@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-def plot3DCRT():
+def all_data():
     # load 3DCRT data
     df = pd.read_excel("./Book1.xlsx")
     print(df)
@@ -40,7 +40,7 @@ def plot3DCRT():
 
     plt.ylim(-0.1, 0.1)
     ax = plt.gca()
-    ax.axhspan(-0.025, 0.025, facecolor="#C5E1A5", alpha=1, zorder=2)
+    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
     ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
     # ax.set_facecolor("#99FF99")
 
