@@ -1,3 +1,3 @@
-import Draw3DCRT
+import plot3DCRT
 
-Draw3DCRT.draw("aki")
+plot3DCRT.all_data()
