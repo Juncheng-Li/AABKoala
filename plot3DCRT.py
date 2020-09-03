@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import matplotlib.image as mpimg
+from matplotlib.offsetbox import (TextArea, DrawingArea, OffsetImage,
+                                  AnnotationBbox)
+from matplotlib.cbook import get_sample_data
 
 
 def all_data():
@@ -29,7 +33,7 @@ def all_data():
     xlabels = np.unique(df["x"])
 
     # plot.scatter(x, y, c="color", s=size)
-    plt.scatter(df["x"], df["a"], s=5, c="#424242", zorder=5)
+    allData = plt.scatter(df["x"], df["a"], s=5, c="#424242", zorder=5)
     plt.xticks(xlabels, ('6', '10', '15', '18', '6FFF', "10FFF",
                          "6", "10", "15", '18', '6FFF', '10FFF',
                          '6', '6', "6", "6", "6", "6",
@@ -39,11 +43,13 @@ def all_data():
                          "6", "10", "15", "18"), rotation=90)
 
     plt.ylim(-0.1, 0.1)
-    ax = plt.gca()
-    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
-    ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    ax1 = plt.gca()
+    ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+    ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
     # ax.set_facecolor("#99FF99")
 
+    plt.legend([allData], ['All Data'])
+    plt.savefig("3DCRT.png", dpi=300)
     plt.show()
-    # plt.savefig("3DCRT.png", dpi=300)
+
 
