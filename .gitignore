@@ -11,3 +11,4 @@
 .navigation
 /captures/
 output.json
+*/__pycache__/
