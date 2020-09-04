@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'AAB.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'AABKoalaTest',
+        'HOST': '35.189.21.28',
+        'PORT': 3306,
+        'USER': 'yunning',  # use own database account name
+        'PASSWORD': 'AA-koala123456',  # use own database account password
     }
 }
 
