@@ -17,15 +17,15 @@ def all_data():
 
     # y
     del df["x-axis"]
-    # x-axis
-    # x = pd.DataFrame({"x": 263 * (1, 2, 3, 4, 5, 6,
-    #                               7, 8, 9, 10, 11, 12,
-    #                               14, 16.5, 19, 21.5, 24, 26.5,
-    #                               28.5, 29.5, 30.5, 31.5, 32.5, 33.5,
-    #                               35.5, 36.5, 37.5, 38.5, 39.5, 40.5,
-    #                               46, 47, 48, 49,
-    #                               53, 54, 55, 56)})
-    x = pd.DataFrame({"x": 263 * list(range(1, 39))})
+    # x-axis pos
+    x = pd.DataFrame({"x": 263 * (1, 2, 3, 4, 5, 6,
+                                  7, 8, 9, 10, 11, 12,
+                                  14, 16.5, 21.5, 24, 29, 31.5,
+                                  34.5, 35.5, 36.5, 37.5, 38.5, 39.5,
+                                  41.5, 42.5, 43.5, 44.5, 45.5, 46.5,
+                                  52, 53, 54, 55,
+                                  59, 60, 61, 62)})
+    # x = pd.DataFrame({"x": 263 * list(range(1, 39))})
     df["x"] = x
     print(df)
 
@@ -33,17 +33,17 @@ def all_data():
     plt.figure(figsize=(8.4, 4.8))
 
     # scatter plot
-    allData = plt.scatter(df["x"], df["a"], s=5, c="#424242", zorder=5)
+    allData = plt.scatter(df["x"], df["a"], s=4, c="#424242", zorder=5)
 
     # set axis
-    xlabels = np.unique(df["x"])
-    plt.xticks(xlabels, ('6', '10', '15', '18', '6FFF', "10FFF",
-                         "6", "10", "15", '18', '6FFF', '10FFF',
-                         '6', '6', "6", "6", "6", "6",
-                         '6', '10', '15', '18', '6FFF', "10FFF",
-                         "6", "10", "15", '18', '6FFF', '10FFF',
-                         '6', '10', "15", "18",
-                         "6", "10", "15", "18"), rotation=90, fontsize=7)
+    xlabel_pos = np.unique(df["x"])
+    plt.xticks(xlabel_pos, ('6', '10', '15', '18', '6FFF', "10FFF",
+                            "6", "10", "15", '18', '6FFF', '10FFF',
+                            '6', '6', "6", "6", "6", "6",
+                            '6', '10', '15', '18', '6FFF', "10FFF",
+                            "6", "10", "15", '18', '6FFF', '10FFF',
+                            '6', '10', "15", "18",
+                            "6", "10", "15", "18"), rotation=90, fontsize=7)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
 
@@ -54,7 +54,7 @@ def all_data():
     # ax.set_facecolor("#99FF99")
 
     # set white margins
-    plt.subplots_adjust(right=0.83)
+    plt.subplots_adjust(left=0.08, right=0.83)
 
     # set legend
     plt.legend([allData], ['All Data'], bbox_to_anchor=(1.23, 1))
@@ -62,5 +62,3 @@ def all_data():
     # save fig
     plt.savefig("3DCRT.png", dpi=300)
     # plt.show()
-
-
