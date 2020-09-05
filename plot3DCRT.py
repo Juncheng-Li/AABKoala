@@ -8,10 +8,11 @@ from matplotlib.cbook import get_sample_data
 
 
 def all_data():
-    imagePath = '/Users/jcl/Desktop/AABKoala/images/case1.png'
-    image2Path = '/Users/jcl/Desktop/AABKoala/images/case2.png'
-    image3Path = '/Users/jcl/Desktop/AABKoala/images/case3.png'
-    image4Path = '/Users/jcl/Desktop/AABKoala/images/case4.png'
+    imagePath = '/Users/jcl/Desktop/AABKoala/images/case1full.png'
+    image2Path = '/Users/jcl/Desktop/AABKoala/images/case2full.png'
+    image3Path = '/Users/jcl/Desktop/AABKoala/images/case3full.png'
+    image4Path = '/Users/jcl/Desktop/AABKoala/images/case4full.png'
+    all_cases_path = '/Users/jcl/Desktop/AABKoala/images/all_cases.png'
     # load 3DCRT data
     df = pd.read_excel("./Book1.xlsx")
     print(df)
@@ -75,21 +76,21 @@ def all_data():
     plt.axhline(y=0, c="black", linewidth=0.4)
 
     # add images
-    case_image = plt.imread(get_sample_data(imagePath))
     fig = plt.gcf()
-    image1ax = fig.add_axes([0.03, 0.07, 0.2, 0.2], anchor='NE', zorder=3)
+    case_image = plt.imread(get_sample_data(imagePath))
+    image1ax = fig.add_axes([0.015, 0.067, 0.24, 0.24], anchor='NE', zorder=3)
     image1ax.imshow(case_image)
     image1ax.axis('off')
     case_image = plt.imread(get_sample_data(image2Path))
-    image2ax = fig.add_axes([0.26, 0.065, 0.2, 0.2], anchor='NE', zorder=3)
+    image2ax = fig.add_axes([0.23, 0.065, 0.24, 0.24], anchor='NE', zorder=3)
     image2ax.imshow(case_image)
     image2ax.axis('off')
     case_image = plt.imread(get_sample_data(image3Path))
-    image3ax = fig.add_axes([0.45, 0.075, 0.2, 0.2], anchor='NE', zorder=3)
+    image3ax = fig.add_axes([0.415, 0.065, 0.24, 0.24], anchor='NE', zorder=2)
     image3ax.imshow(case_image)
     image3ax.axis('off')
     case_image = plt.imread(get_sample_data(image4Path))
-    image4ax = fig.add_axes([0.64, 0.075, 0.2, 0.2], anchor='NE', zorder=3)
+    image4ax = fig.add_axes([0.64, 0.075, 0.24, 0.24], anchor='NE', zorder=3)
     image4ax.imshow(case_image)
     image4ax.axis('off')
 
