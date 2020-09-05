@@ -18,13 +18,13 @@ def all_data():
     # y
     del df["x-axis"]
     # x-axis pos
-    x = pd.DataFrame({"x": 263 * (1, 2, 3, 4, 5, 6,
-                                  7, 8, 9, 10, 11, 12,
-                                  14, 16.5, 21.5, 24, 29, 31.5,
-                                  34.5, 35.5, 36.5, 37.5, 38.5, 39.5,
-                                  41.5, 42.5, 43.5, 44.5, 45.5, 46.5,
-                                  52, 53, 54, 55,
-                                  59, 60, 61, 62)})
+    x = pd.DataFrame({"x": 263 * (0, 1, 2, 3, 4, 5,
+                                  6, 7, 8, 9, 10, 11,
+                                  13, 15.5, 20.5, 23, 27, 30.5,
+                                  33.5, 34.5, 35.5, 36.5, 37.5, 38.5,
+                                  40.5, 41.5, 42.5, 43.5, 44.5, 45.5,
+                                  51, 52, 53, 54,
+                                  58, 59, 60, 61)})
     # x = pd.DataFrame({"x": 263 * list(range(1, 39))})
     df["x"] = x
     print(df)
@@ -46,6 +46,7 @@ def all_data():
                             "6", "10", "15", "18"), rotation=90, fontsize=7)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
+    plt.title("3DCRT Results", fontsize=7, fontweight="bold")
 
     # add green background
     ax1 = plt.gca()
@@ -57,7 +58,18 @@ def all_data():
     plt.subplots_adjust(left=0.08, right=0.83)
 
     # set legend
-    plt.legend([allData], ['All Data'], bbox_to_anchor=(1.23, 1))
+    plt.legend([allData], ['All Data'], bbox_to_anchor=(1.2, 1))
+
+    # add split lines
+    plt.axvline(x=12, c="black", linewidth=0.4)
+    plt.axvline(x=32, c="black", linewidth=0.4)
+    plt.axvline(x=48.25, c="black", linewidth=0.4)
+
+    plt.axvline(x=5.5, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=39.5, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
+
+    plt.axhline(y=0, c="black", linewidth=0.4)
 
     # save fig
     plt.savefig("3DCRT.png", dpi=300)
