@@ -8,6 +8,10 @@ from matplotlib.cbook import get_sample_data
 
 
 def all_data():
+    imagePath = '/Users/jcl/Desktop/AABKoala/images/case1.png'
+    image2Path = '/Users/jcl/Desktop/AABKoala/images/case2.png'
+    image3Path = '/Users/jcl/Desktop/AABKoala/images/case3.png'
+    image4Path = '/Users/jcl/Desktop/AABKoala/images/case4.png'
     # load 3DCRT data
     df = pd.read_excel("./Book1.xlsx")
     print(df)
@@ -30,7 +34,8 @@ def all_data():
     print(df)
 
     # adjust canvas size
-    plt.figure(figsize=(8.4, 4.8))
+    # plt.figure(figsize=(8.4, 4.8))
+    plt.figure(figsize=(7.4, 4.8))
 
     # scatter plot
     allData = plt.scatter(df["x"], df["a"], s=4, c="#424242", zorder=5)
@@ -55,7 +60,7 @@ def all_data():
     # ax.set_facecolor("#99FF99")
 
     # set white margins
-    plt.subplots_adjust(left=0.08, right=0.83)
+    plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4)
 
     # set legend
     plt.legend([allData], ['All Data'], bbox_to_anchor=(1.2, 1))
@@ -64,12 +69,29 @@ def all_data():
     plt.axvline(x=12, c="black", linewidth=0.4)
     plt.axvline(x=32, c="black", linewidth=0.4)
     plt.axvline(x=48.25, c="black", linewidth=0.4)
-
     plt.axvline(x=5.5, c="black", linewidth=0.3, linestyle="dashed")
     plt.axvline(x=39.5, c="black", linewidth=0.3, linestyle="dashed")
     plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
-
     plt.axhline(y=0, c="black", linewidth=0.4)
+
+    # add images
+    case_image = plt.imread(get_sample_data(imagePath))
+    fig = plt.gcf()
+    image1ax = fig.add_axes([0.03, 0.07, 0.2, 0.2], anchor='NE', zorder=3)
+    image1ax.imshow(case_image)
+    image1ax.axis('off')
+    case_image = plt.imread(get_sample_data(image2Path))
+    image2ax = fig.add_axes([0.26, 0.065, 0.2, 0.2], anchor='NE', zorder=3)
+    image2ax.imshow(case_image)
+    image2ax.axis('off')
+    case_image = plt.imread(get_sample_data(image3Path))
+    image3ax = fig.add_axes([0.45, 0.075, 0.2, 0.2], anchor='NE', zorder=3)
+    image3ax.imshow(case_image)
+    image3ax.axis('off')
+    case_image = plt.imread(get_sample_data(image4Path))
+    image4ax = fig.add_axes([0.64, 0.075, 0.2, 0.2], anchor='NE', zorder=3)
+    image4ax.imshow(case_image)
+    image4ax.axis('off')
 
     # save fig
     plt.savefig("3DCRT.png", dpi=300)
