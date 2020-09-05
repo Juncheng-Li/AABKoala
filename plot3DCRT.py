@@ -33,7 +33,7 @@ def all_data():
     xlabels = np.unique(df["x"])
 
     # plot.scatter(x, y, c="color", s=size)
-    plt.figure(figsize=(12.8, 4.8))
+    plt.figure(figsize=(8.4, 4.8))
     allData = plt.scatter(df["x"], df["a"], s=5, c="#424242", zorder=5)
     plt.xticks(xlabels, ('6', '10', '15', '18', '6FFF', "10FFF",
                          "6", "10", "15", '18', '6FFF', '10FFF',
@@ -41,8 +41,8 @@ def all_data():
                          '6', '10', '15', '18', '6FFF', "10FFF",
                          "6", "10", "15", '18', '6FFF', '10FFF',
                          '6', '10', "15", "18",
-                         "6", "10", "15", "18"), rotation=90)
-
+                         "6", "10", "15", "18"), rotation=90, fontsize=7)
+    plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
 
     ax1 = plt.gca()
