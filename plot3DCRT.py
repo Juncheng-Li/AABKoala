@@ -12,6 +12,7 @@ def all_data():
     image2Path = '/Users/jcl/Desktop/AABKoala/images/case2.png'
     image3Path = '/Users/jcl/Desktop/AABKoala/images/case3.png'
     image4Path = '/Users/jcl/Desktop/AABKoala/images/case4.png'
+    RNS_path = '/Users/jcl/Desktop/AABKoala/images/RNS.png'
     # load 3DCRT data
     df = pd.read_excel("./Book1.xlsx")
     print(df)
@@ -59,7 +60,7 @@ def all_data():
     # ax.set_facecolor("#99FF99")
 
     # set white margins
-    plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4)
+    plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
     plt.legend([allData], ['All Data'], bbox_to_anchor=(1.22, 1))
@@ -91,6 +92,16 @@ def all_data():
     image4ax = fig.add_axes([0.603, 0.065, 0.24, 0.24], anchor='NE', zorder=3)
     image4ax.imshow(case_image)
     image4ax.axis('off')
+
+    # add RSN
+    RNS_image = plt.imread(get_sample_data(RNS_path))
+    RNSax = fig.add_axes([-0.014, 0.403, 0.4, 0.495], anchor='NE', zorder=3)
+    RNSax.imshow(RNS_image, alpha=0.65)
+    RNSax.axis('off')
+    RNS_image = plt.imread(get_sample_data(RNS_path))
+    RNSax2 = fig.add_axes([0.068, 0.403, 0.4, 0.495], anchor='NE', zorder=3)
+    RNSax2.imshow(RNS_image, alpha=0.65)
+    RNSax2.axis('off')
 
     # save fig
     plt.savefig("3DCRT.png", dpi=300)
