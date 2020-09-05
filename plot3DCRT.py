@@ -64,7 +64,7 @@ def all_data():
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4)
 
     # set legend
-    plt.legend([allData], ['All Data'], bbox_to_anchor=(1.2, 1))
+    plt.legend([allData], ['All Data'], bbox_to_anchor=(1.22, 1))
 
     # add split lines
     plt.axvline(x=12, c="black", linewidth=0.4)
