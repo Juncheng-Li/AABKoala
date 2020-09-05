@@ -8,11 +8,10 @@ from matplotlib.cbook import get_sample_data
 
 
 def all_data():
-    imagePath = '/Users/jcl/Desktop/AABKoala/images/case1full.png'
-    image2Path = '/Users/jcl/Desktop/AABKoala/images/case2full.png'
-    image3Path = '/Users/jcl/Desktop/AABKoala/images/case3full.png'
-    image4Path = '/Users/jcl/Desktop/AABKoala/images/case4full.png'
-    all_cases_path = '/Users/jcl/Desktop/AABKoala/images/all_cases.png'
+    imagePath = '/Users/jcl/Desktop/AABKoala/images/case1.png'
+    image2Path = '/Users/jcl/Desktop/AABKoala/images/case2.png'
+    image3Path = '/Users/jcl/Desktop/AABKoala/images/case3.png'
+    image4Path = '/Users/jcl/Desktop/AABKoala/images/case4.png'
     # load 3DCRT data
     df = pd.read_excel("./Book1.xlsx")
     print(df)
@@ -35,7 +34,6 @@ def all_data():
     print(df)
 
     # adjust canvas size
-    # plt.figure(figsize=(8.4, 4.8))
     plt.figure(figsize=(7.4, 4.8))
 
     # scatter plot
