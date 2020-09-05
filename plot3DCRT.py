@@ -90,7 +90,7 @@ def all_data():
     image3ax.imshow(case_image)
     image3ax.axis('off')
     case_image = plt.imread(get_sample_data(image4Path))
-    image4ax = fig.add_axes([0.64, 0.075, 0.24, 0.24], anchor='NE', zorder=3)
+    image4ax = fig.add_axes([0.603, 0.065, 0.24, 0.24], anchor='NE', zorder=3)
     image4ax.imshow(case_image)
     image4ax.axis('off')
 
