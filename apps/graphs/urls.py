@@ -7,6 +7,8 @@ from graphs import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'results', views.ResultViewSet)
+# router.register(r'facilityoutput', views.FacilityOutputViewSet)
+
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

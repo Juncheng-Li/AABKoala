@@ -25,3 +25,13 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+#
+# class FacilityOutputViewSet(viewsets.ModelViewSet):
+#     """
+#     This viewset automatically provides `list`, `create`, `retrieve`,
+#     `update` and `destroy` actions.
+#     """
+#     queryset = Result.objects.all()
+#     serializer_class = FacilityOutputSerializer
+#     permission_classes = [permissions.IsAuthenticated]
