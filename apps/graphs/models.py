@@ -23,6 +23,5 @@ class Result(models.Model):
     Phantom = models.CharField(max_length=45)
     user = models.ForeignKey('auth.User', related_name='results', on_delete=models.CASCADE)
 
-
     class Meta:
         ordering = ['created']
