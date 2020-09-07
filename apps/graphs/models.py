@@ -21,6 +21,8 @@ class Result(models.Model):
     kqFac = models.CharField(max_length=10)
     ACDS = models.CharField(max_length=10)
     Phantom = models.CharField(max_length=45)
+    user = models.ForeignKey('auth.User', related_name='results', on_delete=models.CASCADE)
+
 
     class Meta:
         ordering = ['created']
