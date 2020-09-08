@@ -55,3 +55,50 @@ class TPR(models.Model):
 
     class Meta:
         ordering = ['created']
+
+
+class Reading(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    Reading_101106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_110106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_205106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_208106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_205206 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_208206 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_205306 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_208306 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_303106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_305106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_403106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_405106 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_103110 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_110110 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_303110 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_305110 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_403110 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_405110 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_103115 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_110115 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_303115 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_305115 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_403115 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_405115 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_103118 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_110118 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_303118 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_305118 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_403118 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_405118 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_101105 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_110105 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_303105 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_305105 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_103109 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_110109 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_303109 = models.DecimalField(max_digits=5, decimal_places=2)
+    Reading_305109 = models.DecimalField(max_digits=5, decimal_places=2)
+    result = models.ForeignKey(Result, related_name='Reading', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['created']
