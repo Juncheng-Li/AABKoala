@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from graphs.models import Result, FacilityOutput
+from graphs.models import Result, FacilityOutput, TPR
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,10 +17,17 @@ class FacilityOutputSerializer(serializers.ModelSerializer):
         fields = ['energy_6', 'energy_10', 'energy_15', 'energy_18', 'energy_6FFF', 'energy_10FFF']
 
 
+class TPRSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TPR
+        fields = ['energy_6', 'energy_10', 'energy_15', 'energy_18', 'energy_6FFF', 'energy_10FFF']
+
+
 class ResultSerializer(serializers.ModelSerializer):
     # relative to the user who created it
     user = serializers.ReadOnlyField(source='user.username')
     facilityOutput = FacilityOutputSerializer(many=True)
+    TPR = TPRSerializer(many=True)
 
     class Meta:
         model = Result
@@ -28,15 +35,22 @@ class ResultSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         facility_outputs_data = validated_data.pop('facilityOutput')
+        trps_data = validated_data.pop('TPR')
         result = Result.objects.create(**validated_data)
         for facility_output_data in facility_outputs_data:
             FacilityOutput.objects.create(result=result, **facility_output_data)
+        for trp_data in trps_data:
+            TPR.objects.create(result=result, **trp_data)
         return result
 
     def update(self, instance, validated_data):
         facility_outputs_data = validated_data.pop('facilityOutput')
         facilityOutputs = (instance.facilityOutput).all()
         facilityOutputs = list(facilityOutputs)
+
+        trps_data = validated_data.pop('TPR')
+        TPRs = (instance.TPR).all()
+        TPRs = list(TPRs)
 
         instance.AuditID = validated_data.get('AuditID', instance.AuditID)
         instance.RevisionNumber = validated_data.get('RevisionNumber', instance.RevisionNumber)
@@ -66,4 +80,13 @@ class ResultSerializer(serializers.ModelSerializer):
             facilityOutput.energy_6FFF = facility_output_data.get('energy_6FFF', facilityOutput.energy_6FFF)
             facilityOutput.energy_10FFF = facility_output_data.get('energy_10FFF', facilityOutput.energy_10FFF)
             facilityOutput.save()
+
+        for trp_data in trps_data:
+            TPR = TPRs.pop(0)
+            TPR.energy_6 = trp_data.get('energy_6', TPR.energy_6)
+            TPR.energy_10 = trp_data.get('energy_10', TPR.energy_10)
+            TPR.energy_18 = trp_data.get('energy_18', TPR.energy_18)
+            TPR.energy_6FFF = trp_data.get('energy_6FFF', TPR.energy_6FFF)
+            TPR.energy_10FFF = trp_data.get('energy_10FFF', TPR.energy_10FFF)
+            TPR.save()
         return instance
