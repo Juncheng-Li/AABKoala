@@ -102,3 +102,50 @@ class Reading(models.Model):
 
     class Meta:
         ordering = ['created']
+
+
+class Misdelivery(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    Misdelivery_101106 = models.SmallIntegerField()
+    Misdelivery_110106 = models.SmallIntegerField()
+    Misdelivery_205106 = models.SmallIntegerField()
+    Misdelivery_208106 = models.SmallIntegerField()
+    Misdelivery_205206 = models.SmallIntegerField()
+    Misdelivery_208206 = models.SmallIntegerField()
+    Misdelivery_205306 = models.SmallIntegerField()
+    Misdelivery_208306 = models.SmallIntegerField()
+    Misdelivery_303106 = models.SmallIntegerField()
+    Misdelivery_305106 = models.SmallIntegerField()
+    Misdelivery_403106 = models.SmallIntegerField()
+    Misdelivery_405106 = models.SmallIntegerField()
+    Misdelivery_103110 = models.SmallIntegerField()
+    Misdelivery_110110 = models.SmallIntegerField()
+    Misdelivery_303110 = models.SmallIntegerField()
+    Misdelivery_305110 = models.SmallIntegerField()
+    Misdelivery_403110 = models.SmallIntegerField()
+    Misdelivery_405110 = models.SmallIntegerField()
+    Misdelivery_103115 = models.SmallIntegerField()
+    Misdelivery_110115 = models.SmallIntegerField()
+    Misdelivery_303115 = models.SmallIntegerField()
+    Misdelivery_305115 = models.SmallIntegerField()
+    Misdelivery_403115 = models.SmallIntegerField()
+    Misdelivery_405115 = models.SmallIntegerField()
+    Misdelivery_103118 = models.SmallIntegerField()
+    Misdelivery_110118 = models.SmallIntegerField()
+    Misdelivery_303118 = models.SmallIntegerField()
+    Misdelivery_305118 = models.SmallIntegerField()
+    Misdelivery_403118 = models.SmallIntegerField()
+    Misdelivery_405118 = models.SmallIntegerField()
+    Misdelivery_101105 = models.SmallIntegerField()
+    Misdelivery_110105 = models.SmallIntegerField()
+    Misdelivery_303105 = models.SmallIntegerField()
+    Misdelivery_305105 = models.SmallIntegerField()
+    Misdelivery_103109 = models.SmallIntegerField()
+    Misdelivery_110109 = models.SmallIntegerField()
+    Misdelivery_303109 = models.SmallIntegerField()
+    Misdelivery_305109 = models.SmallIntegerField()
+    result = models.ForeignKey(Result, related_name='Misdelivery', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['created']
