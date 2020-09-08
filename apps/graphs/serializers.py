@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models.functions import datetime
 from rest_framework import serializers
-from graphs.models import Result, FacilityOutput, TPR, Reading
+from graphs.models import Result, FacilityOutput, TPR, Reading, Misdelivery
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,12 +38,34 @@ class ReadingSerializer(serializers.ModelSerializer):
                   ]
 
 
+class MisdeliverySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Misdelivery
+        fields = ['Misdelivery_101106', 'Misdelivery_110106', 'Misdelivery_205106', 'Misdelivery_208106',
+                  'Misdelivery_205206',
+                  'Misdelivery_208206', 'Misdelivery_205306', 'Misdelivery_208306', 'Misdelivery_303106',
+                  'Misdelivery_305106',
+                  'Misdelivery_403106', 'Misdelivery_405106', 'Misdelivery_103110', 'Misdelivery_110110',
+                  'Misdelivery_303110',
+                  'Misdelivery_305110', 'Misdelivery_403110', 'Misdelivery_405110', 'Misdelivery_103115',
+                  'Misdelivery_110115',
+                  'Misdelivery_303115', 'Misdelivery_305115', 'Misdelivery_403115', 'Misdelivery_405115',
+                  'Misdelivery_103118',
+                  'Misdelivery_303118', 'Misdelivery_305118', 'Misdelivery_403118', 'Misdelivery_405118',
+                  'Misdelivery_101105',
+                  'Misdelivery_110105', 'Misdelivery_303105', 'Misdelivery_305105', 'Misdelivery_103109',
+                  'Misdelivery_110109',
+                  'Misdelivery_303109', 'Misdelivery_305109', 'Misdelivery_110118'
+                  ]
+
+
 class ResultSerializer(serializers.ModelSerializer):
     # relative to the user who created it
     user = serializers.ReadOnlyField(source='user.username')
     facilityOutput = FacilityOutputSerializer(many=True)
     TPR = TPRSerializer(many=True)
     Reading = ReadingSerializer(many=True)
+    Misdelivery = MisdeliverySerializer(many=True)
 
     class Meta:
         model = Result
@@ -53,14 +75,17 @@ class ResultSerializer(serializers.ModelSerializer):
         facility_outputs_data = validated_data.pop('facilityOutput')
         trps_data = validated_data.pop('TPR')
         Readings_data = validated_data.pop('Reading')
+        Misdeliveries_data = validated_data.pop('Misdelivery')
 
         result = Result.objects.create(**validated_data)
         for facility_output_data in facility_outputs_data:
             FacilityOutput.objects.create(result=result, **facility_output_data)
         for trp_data in trps_data:
             TPR.objects.create(result=result, **trp_data)
-        for Readings_data in Readings_data:
-            Reading.objects.create(result=result, **Readings_data)
+        for Reading_data in Readings_data:
+            Reading.objects.create(result=result, **Reading_data)
+        for Misdelivery_data in Misdeliveries_data:
+            Misdelivery.objects.create(result=result, **Misdelivery_data)
         return result
 
     def update(self, instance, validated_data):
@@ -75,6 +100,10 @@ class ResultSerializer(serializers.ModelSerializer):
         readings_data = validated_data.pop('Reading')
         Readings = (instance.Reading).all()
         Readings = list(Readings)
+
+        misdeliveries_data = validated_data.pop('Misdelivery')
+        Misdeliveries = (instance.Misdelivery).all()
+        Misdeliveries = list(Misdeliveries)
 
         instance.updated = datetime.datetime.now()
         instance.AuditID = validated_data.get('AuditID', instance.AuditID)
@@ -159,4 +188,47 @@ class ResultSerializer(serializers.ModelSerializer):
             Reading.Reading_305109 = reading_data.get('Reading_305109', Reading.Reading_305109)
             Reading.Reading_110118 = reading_data.get('Reading_110118', Reading.Reading_110118)
             Reading.save()
+
+        for misdelivery_data in misdeliveries_data:
+            Misdelivery = Misdeliveries.pop(0)
+            Misdelivery.updated = datetime.datetime.now()
+            Misdelivery.Misdelivery_101106 = misdelivery_data.get('Misdelivery_101106', Misdelivery.Misdelivery_101106)
+            Misdelivery.Misdelivery_110106 = misdelivery_data.get('Misdelivery_110106', Misdelivery.Misdelivery_110106)
+            Misdelivery.Misdelivery_205106 = misdelivery_data.get('Misdelivery_205106', Misdelivery.Misdelivery_205106)
+            Misdelivery.Misdelivery_208106 = misdelivery_data.get('Misdelivery_208106', Misdelivery.Misdelivery_208106)
+            Misdelivery.Misdelivery_205206 = misdelivery_data.get('Misdelivery_205206', Misdelivery.Misdelivery_205206)
+            Misdelivery.Misdelivery_208206 = misdelivery_data.get('Misdelivery_208206', Misdelivery.Misdelivery_208206)
+            Misdelivery.Misdelivery_205306 = misdelivery_data.get('Misdelivery_205306', Misdelivery.Misdelivery_205306)
+            Misdelivery.Misdelivery_208306 = misdelivery_data.get('Misdelivery_208306', Misdelivery.Misdelivery_208306)
+            Misdelivery.Misdelivery_303106 = misdelivery_data.get('Misdelivery_303106', Misdelivery.Misdelivery_303106)
+            Misdelivery.Misdelivery_305106 = misdelivery_data.get('Misdelivery_305106', Misdelivery.Misdelivery_305106)
+            Misdelivery.Misdelivery_403106 = misdelivery_data.get('Misdelivery_403106', Misdelivery.Misdelivery_403106)
+            Misdelivery.Misdelivery_405106 = misdelivery_data.get('Misdelivery_405106', Misdelivery.Misdelivery_405106)
+            Misdelivery.Misdelivery_103110 = misdelivery_data.get('Misdelivery_103110', Misdelivery.Misdelivery_103110)
+            Misdelivery.Misdelivery_110110 = misdelivery_data.get('Misdelivery_110110', Misdelivery.Misdelivery_110110)
+            Misdelivery.Misdelivery_303110 = misdelivery_data.get('Misdelivery_303110', Misdelivery.Misdelivery_303110)
+            Misdelivery.Misdelivery_305110 = misdelivery_data.get('Misdelivery_305110', Misdelivery.Misdelivery_305110)
+            Misdelivery.Misdelivery_403110 = misdelivery_data.get('Misdelivery_403110', Misdelivery.Misdelivery_403110)
+            Misdelivery.Misdelivery_405110 = misdelivery_data.get('Misdelivery_405110', Misdelivery.Misdelivery_405110)
+            Misdelivery.Misdelivery_103115 = misdelivery_data.get('Misdelivery_103115', Misdelivery.Misdelivery_103115)
+            Misdelivery.Misdelivery_110115 = misdelivery_data.get('Misdelivery_110115', Misdelivery.Misdelivery_110115)
+            Misdelivery.Misdelivery_303115 = misdelivery_data.get('Misdelivery_303115', Misdelivery.Misdelivery_303115)
+            Misdelivery.Misdelivery_305115 = misdelivery_data.get('Misdelivery_305115', Misdelivery.Misdelivery_305115)
+            Misdelivery.Misdelivery_403115 = misdelivery_data.get('Misdelivery_403115', Misdelivery.Misdelivery_403115)
+            Misdelivery.Misdelivery_405115 = misdelivery_data.get('Misdelivery_405115', Misdelivery.Misdelivery_405115)
+            Misdelivery.Misdelivery_103118 = misdelivery_data.get('Misdelivery_103118', Misdelivery.Misdelivery_103118)
+            Misdelivery.Misdelivery_303118 = misdelivery_data.get('Misdelivery_303118', Misdelivery.Misdelivery_303118)
+            Misdelivery.Misdelivery_305118 = misdelivery_data.get('Misdelivery_305118', Misdelivery.Misdelivery_305118)
+            Misdelivery.Misdelivery_403118 = misdelivery_data.get('Misdelivery_403118', Misdelivery.Misdelivery_403118)
+            Misdelivery.Misdelivery_405118 = misdelivery_data.get('Misdelivery_405118', Misdelivery.Misdelivery_405118)
+            Misdelivery.Misdelivery_101105 = misdelivery_data.get('Misdelivery_101105', Misdelivery.Misdelivery_101105)
+            Misdelivery.Misdelivery_110105 = misdelivery_data.get('Misdelivery_110105', Misdelivery.Misdelivery_110105)
+            Misdelivery.Misdelivery_303105 = misdelivery_data.get('Misdelivery_303105', Misdelivery.Misdelivery_303105)
+            Misdelivery.Misdelivery_305105 = misdelivery_data.get('Misdelivery_305105', Misdelivery.Misdelivery_305105)
+            Misdelivery.Misdelivery_103109 = misdelivery_data.get('Misdelivery_103109', Misdelivery.Misdelivery_103109)
+            Misdelivery.Misdelivery_110109 = misdelivery_data.get('Misdelivery_110109', Misdelivery.Misdelivery_110109)
+            Misdelivery.Misdelivery_303109 = misdelivery_data.get('Misdelivery_303109', Misdelivery.Misdelivery_303109)
+            Misdelivery.Misdelivery_305109 = misdelivery_data.get('Misdelivery_305109', Misdelivery.Misdelivery_305109)
+            Misdelivery.Misdelivery_110118 = misdelivery_data.get('Misdelivery_110118', Misdelivery.Misdelivery_110118)
+            Misdelivery.save()
         return instance
