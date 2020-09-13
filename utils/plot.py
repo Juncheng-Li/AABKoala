@@ -1,20 +1,19 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import matplotlib.image as mpimg
-from matplotlib.offsetbox import (TextArea, DrawingArea, OffsetImage,
-                                  AnnotationBbox)
 from matplotlib.cbook import get_sample_data
+import os
 
 
-def all_data():
-    imagePath = '/Users/jcl/Desktop/AABKoala/images/case1.png'
-    image2Path = '/Users/jcl/Desktop/AABKoala/images/case2.png'
-    image3Path = '/Users/jcl/Desktop/AABKoala/images/case3.png'
-    image4Path = '/Users/jcl/Desktop/AABKoala/images/case4.png'
-    RNS_path = '/utils/images/RNS.png'
+def NDS_3DCRT(dataframe):
+    path = os.getcwd()
+    imagePath = path + '/utils/images/case1.png'
+    image2Path = path + '/utils/images/case2.png'
+    image3Path = path + '/utils/images/case3.png'
+    image4Path = path + '/utils/images/case4.png'
+    RNS_path = path + '/utils/images/RNS.png'
     # load 3DCRT data
-    df = pd.read_excel("./Book1.xlsx")
+    df = pd.read_excel("./utils/Book1.xlsx")
     print(df)
 
     # print(df.groupby(["x-axis"]).count())
@@ -103,6 +102,6 @@ def all_data():
     RNSax2.imshow(RNS_image, alpha=0.65)
     RNSax2.axis('off')
 
-    # save fig
-    plt.savefig("3DCRT.png", dpi=300)
+    # plotsave fig
+    plt.savefig("./plotsave/3DCRT.png", dpi=300)
     # plt.show()
