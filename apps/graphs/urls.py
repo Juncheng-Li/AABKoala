@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
-from graphs import views
+from apps.graphs import views
 
 
 # Create a router and register our viewsets with it.
