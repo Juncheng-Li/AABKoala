@@ -1,3 +1,3 @@
-from utils import plot3DCRT
+from utils import plot
 
-plot3DCRT.all_data()
+plot.NDS_3DCRT()
