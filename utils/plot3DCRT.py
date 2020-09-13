@@ -12,7 +12,7 @@ def all_data():
     image2Path = '/Users/jcl/Desktop/AABKoala/images/case2.png'
     image3Path = '/Users/jcl/Desktop/AABKoala/images/case3.png'
     image4Path = '/Users/jcl/Desktop/AABKoala/images/case4.png'
-    RNS_path = '/Users/jcl/Desktop/AABKoala/images/RNS.png'
+    RNS_path = '/utils/images/RNS.png'
     # load 3DCRT data
     df = pd.read_excel("./Book1.xlsx")
     print(df)
