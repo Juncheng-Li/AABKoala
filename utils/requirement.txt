@@ -1,7 +1,0 @@
-pip install sqlalchemy
-pip install pandas
-pip install matplotlib
-pip install configparser
-pip install mysql-connector-repackaged
-pip install Pillow
-pip install xlrd

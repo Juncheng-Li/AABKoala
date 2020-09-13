@@ -5,42 +5,34 @@ from matplotlib.cbook import get_sample_data
 import os
 
 
-def NDS_3DCRT(dataframe):
+def NDS_3DCRT(data):
     path = os.getcwd()
-    imagePath = path + '/utils/images/case1.png'
-    image2Path = path + '/utils/images/case2.png'
-    image3Path = path + '/utils/images/case3.png'
-    image4Path = path + '/utils/images/case4.png'
-    RNS_path = path + '/utils/images/RNS.png'
-    # load 3DCRT data
-    df = pd.read_excel("./utils/Book1.xlsx")
-    print(df)
+    imagePath = path + '/images/case1.png'
+    image2Path = path + '/images/case2.png'
+    image3Path = path + '/images/case3.png'
+    image4Path = path + '/images/case4.png'
+    RNS_path = path + '/images/RNS.png'
+    x = []
+    y = []
 
-    # print(df.groupby(["x-axis"]).count())
-    # axis = df["x-axis"].unique()
-
-    # y
-    del df["x-axis"]
-    # x-axis pos
-    x = pd.DataFrame({"x": 263 * (0, 1, 2, 3, 4, 5,
-                                  6, 7, 8, 9, 10, 11,
-                                  13, 15.5, 20.5, 23, 27, 30.5,
-                                  33.5, 34.5, 35.5, 36.5, 37.5, 38.5,
-                                  40.5, 41.5, 42.5, 43.5, 44.5, 45.5,
-                                  51, 52, 53, 54,
-                                  58, 59, 60, 61)})
-    # x = pd.DataFrame({"x": 263 * list(range(1, 39))})
-    df["x"] = x
-    print(df)
+    for code in data:
+        # flatten measurements to y
+        measurements = data[code]
+        for measurement in measurements:
+            y.append(measurement)
+        # flatten code to x
+        length = len(measurements)
+        for i in range(0, length):
+            x.append(code_to_x(code))
 
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
     # scatter plot
-    allData = plt.scatter(df["x"], df["a"], s=4, c="#424242", zorder=5)
+    allData = plt.scatter(x, y, s=4, c="#424242", zorder=5)
 
     # set axis
-    xlabel_pos = np.unique(df["x"])
+    xlabel_pos = np.unique(x)
     plt.xticks(xlabel_pos, ('6', '10', '15', '18', '6FFF', "10FFF",
                             "6", "10", "15", '18', '6FFF', '10FFF',
                             '6', '6', "6", "6", "6", "6",
@@ -103,5 +95,49 @@ def NDS_3DCRT(dataframe):
     RNSax2.axis('off')
 
     # plotsave fig
-    plt.savefig("./plotsave/3DCRT.png", dpi=300)
+    plt.savefig("3DCRT.png", dpi=300)
     # plt.show()
+
+
+def code_to_x(input_code):
+    switcher = {
+        "101106": 0,
+        "110106": 1,
+        "205106": 2,
+        "208106": 3,
+        "205206": 4,
+        "208206": 5,
+        "205306": 6,
+        "208306": 7,
+        "303106": 8,
+        "305106": 9,
+        "403106": 10,
+        "405106": 11,
+        "103110": 13,
+        "110110": 15.5,
+        "303110": 20.5,
+        "305110": 23,
+        "403110": 27,
+        "405110": 30.5,
+        "103115": 33.5,
+        "110115": 34.5,
+        "303115": 35.5,
+        "305115": 36.5,
+        "403115": 37.5,
+        "405115": 38.5,
+        "103118": 40.5,
+        "110118": 41.5,
+        "303118": 42.5,
+        "305118": 43.5,
+        "403118": 44.5,
+        "405118": 45.5,
+        "101105": 51,
+        "110105": 52,
+        "303105": 53,
+        "305105": 54,
+        "103109": 58,
+        "110109": 59,
+        "303109": 60,
+        "305109": 61
+    }
+    return switcher.get(input_code)
