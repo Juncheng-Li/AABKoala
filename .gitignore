@@ -12,3 +12,5 @@
 /captures/
 output.json
 */__pycache__/
+/venv/
+dfTest.py
