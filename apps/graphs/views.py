@@ -1,7 +1,10 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from rest_framework import generics, viewsets, permissions
-from graphs.models import Result, Graph
+from rest_framework import generics, viewsets, permissions, mixins, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+import json
+from graphs.models import Result, Graph, Reading
 from graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
 
@@ -28,14 +31,22 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class GraphViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-    """
-    queryset = Graph.objects.all()
-    serializer_class = GraphSerializer
-    permission_classes = [permissions.IsAuthenticated]
+class GraphViewSet(APIView):
+    def post(self, request):
+        results_list = json.loads(request.body.decode('utf-8')).get('results_list')
+        readings = Reading.objects.filter(result_id__in=results_list)
+        data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [], "205306": [],
+                "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [], "110110": [],
+                "303110": [], "305110": [], "403110": [], "405110": [], "103115": [], "110115": [], "303115": [],
+                "305115": [], "403115": [], "405115": [], "103118": [], "110118": [], "303118": [], "305118": [],
+                "403118": [], "405118": [], "101105": [], "110105": [], "303105": [], "305105": [], "103109": [],
+                "110109": [], "303109": [], "305109": []}
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        for reading in readings:
+            for key in data.keys():
+                temp = "data[key].append(reading.Reading_" + key + ")"
+                exec(temp)
+
+        graph_info = plot.NDS_3DCRT(data)
+
+        return Response(status=status.HTTP_200_OK)

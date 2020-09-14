@@ -62,7 +62,7 @@ class MisdeliverySerializer(serializers.ModelSerializer):
 class GraphSerializer(serializers.ModelSerializer):
     class Meta:
         model = Graph
-        fields = ['url']
+        fields = '__all__'
 
 
 class ResultSerializer(serializers.ModelSerializer):
