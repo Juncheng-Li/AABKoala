@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models.functions import datetime
 from rest_framework import serializers
-from apps.graphs.models import Result, FacilityOutput, TPR, Reading, Misdelivery
+from graphs.models import Result, FacilityOutput, TPR, Reading, Misdelivery
 
 
 class UserSerializer(serializers.ModelSerializer):

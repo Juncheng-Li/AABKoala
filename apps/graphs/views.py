@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import generics, viewsets, permissions
-from apps.graphs.models import Result
-from apps.graphs.serializers import ResultSerializer, UserSerializer
+from graphs.models import Result
+from graphs.serializers import ResultSerializer, UserSerializer
 from utils import plot
 
 class ResultViewSet(viewsets.ModelViewSet):
