@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import generics, viewsets, permissions
 from graphs.models import Result, Graph
-from graphs.serializers import ResultSerializer, UserSerializer
+from graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
 
 
