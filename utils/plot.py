@@ -3,10 +3,11 @@ import pandas as pd
 import numpy as np
 from matplotlib.cbook import get_sample_data
 import os
+import time
 
 
 def NDS_3DCRT(data):
-    path = os.getcwd()
+    path = os.path.split(os.path.realpath(__file__))[0]
     imagePath = path + '/images/case1.png'
     image2Path = path + '/images/case2.png'
     image3Path = path + '/images/case3.png'
@@ -95,7 +96,11 @@ def NDS_3DCRT(data):
     RNSax2.axis('off')
 
     # plotsave fig
-    plt.savefig("3DCRT.png", dpi=300)
+    ticks = time.time()
+    ticks = str(round(ticks * 1000))
+    plt.savefig(path + "/plGraphs/3DCRT_" + ticks + ".png", dpi=300)
+    response = {"fileName": "/plGraphs/3DCRT_" + ticks + ".png", "url": path + "/plGraphs/3DCRT_" + ticks + ".png"}
+    return response
     # plt.show()
 
 
