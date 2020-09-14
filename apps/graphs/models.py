@@ -149,3 +149,13 @@ class Misdelivery(models.Model):
 
     class Meta:
         ordering = ['created']
+
+
+class Graph(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    url = models.CharField(max_length=100)
+    result = models.ManyToManyField('Result')
+
+    class Meta:
+        ordering = ['created']
