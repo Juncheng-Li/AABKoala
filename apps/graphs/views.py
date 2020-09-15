@@ -1,5 +1,6 @@
+import os
+
 from django.contrib.auth.models import User
-from django.shortcuts import render
 from rest_framework import generics, viewsets, permissions, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -60,5 +61,16 @@ class GraphViewSet(APIView):
         results_obj = models.Result.objects.filter(pk__in=results_list)
         graph_obj.result.add(*results_obj)
         graph_obj.save()
-
         return Response(graph_info, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        graphs_list = json.loads(request.body.decode('utf-8')).get('graphs_list')
+
+        graphs_obj = Graph.objects.filter(pk__in=graphs_list)
+        for graph_obj in graphs_obj:
+            url = graph_obj.url
+            os.remove(url)
+            graph_obj.result.clear()
+            graph_obj.delete()
+
+        return Response(status=status.HTTP_200_OK)
