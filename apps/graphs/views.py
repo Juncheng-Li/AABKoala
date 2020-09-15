@@ -4,6 +4,8 @@ from rest_framework import generics, viewsets, permissions, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
+
+from graphs import models
 from graphs.models import Result, Graph, Reading
 from graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
@@ -49,4 +51,9 @@ class GraphViewSet(APIView):
 
         graph_info = plot.NDS_3DCRT(data)
 
-        return Response(status=status.HTTP_200_OK)
+        graph_obj = models.Graph.objects.create(url=graph_info['url'])
+        results_obj = models.Result.objects.filter(pk__in=results_list)
+        graph_obj.result.add(*results_obj)
+        graph_obj.save()
+
+        return Response(graph_info, status=status.HTTP_200_OK)

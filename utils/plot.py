@@ -99,7 +99,7 @@ def NDS_3DCRT(data):
     ticks = time.time()
     ticks = str(round(ticks * 1000))
     plt.savefig(path + "/plGraphs/3DCRT_" + ticks + ".png", dpi=300)
-    response = {"fileName": "/plGraphs/3DCRT_" + ticks + ".png", "url": path + "/plGraphs/3DCRT_" + ticks + ".png"}
+    response = {"fileName": "3DCRT_" + ticks + ".png", "url": path + "/plGraphs/3DCRT_" + ticks + ".png"}
     return response
     # plt.show()
 
