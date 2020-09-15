@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models.functions import datetime
 from rest_framework import serializers
-from graphs.models import Result, FacilityOutput, TPR, Reading, Misdelivery
+from graphs.models import Result, FacilityOutput, TPR, Reading, Misdelivery, Graph
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -57,6 +57,12 @@ class MisdeliverySerializer(serializers.ModelSerializer):
                   'Misdelivery_110109',
                   'Misdelivery_303109', 'Misdelivery_305109', 'Misdelivery_110118'
                   ]
+
+
+class GraphSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Graph
+        fields = '__all__'
 
 
 class ResultSerializer(serializers.ModelSerializer):
