@@ -34,6 +34,11 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GraphViewSet(APIView):
+    def get(self, request):
+        graphs = Graph.objects.all()
+        serializer = GraphSerializer(graphs, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         results_list = json.loads(request.body.decode('utf-8')).get('results_list')
         readings = Reading.objects.filter(result_id__in=results_list)
