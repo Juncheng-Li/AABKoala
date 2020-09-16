@@ -6,9 +6,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
 
-from graphs import models
-from graphs.models import Result, Graph, Reading
-from graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
+from apps.graphs import models
+from apps.graphs.models import Result, Graph, Reading
+from apps.graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
 
 

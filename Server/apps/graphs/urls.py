@@ -1,11 +1,11 @@
 from django.conf.urls import url
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from graphs import views
 
 
 # Create a router and register our viewsets with it.
-from graphs.views import GraphViewSet
+from apps.graphs import views
+from apps.graphs.views import GraphViewSet
 
 router = DefaultRouter()
 router.register(r'results', views.ResultViewSet, basename='results')
