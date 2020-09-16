@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'graphs.apps.GraphsConfig',
+    'apps.graphs',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +125,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# add "apps" path to the root search
-sys.path.insert(0, os.path.join(BASE_DIR,"apps"))
