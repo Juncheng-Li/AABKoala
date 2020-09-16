@@ -15,3 +15,5 @@ output.json
 /venv/
 dfTest.py
 /plotsave/
+/app/graphs/migrations/__pycache__/
+/apps/graphs/__pycache__/
