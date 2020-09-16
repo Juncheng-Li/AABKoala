@@ -11,9 +11,8 @@
 .navigation
 /captures/
 output.json
-*/__pycache__/
+!**/__pycache__/
 /venv/
 dfTest.py
 /plotsave/
-/app/graphs/migrations/__pycache__/
-/apps/graphs/__pycache__/
+/Server/utils/plGraphs
