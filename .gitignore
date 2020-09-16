@@ -17,3 +17,10 @@ dfTest.py
 /plotsave/
 /Server/utils/plGraphs/*
 
+# __pycache__
+/Server/AAB/__pycache__/
+/Server/apps/graphs/__pycache__/
+/Server/apps/graphs/migrations/__pycache__/
+/Server/utils/__pychache__/
+/Server/__pychache__/
+
