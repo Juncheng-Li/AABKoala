@@ -6,6 +6,7 @@ from graphs import views
 
 # Create a router and register our viewsets with it.
 from graphs.views import GraphViewSet
+from graphs.views import GraphComparisonViewSet
 
 router = DefaultRouter()
 router.register(r'results', views.ResultViewSet, basename='results')
@@ -16,5 +17,5 @@ router.register(r'results', views.ResultViewSet, basename='results')
 urlpatterns = [
     path('', include(router.urls)),
     path('graphManage/', GraphViewSet.as_view()),
-
+    path('graphComparison/', GraphComparisonViewSet.as_view())
 ]

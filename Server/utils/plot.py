@@ -6,31 +6,33 @@ import os
 import time
 
 
-def NDS_3DCRT(data):
+def NDS_3DCRT(*data):
     path = os.path.split(os.path.realpath(__file__))[0]
     imagePath = path + '/images/case1.png'
     image2Path = path + '/images/case2.png'
     image3Path = path + '/images/case3.png'
     image4Path = path + '/images/case4.png'
     RNS_path = path + '/images/RNS.png'
-    x = []
-    y = []
-
-    for code in data:
-        # flatten measurements to y
-        measurements = data[code]
-        for measurement in measurements:
-            y.append(measurement)
-        # flatten code to x
-        length = len(measurements)
-        for i in range(0, length):
-            x.append(code_to_x(code))
 
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
-    # scatter plot
-    allData = plt.scatter(x, y, s=4, c="#424242", zorder=5)
+    # plot series
+    for series in data:
+        x = []
+        y = []
+        for code in series:
+            # flatten measurements in data into list y
+            measurements = series[code]
+            for measurement in measurements:
+                y.append(measurement)
+            # flatten code in data into list x
+            length = len(measurements)
+            for i in range(0, length):
+                x.append(code_to_x(code))
+        # scatter plot
+        # allData = plt.scatter(x, y, s=4, c="#424242", zorder=5)
+        allData = plt.scatter(x, y, s=4, zorder=5)
 
     # set axis
     xlabel_pos = np.unique(x)
