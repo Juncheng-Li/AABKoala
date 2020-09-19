@@ -1,0 +1,105 @@
+import pandas as pd
+import json
+import http.client
+import mimetypes
+from pandas import json_normalize
+from LocalProgram.config import *
+from datetime import datetime
+
+class resultRequest:
+
+    def __init__(self):
+        self.authorization = authorization
+        self.host = host
+        self.port = port
+        self.conn = http.client.HTTPConnection(self.host,self.port)
+
+    def parseExcel(self) -> [str]:
+        filename = "upload/uploadingData.xlsx"
+        df = pd.read_excel(filename)
+        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
+        resultList = []
+
+        for i in range(len(df)):
+            unested = df.loc[i,"AuditID":"Phantom"].to_json()
+            facilityOutput = df.loc[i,"fac_6":"fac_10FFF"].to_json().replace("fac","energy")
+            tpr = df.loc[i,"TPR_6":"TPR_10FFF"].to_json().replace("TPR","energy")
+            readings = df.loc[i,"Reading_101106":"Reading_305109"].to_json()
+            misdelivery = df.loc[i,"Misdelivery_101106":"Misdelivery_305109"].to_json()
+
+            result = json.loads(unested)
+            result.update({"facilityOutput":[json.loads(facilityOutput)]})
+            result.update({"TPR":[json.loads(tpr)]})
+            result.update({"Reading":[json.loads(readings)]})
+            result.update({"Misdelivery":[json.loads(misdelivery)]})
+
+            resultList.append(json.dumps(result))
+
+        return resultList
+
+    def insertNewResult(self):
+        resultsList = self.parseExcel()
+        for result in resultsList:
+            payload = result
+            headers = {
+                'Authorization': self.authorization,
+                'Content-Type': 'application/json'
+            }
+            self.conn.request("POST", "/graphs/results/", payload, headers)
+            res = self.conn.getresponse()
+            data = res.read()
+            print(data.decode("utf-8"))
+
+    def listResults(self):
+        payload = ''
+        headers = {
+            'Authorization': self.authorization,
+        }
+        self.conn.request("GET", "/graphs/results/", payload, headers)
+        res = self.conn.getresponse()
+        data = res.read()
+        content = bytes.decode(data, 'utf-8')
+        df = json_normalize(json.loads(content))
+        df.to_excel("download/" + "list" + datetime.now().strftime("%Y%m%d%H%H%S") + ".xlsx")
+        print(data.decode("utf-8"))
+
+    def updateResultsWithIDs(self, resultIds):
+        resultsList = self.parseExcel()
+        if len(resultIds) != len(resultsList):
+            print("The number of results ids does not match with the number of results in excel")
+            return
+        for i in range(len(resultIds)):
+            payload = resultsList[i]
+            headers = {
+                'Authorization': self.authorization,
+                'Content-Type': 'application/json'
+            }
+            self.conn.request("PUT", "/graphs/results/" + resultIds[i] + "/", payload, headers)
+            res = self.conn.getresponse()
+            data = res.read()
+            print(data.decode("utf-8"))
+
+    def retrieveResultWithID(self, resultID):
+        payload = ''
+        headers = {
+            'Authorization': self.authorization,
+        }
+        self.conn.request("GET", "/graphs/results/" + resultID + "/", payload, headers)
+        res = self.conn.getresponse()
+        data = res.read()
+        content = bytes.decode(data,'utf-8')
+        df = json_normalize(json.loads(content))
+        df.to_excel("download/" + "retrive" + resultID + datetime.now().strftime("%Y%m%d%H%H%S") + ".xlsx")
+        print(data.decode("utf-8"))
+
+    def deleteResultWithID(self, resultID):
+        payload = ''
+        headers = {
+            'Authorization': self.authorization,
+        }
+        self.conn.request("DELETE", "/graphs/results/" + resultID + "/", payload, headers)
+        res = self.conn.getresponse()
+        data = res.read()
+        print(data.decode("utf-8"))
+
+resultRequest().listResults()

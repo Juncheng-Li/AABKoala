@@ -24,3 +24,5 @@ dfTest.py
 /Server/utils/__pycache__/
 /Server/__pycache__/
 /Server/*/__pycache__/
+/LocalProgram/*/__pycache__/
+/LocalProgram/__pycache__/
