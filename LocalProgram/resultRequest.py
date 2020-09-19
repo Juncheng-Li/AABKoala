@@ -2,7 +2,9 @@ import pandas as pd
 import json
 import http.client
 import mimetypes
+from pandas import json_normalize
 from LocalProgram.config import *
+from datetime import datetime
 
 class resultRequest:
 
@@ -56,8 +58,10 @@ class resultRequest:
         self.conn.request("GET", "/graphs/results/", payload, headers)
         res = self.conn.getresponse()
         data = res.read()
+        content = bytes.decode(data, 'utf-8')
+        df = json_normalize(json.loads(content))
+        df.to_excel("download/" + "list" + datetime.now().strftime("%Y%m%d%H%H%S") + ".xlsx")
         print(data.decode("utf-8"))
-        """write some code here to decode the json to excel"""
 
     def updateResultsWithIDs(self, resultIds):
         resultsList = self.parseExcel()
@@ -83,6 +87,9 @@ class resultRequest:
         self.conn.request("GET", "/graphs/results/" + resultID + "/", payload, headers)
         res = self.conn.getresponse()
         data = res.read()
+        content = bytes.decode(data,'utf-8')
+        df = json_normalize(json.loads(content))
+        df.to_excel("download/" + "retrive" + resultID + datetime.now().strftime("%Y%m%d%H%H%S") + ".xlsx")
         print(data.decode("utf-8"))
 
     def deleteResultWithID(self, resultID):
@@ -94,3 +101,5 @@ class resultRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
+
+resultRequest().listResults()
