@@ -15,18 +15,19 @@ class resultRequest:
     def parseExcel(self) -> [str]:
         filename = "upload/uploadingData.xlsx"
         df = pd.read_excel(filename)
+        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
         resultList = []
 
         for i in range(len(df)):
             unested = df.loc[i,"AuditID":"Phantom"].to_json()
             facilityOutput = df.loc[i,"fac_6":"fac_10FFF"].to_json().replace("fac","energy")
-            trp = df.loc[i,"TRP_6":"TRP_10FFF"].to_json().replace("TRP","energy")
+            tpr = df.loc[i,"TPR_6":"TPR_10FFF"].to_json().replace("TPR","energy")
             readings = df.loc[i,"Reading_101106":"Reading_305109"].to_json()
             misdelivery = df.loc[i,"Misdelivery_101106":"Misdelivery_305109"].to_json()
 
             result = json.loads(unested)
             result.update({"facilityOutput":[json.loads(facilityOutput)]})
-            result.update({"TRP":[json.loads(trp)]})
+            result.update({"TPR":[json.loads(tpr)]})
             result.update({"Reading":[json.loads(readings)]})
             result.update({"Misdelivery":[json.loads(misdelivery)]})
 
@@ -74,7 +75,7 @@ class resultRequest:
             data = res.read()
             print(data.decode("utf-8"))
 
-    def retriveResultWithID(self, resultID):
+    def retrieveResultWithID(self, resultID):
         payload = ''
         headers = {
             'Authorization': self.authorization,
@@ -93,5 +94,3 @@ class resultRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
-
-
