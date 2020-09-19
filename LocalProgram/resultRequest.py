@@ -58,3 +58,33 @@ class resultRequest:
         print(data.decode("utf-8"))
         """write some code here to decode the json to excel"""
 
+    def updateResultsWithIDs(self, resultIds):
+        resultsList = self.parseExcel()
+        if len(resultIds) != len(resultsList):
+            print("The number of results ids does not match with the number of results in excel")
+            return
+        for i in range(len(resultIds)):
+            payload = resultsList[i]
+            headers = {
+                'Authorization': self.authorization,
+                'Content-Type': 'application/json'
+            }
+            self.conn.request("PUT", "/graphs/results/" + resultIds[i] + "/", payload, headers)
+            res = self.conn.getresponse()
+            data = res.read()
+            print(data.decode("utf-8"))
+
+    def retriveResultWithID(self, resultID):
+        payload = ''
+        headers = {
+            'Authorization': self.authorization,
+        }
+        self.conn.request("GET", "/graphs/results/" + resultID + "/", payload, headers)
+        res = self.conn.getresponse()
+        data = res.read()
+        print(data.decode("utf-8"))
+
+
+resultRequest().retriveResultWithID("12")
+
+
