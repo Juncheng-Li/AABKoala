@@ -84,7 +84,14 @@ class resultRequest:
         data = res.read()
         print(data.decode("utf-8"))
 
-
-resultRequest().retriveResultWithID("12")
+    def deleteResultWithID(self, resultID):
+        payload = ''
+        headers = {
+            'Authorization': self.authorization,
+        }
+        self.conn.request("DELETE", "/graphs/results/" + resultID + "/", payload, headers)
+        res = self.conn.getresponse()
+        data = res.read()
+        print(data.decode("utf-8"))
 
 
