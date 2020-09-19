@@ -11,10 +11,6 @@ class resultRequest:
         self.host = host
         self.port = port
         self.conn = http.client.HTTPConnection(self.host,self.port)
-        self.headers = {
-            'Authorization': self.authorization,
-            'Content-Type': 'application/json'
-        }
 
     def parseExcel(self) -> [str]:
         filename = "upload/uploadingData.xlsx"
@@ -38,16 +34,27 @@ class resultRequest:
 
         return resultList
 
-    def insertNewResultIntoDatabase(self):
+    def insertNewResult(self):
         resultsList = self.parseExcel()
-
         for result in resultsList:
             payload = result
-            self.conn.request("POST", "/graphs/results/", payload, self.headers)
+            headers = {
+                'Authorization': self.authorization,
+                'Content-Type': 'application/json'
+            }
+            self.conn.request("POST", "/graphs/results/", payload, headers)
             res = self.conn.getresponse()
             data = res.read()
             print(data.decode("utf-8"))
 
-resultRequest().insertNewResultIntoDatabase()
-
+    def listResults(self):
+        payload = ''
+        headers = {
+            'Authorization': self.authorization,
+        }
+        self.conn.request("GET", "/graphs/results/", payload, headers)
+        res = self.conn.getresponse()
+        data = res.read()
+        print(data.decode("utf-8"))
+        """write some code here to decode the json to excel"""
 
