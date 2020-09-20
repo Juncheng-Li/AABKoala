@@ -155,6 +155,7 @@ class Graph(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
     url = models.CharField(max_length=250)
+    fileName = models.CharField(max_length=250)
     result = models.ManyToManyField('Result')
 
     class Meta:
