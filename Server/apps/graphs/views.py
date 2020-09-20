@@ -57,7 +57,7 @@ class GraphViewSet(APIView):
 
         graph_info = plot.NDS_3DCRT(data)
 
-        graph_obj = models.Graph.objects.create(url=graph_info['url'])
+        graph_obj = models.Graph.objects.create(url=graph_info['url'], fileName=graph_info['fileName'])
         results_obj = models.Result.objects.filter(pk__in=results_list)
         graph_obj.result.add(*results_obj)
         graph_obj.save()
