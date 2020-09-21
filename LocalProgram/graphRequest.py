@@ -1,4 +1,7 @@
 import http.client
+import urllib.request
+import os
+
 
 class graphRequest:
 
@@ -8,7 +11,6 @@ class graphRequest:
         self.port = 8000
         self.conn = http.client.HTTPConnection(self.host, self.port)
 
-
     def list_graphs(self):
         payload = {}
         headers = {}
@@ -17,8 +19,13 @@ class graphRequest:
         data = res.read()
         print(data.decode("utf-8"))
 
-    def plot_graph(self, resultID):
-        payload = "{\n    \"results_list\":[%d]\n}"%resultID
+    def retrieve_graph(self, fileName):
+        localPath = os.path.split(os.path.realpath(__file__))[0]+"/download/"+fileName
+        filePath = "http://"+self.host+":"+str(self.port)+"/graph/"+fileName
+        urllib.request.urlretrieve(filePath, localPath)
+
+    def plot_graph(self, resultIDs):
+        payload = "{\n    \"results_list\":%s\n}"%resultIDs
         headers = {
             'Authorization': self.authorization,
             'Content-Type': 'application/json'
@@ -36,4 +43,8 @@ class graphRequest:
         data = res.read()
         print(data.decode("utf-8"))
 
-graphRequest().list_graphs()
+
+#graphRequest().list_graphs()
+#graphRequest().delete_graph(16)
+#graphRequest().plot_graph("[1,2,3]")
+graphRequest().retrieve_graph("3DCRT_1600153340110.png")
