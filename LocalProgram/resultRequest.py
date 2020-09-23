@@ -6,6 +6,7 @@ from pandas import json_normalize
 from LocalProgram.config import *
 from datetime import datetime
 
+
 class resultRequest:
 
     def __init__(self):
@@ -16,26 +17,35 @@ class resultRequest:
 
     def parseExcel(self) -> [str]:
         filename = "upload/uploadingData.xlsx"
-        df = pd.read_excel(filename)
-        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
+        df = pd.read_excel(filename) # read uploadingData.xlsx
+        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d") # covert 10/5/2016 to 2016-10-05
         resultList = []
 
         for i in range(len(df)):
             unested = df.loc[i,"AuditID":"Phantom"].to_json()
+            # get excel content from "AuditID" to "Phantom"as JSON
+
             facilityOutput = df.loc[i,"fac_6":"fac_10FFF"].to_json().replace("fac","energy")
+            # replace 'fac' as 'energy' from "fac_6" to "fac_10FFF"
+
             tpr = df.loc[i,"TPR_6":"TPR_10FFF"].to_json().replace("TPR","energy")
+            # replace 'fac' as 'energy' from "TPR_6" to "TPR_10FFF"
+
             readings = df.loc[i,"Reading_101106":"Reading_305109"].to_json()
+            # get excel content from "AuditID" to "Phantom"as JSON
+
             misdelivery = df.loc[i,"Misdelivery_101106":"Misdelivery_305109"].to_json()
+            # get excel content from "Misdelivery_101106" to "Misdelivery_305109"as JSON
 
             result = json.loads(unested)
-            result.update({"facilityOutput":[json.loads(facilityOutput)]})
-            result.update({"TPR":[json.loads(tpr)]})
-            result.update({"Reading":[json.loads(readings)]})
-            result.update({"Misdelivery":[json.loads(misdelivery)]})
-
+            result.update({"facilityOutput":[json.loads(facilityOutput)]}) # update facilityOutput dataset
+            result.update({"TPR":[json.loads(tpr)]}) # update TPR dataset
+            result.update({"Reading":[json.loads(readings)]}) # update Reading dataset
+            result.update({"Misdelivery":[json.loads(misdelivery)]}) # update Misdelivery dataset
             resultList.append(json.dumps(result))
-
+            #append facilityOutput dataset,TPR dataset,Reading dataset,Misdelivery dataset into resultList
         return resultList
+
 
     def insertNewResult(self):
         resultsList = self.parseExcel()
@@ -48,7 +58,7 @@ class resultRequest:
             self.conn.request("POST", "/graphs/results/", payload, headers)
             res = self.conn.getresponse()
             data = res.read()
-            print(data.decode("utf-8"))
+            print('hi'+data.decode("utf-8"))
 
     def listResults(self):
         payload = ''
@@ -102,4 +112,10 @@ class resultRequest:
         data = res.read()
         print(data.decode("utf-8"))
 
-resultRequest().listResults()
+
+resultRequest().parseExcel()
+resultRequest().insertNewResult()
+# resultRequest().listResults()
+# resultRequest().updateResultsWithIDs()
+# resultRequest().retrieveResultWithID()
+# resultRequest().deleteResultWithID()
