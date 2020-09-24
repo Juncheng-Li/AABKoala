@@ -1,6 +1,7 @@
 import http.client
 import urllib.request
 import os
+import json
 
 
 class graphRequest:
@@ -34,6 +35,8 @@ class graphRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
+        graphInfo = json.loads(data.decode("utf-8"))
+        graphRequest().retrieve_graph(graphInfo["fileName"])
 
     def delete_graph(self, graphID):
         payload = "{\n    \"graphs_list\":[%d]\n}" % graphID
@@ -45,6 +48,6 @@ class graphRequest:
 
 
 #graphRequest().list_graphs()
-#graphRequest().delete_graph(16)
-graphRequest().plot_graph("[22,24]", "history")
-#graphRequest().retrieve_graph("3DCRT_1600153340110.png")
+#graphRequest().delete_graph(36)
+graphRequest().plot_graph("[31]", "history")
+#graphRequest().retrieve_graph("3DCRT_1600914975424.png")

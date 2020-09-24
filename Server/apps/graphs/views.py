@@ -97,8 +97,11 @@ class GraphViewSet(APIView):
         graphs_obj = Graph.objects.filter(pk__in=graphs_list)
         for graph_obj in graphs_obj:
             url = graph_obj.url
-            os.remove(url)
+            if os.path.exists(url):
+                os.remove(url)
             graph_obj.result.clear()
             graph_obj.delete()
 
         return Response(status=status.HTTP_200_OK)
+
+
