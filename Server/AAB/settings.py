@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'graphs.apps.GraphsConfig',
+    'apps.graphs',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -126,5 +127,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# add "apps" path to the root search
-sys.path.insert(0, os.path.join(BASE_DIR,"apps"))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'utils', 'plGraphs')
+MEDIA_URL = '/media/'
