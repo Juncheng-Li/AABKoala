@@ -43,6 +43,13 @@ class GraphViewSet(APIView):
     def post(self, request):
         results_list = json.loads(request.body.decode('utf-8')).get('results_list')
         mode = json.loads(request.body.decode('utf-8')).get('mode')
+        series_name = []
+        for resultID in results_list:
+            current_results = Result.objects.filter(id=resultID)
+            for current_result in current_results:
+                series_name.append(current_result.FacilityName)
+        print("Series name:")
+        print(series_name)
         readings = Reading.objects.filter(result_id__in=results_list)
         data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [], "205306": [],
                 "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [], "110110": [],
@@ -79,11 +86,13 @@ class GraphViewSet(APIView):
             print("history_data: ")
             print(history_data)
             # Plot with history data
-            graph_info = plot.NDS_3DCRT(history_data, data)
+            data_list = [history_data, data]
+            graph_info = plot.NDS_3DCRT(data_list, series_name, mode)
         else:
             # Plot without history data
             print("not")
-            graph_info = plot.NDS_3DCRT(data)
+            data_list = [data]
+            graph_info = plot.NDS_3DCRT(data_list, series_name, mode)
 
         graph_obj = models.Graph.objects.create(url=graph_info['url'], fileName=graph_info['fileName'])
         results_obj = models.Result.objects.filter(pk__in=results_list)

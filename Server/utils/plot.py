@@ -1,26 +1,35 @@
 import matplotlib.pyplot as plt
-import pandas as pd
+import matplotlib
 import numpy as np
 from matplotlib.cbook import get_sample_data
 import os
 import time
 
 
-def NDS_3DCRT(*data):
+def NDS_3DCRT(data_list, series_name, mode):
+    matplotlib.pyplot.switch_backend('Agg')
     path = os.path.split(os.path.realpath(__file__))[0]
     imagePath = path + '/images/case1.png'
     image2Path = path + '/images/case2.png'
     image3Path = path + '/images/case3.png'
     image4Path = path + '/images/case4.png'
     RNS_path = path + '/images/RNS.png'
+    Series_names = []
 
+    if mode == "history":
+        Series_names.append("All Data")
+        for name in series_name:
+            Series_names.append(name)
+    else:
+        for name in series_name:
+            Series_names.append(name)
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
     # plot series
     Data_Series = []
-    count = "all data"
-    for series in data:
+    # count = "all data"
+    for series in data_list:
         x = []
         y = []
         for code in series:
@@ -33,11 +42,11 @@ def NDS_3DCRT(*data):
             for i in range(0, length):
                 x.append(code_to_x(code))
         # scatter plot
-        if count is "all data":
+        if mode == "history":
             Data_Series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
-        elif count is "other data":
+            mode = "others"
+        else:
             Data_Series.append(plt.scatter(x, y, s=4, zorder=5))
-        count = "other data"
 
     # set axis
     xlabel_pos = np.unique(x)
@@ -62,8 +71,8 @@ def NDS_3DCRT(*data):
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
-    plt.legend(Data_Series, ['History', 'New'], bbox_to_anchor=(1.22, 1))
-
+    plt.legend(Data_Series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
+    # plt.legend(Data_Series, Series_names, loc=0)
     # add split lines
     plt.axvline(x=12, c="black", linewidth=0.4)
     plt.axvline(x=32, c="black", linewidth=0.4)
