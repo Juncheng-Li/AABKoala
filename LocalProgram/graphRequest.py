@@ -36,7 +36,7 @@ class graphRequest:
         data = res.read()
         print(data.decode("utf-8"))
         graphInfo = json.loads(data.decode("utf-8"))
-        graphRequest().retrieve_graph(graphInfo["fileName"])
+        self.retrieve_graph(graphInfo["fileName"])
 
     def delete_graph(self, graphID):
         payload = "{\n    \"graphs_list\":[%d]\n}" % graphID
