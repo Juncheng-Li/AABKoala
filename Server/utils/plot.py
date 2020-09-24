@@ -6,31 +6,38 @@ import os
 import time
 
 
-def NDS_3DCRT(data):
+def NDS_3DCRT(*data):
     path = os.path.split(os.path.realpath(__file__))[0]
     imagePath = path + '/images/case1.png'
     image2Path = path + '/images/case2.png'
     image3Path = path + '/images/case3.png'
     image4Path = path + '/images/case4.png'
     RNS_path = path + '/images/RNS.png'
-    x = []
-    y = []
-
-    for code in data:
-        # flatten measurements to y
-        measurements = data[code]
-        for measurement in measurements:
-            y.append(measurement)
-        # flatten code to x
-        length = len(measurements)
-        for i in range(0, length):
-            x.append(code_to_x(code))
 
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
-    # scatter plot
-    allData = plt.scatter(x, y, s=4, c="#424242", zorder=5)
+    # plot series
+    Data_Series = []
+    count = "all data"
+    for series in data:
+        x = []
+        y = []
+        for code in series:
+            # flatten measurements in data into list y
+            measurements = series[code]
+            for measurement in measurements:
+                y.append(measurement)
+            # flatten code in data into list x
+            length = len(measurements)
+            for i in range(0, length):
+                x.append(code_to_x(code))
+        # scatter plot
+        if count is "all data":
+            Data_Series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+        elif count is "other data":
+            Data_Series.append(plt.scatter(x, y, s=4, zorder=5))
+        count = "other data"
 
     # set axis
     xlabel_pos = np.unique(x)
@@ -55,7 +62,7 @@ def NDS_3DCRT(data):
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
-    plt.legend([allData], ['All Data'], bbox_to_anchor=(1.22, 1))
+    plt.legend(Data_Series, ['History', 'Request'], bbox_to_anchor=(1.22, 1))
 
     # add split lines
     plt.axvline(x=12, c="black", linewidth=0.4)
@@ -146,3 +153,49 @@ def code_to_x(input_code):
         "305109": 61
     }
     return switcher.get(input_code)
+
+
+if __name__ == '__main__':
+    data = {'101106': [float('-0.00840'), float('0.00400')], '110106': [float('-0.02060'), float('-0.00190')],
+            '205106': [float('-0.01770'), float('0.00300')], '208106': [float('-0.00460'), float('0.00470')],
+            '205206': [float('-0.01330'), float('0.00000')], '208206': [float('-0.11110'), float('0.08240')],
+            '205306': [float('0.00760'), float('-0.00600')], '208306': [float('-0.01500'), float('-0.02630')],
+            '303106': [float('-0.00690'), float('-0.00250')], '305106': [float('-0.00390'), float('0.00050')],
+            '403106': [float('0.01010'), float('-0.00150')], '405106': [float('0.01150'), float('0.00230')],
+            '103110': [float('-0.00600'), float('0.00650')], '110110': [float('-0.01600'), float('0.00300')],
+            '303110': [float('-0.00450'), float('0.00000')], '305110': [float('0.00340'), float('0.00340')],
+            '403110': [float('0.00600'), float('-0.01280')], '405110': [float('-0.00430'), float('-0.02740')],
+            '103115': [None, None], '110115': [None, None], '303115': [None, None], '305115': [None, None],
+            '403115': [None, None], '405115': [None, None], '103118': [None, None], '110118': [None, None],
+            '303118': [None, None], '305118': [None, None], '403118': [None, None], '405118': [None, None],
+            '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
+            '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
+    data1 = {'101106': [float('-0.01840'), float('0.01400')], '110106': [float('-0.02060'), float('-0.00290')],
+             '205106': [float('-0.01070'), float('0.01300')], '208106': [float('-0.00460'), float('0.01470')],
+             '205206': [float('-0.01330'), float('0.00100')], '208206': [float('-0.11110'), float('0.08240')],
+             '205306': [float('0.00160'), float('-0.01600')], '208306': [float('-0.01500'), float('-0.01630')],
+             '303106': [float('-0.00190'), float('-0.01250')], '305106': [float('-0.00390'), float('0.01050')],
+             '403106': [float('0.01510'), float('-0.00250')], '405106': [float('0.01150'), float('0.00230')],
+             '103110': [float('-0.00600'), float('0.00150')], '110110': [float('-0.01600'), float('0.00300')],
+             '303110': [float('-0.00150'), float('0.00100')], '305110': [float('0.00340'), float('0.00340')],
+             '403110': [float('0.00300'), float('-0.01780')], '405110': [float('-0.00430'), float('-0.02740')],
+             '103115': [None, None], '110115': [None, None], '303115': [None, None], '305115': [None, None],
+             '403115': [None, None], '405115': [None, None], '103118': [None, None], '110118': [None, None],
+             '303118': [None, None], '305118': [None, None], '403118': [None, None], '405118': [None, None],
+             '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
+             '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
+    data3 = {'101106': [float('-0.01840'), float('0.01400')], '110106': [float('-0.02060'), float('-0.00290')],
+             '205106': [float('-0.01070'), float('0.01300')], '208106': [float('-0.00460'), float('0.01470')],
+             '205206': [float('-0.01330'), float('0.00100')], '208206': [float('-0.11110'), float('0.08240')],
+             '205306': [float('0.00160'), float('-0.01600')], '208306': [float('-0.01500'), float('-0.01630')],
+             '303106': [float('-0.00190'), float('-0.01250')], '305106': [float('-0.00390'), float('0.01050')],
+             '403106': [float('0.01510'), float('-0.00250')], '405106': [float('0.01150'), float('0.00230')],
+             '103110': [float('-0.00600'), float('0.00150')], '110110': [float('-0.01600'), float('0.00300')],
+             '303110': [float('-0.00150'), float('0.00100')], '305110': [float('0.00340'), float('0.00340')],
+             '403110': [float('0.00300'), float('-0.01780')], '405110': [float('-0.00430'), float('-0.02740')],
+             '103115': [None, None], '110115': [None, None], '303115': [None, None], '305115': [None, None],
+             '403115': [None, None], '405115': [None, None], '103118': [None, None], '110118': [None, None],
+             '303118': [None, None], '305118': [None, None], '403118': [None, None], '405118': [None, None],
+             '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
+             '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
+    NDS_3DCRT(data, data1, data3)

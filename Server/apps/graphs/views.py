@@ -42,6 +42,7 @@ class GraphViewSet(APIView):
 
     def post(self, request):
         results_list = json.loads(request.body.decode('utf-8')).get('results_list')
+        mode = json.loads(request.body.decode('utf-8')).get('mode')
         readings = Reading.objects.filter(result_id__in=results_list)
         data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [], "205306": [],
                 "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [], "110110": [],
@@ -54,8 +55,35 @@ class GraphViewSet(APIView):
             for key in data.keys():
                 temp = "data[key].append(reading.Reading_" + key + ")"
                 exec(temp)
+        print(data)
 
-        graph_info = plot.NDS_3DCRT(data)
+        # If mode is history, load history readings from the DB
+        if mode == "history":
+            # Load all history readings
+            history_readings = Reading.objects.all()
+            history_data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [],
+                            "205306": [],
+                            "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [],
+                            "110110": [],
+                            "303110": [], "305110": [], "403110": [], "405110": [], "103115": [], "110115": [],
+                            "303115": [],
+                            "305115": [], "403115": [], "405115": [], "103118": [], "110118": [], "303118": [],
+                            "305118": [],
+                            "403118": [], "405118": [], "101105": [], "110105": [], "303105": [], "305105": [],
+                            "103109": [],
+                            "110109": [], "303109": [], "305109": []}
+            for history_reading in history_readings:
+                for history_key in history_data.keys():
+                    tmp = "history_data[history_key].append(history_reading.Reading_" + history_key + ")"
+                    exec(tmp)
+            print("history_data: ")
+            print(history_data)
+            # Plot with history data
+            graph_info = plot.NDS_3DCRT(history_data, data)
+        else:
+            # Plot without history data
+            print("not")
+            graph_info = plot.NDS_3DCRT(data)
 
         graph_obj = models.Graph.objects.create(url=graph_info['url'], fileName=graph_info['fileName'])
         results_obj = models.Result.objects.filter(pk__in=results_list)
