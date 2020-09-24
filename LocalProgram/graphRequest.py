@@ -25,7 +25,7 @@ class graphRequest:
         filePath = "http://"+self.host+":"+str(self.port)+"/graph/"+fileName
         urllib.request.urlretrieve(filePath, localPath)
 
-    def plot_graph(self, resultIDs, mode):
+    def plot_graph(self, resultIDs, mode=None):
         payload = "{\n    \"results_list\":%s,\n    \"mode\":\"%s\"\n}" % (resultIDs, mode)
         headers = {
             'Authorization': self.authorization,
@@ -49,5 +49,5 @@ class graphRequest:
 
 #graphRequest().list_graphs()
 #graphRequest().delete_graph(36)
-graphRequest().plot_graph("[31]", "history")
+graphRequest().plot_graph("[31]")
 #graphRequest().retrieve_graph("3DCRT_1600914975424.png")
