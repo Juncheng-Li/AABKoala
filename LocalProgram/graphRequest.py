@@ -24,8 +24,8 @@ class graphRequest:
         filePath = "http://"+self.host+":"+str(self.port)+"/graph/"+fileName
         urllib.request.urlretrieve(filePath, localPath)
 
-    def plot_graph(self, resultIDs):
-        payload = "{\n    \"results_list\":%s\n}"%resultIDs
+    def plot_graph(self, resultIDs, mode):
+        payload = "{\n    \"results_list\":%s,\n    \"mode\":\"%s\"\n}" % (resultIDs, mode)
         headers = {
             'Authorization': self.authorization,
             'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ class graphRequest:
         print(data.decode("utf-8"))
 
     def delete_graph(self, graphID):
-        payload = "{\n    \"graphs_list\":[%d]\n}"%graphID
+        payload = "{\n    \"graphs_list\":[%d]\n}" % graphID
         headers = {}
         self.conn.request("DELETE", "/graphs/graphManage/", payload, headers)
         res = self.conn.getresponse()
@@ -46,5 +46,5 @@ class graphRequest:
 
 #graphRequest().list_graphs()
 #graphRequest().delete_graph(16)
-#graphRequest().plot_graph("[1,2,3]")
-graphRequest().retrieve_graph("3DCRT_1600153340110.png")
+graphRequest().plot_graph("[22,24]", "history")
+#graphRequest().retrieve_graph("3DCRT_1600153340110.png")
