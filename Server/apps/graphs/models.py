@@ -11,7 +11,7 @@ class Result(models.Model):
     Auditor1 = models.CharField(max_length=45)
     Auditor2 = models.CharField(max_length=45, null=True)
     Auditor3 = models.CharField(max_length=45, null=True)
-    AuditDate = models.DateField()
+    AuditDate = models.DateField(null=True)
     RepDate = models.CharField(max_length=45)
     LinacModel = models.CharField(max_length=45)
     LinacManufacturer = models.CharField(max_length=45)
@@ -30,12 +30,12 @@ class Result(models.Model):
 class FacilityOutput(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
-    energy_6 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_10 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_15 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_18 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_6FFF = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_10FFF = models.DecimalField(max_digits=6, decimal_places=3, null=True)
+    energy_6 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_10 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_15 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_18 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_6FFF = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_10FFF = models.DecimalField(max_digits=7, decimal_places=4, null=True)
     result = models.ForeignKey(Result, related_name='facilityOutput', on_delete=models.CASCADE)
 
     class Meta:
@@ -45,12 +45,12 @@ class FacilityOutput(models.Model):
 class TPR(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
-    energy_6 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_10 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_15 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_18 = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_6FFF = models.DecimalField(max_digits=6, decimal_places=3, null=True)
-    energy_10FFF = models.DecimalField(max_digits=6, decimal_places=3, null=True)
+    energy_6 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_10 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_15 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_18 = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_6FFF = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    energy_10FFF = models.DecimalField(max_digits=7, decimal_places=4, null=True)
     result = models.ForeignKey(Result, related_name='TPR', on_delete=models.CASCADE)
 
     class Meta:
