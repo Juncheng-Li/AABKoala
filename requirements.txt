@@ -1,7 +1,5 @@
 Django
 djangorestframework
-markdown
-django-filter
 mysqlclient
 matplotlib
 pandas
