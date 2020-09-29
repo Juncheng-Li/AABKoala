@@ -81,9 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'AABKoalaTest',
-        'HOST': '35.189.21.28',
-        'PORT': 3306,
-        'USER': 'client1',  # use own database account name
+        'HOST': 'db',
+        'PORT': 3305,
+        'USER': 'root',  # use own database account name
         'PASSWORD': 'AA-koala123456',  # use own database account password
     }
 }
