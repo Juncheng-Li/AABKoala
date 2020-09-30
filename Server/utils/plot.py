@@ -127,8 +127,9 @@ def NDS_IMRT(df):
     print(y)
     plt.scatter(x, y, s=4, c="#454545", zorder=5)
     # set axis
-    xlabel_pos = [4, 21, 38, 55, 72, 89]
+    xlabel_pos = [8, 25, 42, 59, 76, 93]
     plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=8)
+    plt.xlim(0, 102)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
     plt.title("3DCRT Results", fontsize=7, fontweight="bold")
@@ -142,7 +143,7 @@ def NDS_IMRT(df):
     ax1.spines["top"].set_edgecolor("white")
     ax1.spines["bottom"].set_edgecolor("white")
     ax1.spines["right"].set_edgecolor("white")
-    ax1.margins(x=0.01)
+    # ax1.margins(x=0.01)
 
     # add line
     plt.axvline(x=17, c="black", linewidth=0.3, linestyle="dashed")
