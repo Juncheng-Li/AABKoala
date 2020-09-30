@@ -65,7 +65,6 @@ def NDS_3DCRT(data_list, series_name, mode):
     ax1 = plt.gca()
     ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
     ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
-    # ax.set_facecolor("#99FF99")
 
     # set white margins
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
@@ -120,10 +119,39 @@ def NDS_3DCRT(data_list, series_name, mode):
 
 
 def NDS_IMRT(df):
+    matplotlib.pyplot.switch_backend('Agg')
+    path = os.path.split(os.path.realpath(__file__))[0]
     x = df["x"].values.tolist()
     y = df["y"].values.tolist()
     print(x)
     print(y)
+    plt.scatter(x, y, s=4, c="#454545", zorder=5)
+    # set axis
+    xlabel_pos = [4, 21, 38, 55, 72, 89]
+    plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=8)
+    plt.yticks(fontsize=7)
+    plt.ylim(-0.1, 0.1)
+    plt.title("3DCRT Results", fontsize=7, fontweight="bold")
+    plt.suptitle("where is subtitle?", fontsize=10)
+
+    # add green background
+    ax1 = plt.gca()
+    ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+    ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+
+    ax1.spines["top"].set_edgecolor("white")
+    ax1.spines["bottom"].set_edgecolor("white")
+    ax1.spines["right"].set_edgecolor("white")
+
+    # add line
+    plt.axvline(x=17, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=34, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=51, c="black", linewidth=0.4)
+    plt.axvline(x=68, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=85, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axhline(y=0, c="black", linewidth=0.4)
+
+    plt.savefig("./imrtPP.png", dpi=300)
 
 
 def code_to_x(input_code):
