@@ -120,12 +120,16 @@ def NDS_3DCRT(data_list, series_name, mode):
 
 def NDS_IMRT(df):
     matplotlib.pyplot.switch_backend('Agg')
-    path = os.path.split(os.path.realpath(__file__))[0]
     x = df["x"].values.tolist()
     y = df["y"].values.tolist()
     print(x)
     print(y)
-    plt.scatter(x, y, s=4, c="#454545", zorder=5)
+    Data_series = []
+    series_name = ["All", "New"]
+    # plot
+    Data_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+    Data_series.append(plt.scatter(x, y, s=4, c="blue", zorder=5))
+
     # set axis
     xlabel_pos = [8, 25, 42, 59, 76, 93]
     plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=8)
@@ -140,6 +144,7 @@ def NDS_IMRT(df):
     ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
     ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
 
+    # configure plot boundries
     ax1.spines["top"].set_edgecolor("white")
     ax1.spines["bottom"].set_edgecolor("white")
     ax1.spines["right"].set_edgecolor("white")
@@ -152,6 +157,10 @@ def NDS_IMRT(df):
     plt.axvline(x=68, c="black", linewidth=0.3, linestyle="dashed")
     plt.axvline(x=85, c="black", linewidth=0.3, linestyle="dashed")
     plt.axhline(y=0, c="black", linewidth=0.4)
+
+    # add legend
+    # plt.legend(Data_series, series_name, loc='lower center', prop={'size': 6}, ncol=len(series_name))
+    plt.legend(Data_series, series_name, bbox_to_anchor=(0.6, -0.08), prop={'size': 6}, ncol=len(series_name), frameon=False)
 
     plt.savefig("./imrtPP.png", dpi=300)
 
