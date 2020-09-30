@@ -143,7 +143,7 @@ def NDS_IMRT(df):
     ax1.spines["top"].set_edgecolor("white")
     ax1.spines["bottom"].set_edgecolor("white")
     ax1.spines["right"].set_edgecolor("white")
-    # ax1.margins(x=0.01)
+    ax1.tick_params(bottom=False)
 
     # add line
     plt.axvline(x=17, c="black", linewidth=0.3, linestyle="dashed")
