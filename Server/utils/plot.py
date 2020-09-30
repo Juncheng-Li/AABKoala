@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
+import pandas as pd
 from matplotlib.cbook import get_sample_data
 import os
 import time
@@ -28,7 +29,6 @@ def NDS_3DCRT(data_list, series_name, mode):
 
     # plot series
     Data_Series = []
-    # count = "all data"
     for series in data_list:
         x = []
         y = []
@@ -82,7 +82,7 @@ def NDS_3DCRT(data_list, series_name, mode):
     plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
     plt.axhline(y=0, c="black", linewidth=0.4)
 
-    # add images
+    # add case images
     fig = plt.gcf()
     case_image = plt.imread(get_sample_data(imagePath))
     image1ax = fig.add_axes([0.015, 0.067, 0.24, 0.24], anchor='NE', zorder=3)
@@ -117,7 +117,13 @@ def NDS_3DCRT(data_list, series_name, mode):
     plt.savefig(path + "/plGraphs/3DCRT_" + ticks + ".png", dpi=300)
     response = {"fileName": "3DCRT_" + ticks + ".png", "url": path + "/plGraphs/3DCRT_" + ticks + ".png"}
     return response
-    # plt.show()
+
+
+def NDS_IMRT(df):
+    x = df["x"].values.tolist()
+    y = df["y"].values.tolist()
+    print(x)
+    print(y)
 
 
 def code_to_x(input_code):
@@ -208,3 +214,7 @@ def code_to_x(input_code):
 #              '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
 #              '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
 #     NDS_3DCRT(data, data1, data3)
+
+if __name__ == '__main__':
+    df = pd.read_excel("./imrt.xlsx")
+    NDS_IMRT(df)
