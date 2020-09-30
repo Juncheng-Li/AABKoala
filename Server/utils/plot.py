@@ -118,37 +118,48 @@ def NDS_3DCRT(data_list, series_name, mode):
     return response
 
 
-def NDS_IMRT(df):
+def NDS_IMRT(df, series_name, mode):
     matplotlib.pyplot.switch_backend('Agg')
     x = df["x"].values.tolist()
     y = df["y"].values.tolist()
-    print(x)
-    print(y)
+
     Data_series = []
-    series_name = ["All", "New"]
     # plot
     Data_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
     Data_series.append(plt.scatter(x, y, s=4, c="blue", zorder=5))
 
     # set axis
     xlabel_pos = [8, 25, 42, 59, 76, 93]
-    plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=8)
+    plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=6)
     plt.xlim(0, 102)
-    plt.yticks(fontsize=7)
+    plt.yticks(fontsize=6)
     plt.ylim(-0.1, 0.1)
-    plt.title("3DCRT Results", fontsize=7, fontweight="bold")
-    plt.suptitle("where is subtitle?", fontsize=10)
+    # plt.title("3DCRT Results", fontsize=7, fontweight="bold")
+    # plt.suptitle("where is subtitle?", fontsize=10)
+
+    # set white margins
+    # plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
+    plt.subplots_adjust(bottom=0.13)
 
     # add green background
     ax1 = plt.gca()
     ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
     ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
 
-    # configure plot boundries
+    # configure plot boundaries
     ax1.spines["top"].set_edgecolor("white")
     ax1.spines["bottom"].set_edgecolor("white")
     ax1.spines["right"].set_edgecolor("white")
     ax1.tick_params(bottom=False)
+
+    # set title and sub title
+    ax1.set_title('IMRT Results', y=1.1, horizontalalignment='center' , pad=-4, size=10, fontweight='bold')
+    if mode == 'all':
+        plt.suptitle("All in-volume points", y=0.93, x=0.51, fontsize=8)
+    elif mode == 'average':
+        plt.suptitle("Average of in-volume points", y=0.93, x=0.51, fontsize=8)
+    elif mode == 'std':
+        plt.suptitle("Standard Deviation of in-volume points", y=0.93, x=0.51, fontsize=8)
 
     # add line
     plt.axvline(x=17, c="black", linewidth=0.3, linestyle="dashed")
@@ -158,10 +169,15 @@ def NDS_IMRT(df):
     plt.axvline(x=85, c="black", linewidth=0.3, linestyle="dashed")
     plt.axhline(y=0, c="black", linewidth=0.4)
 
+    # add energy text
+    plt.text(23, -0.119, "6X", fontsize=6, zorder=6)
+    plt.text(74, -0.119, "10X", fontsize=6, zorder=6)
+
     # add legend
     # plt.legend(Data_series, series_name, loc='lower center', prop={'size': 6}, ncol=len(series_name))
-    plt.legend(Data_series, series_name, bbox_to_anchor=(0.6, -0.08), prop={'size': 6}, ncol=len(series_name),
-               frameon=False)
+    # plt.legend(Data_series, series_name, bbox_to_anchor=(0.62, -0.11), prop={'size': 8}, ncol=len(series_name),
+    #            frameon=False)
+    ax1.legend(Data_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8, frameon=False)
 
     plt.savefig("./imrtPP.png", dpi=300)
 
@@ -257,4 +273,5 @@ def code_to_x(input_code):
 
 if __name__ == '__main__':
     df = pd.read_excel("./imrt.xlsx")
-    NDS_IMRT(df)
+    series_name = ["All", "New"]
+    NDS_IMRT(df, series_name, "all")

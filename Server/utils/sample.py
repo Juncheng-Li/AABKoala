@@ -1,5 +1,5 @@
 import pandas as pd
-from utils import plot
+from Server.utils import plot
 
 data = {"101106": [-0.003], "110106": [None], "205106": [None], "208106": [None], "205206": [None], "208206": [None],
         "205306": [None], "208306": [None],
