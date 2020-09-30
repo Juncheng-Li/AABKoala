@@ -71,7 +71,7 @@ def NDS_3DCRT(data_list, series_name, mode):
 
     # set legend
     plt.legend(Data_Series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
-    # plt.legend(Data_Series, Series_names, loc=0)
+
     # add split lines
     plt.axvline(x=12, c="black", linewidth=0.4)
     plt.axvline(x=32, c="black", linewidth=0.4)
@@ -160,7 +160,8 @@ def NDS_IMRT(df):
 
     # add legend
     # plt.legend(Data_series, series_name, loc='lower center', prop={'size': 6}, ncol=len(series_name))
-    plt.legend(Data_series, series_name, bbox_to_anchor=(0.6, -0.08), prop={'size': 6}, ncol=len(series_name), frameon=False)
+    plt.legend(Data_series, series_name, bbox_to_anchor=(0.6, -0.08), prop={'size': 6}, ncol=len(series_name),
+               frameon=False)
 
     plt.savefig("./imrtPP.png", dpi=300)
 
