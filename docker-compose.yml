@@ -7,18 +7,24 @@ services:
     ports:
       - "3305:3306"
     environment:
-      MYSQL_DATABASE: 'aakoala'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'AA-koala123456'
-      MYSQL_ROOT_PASSWORD: 'AA-koala123456'
-    volumes:
-      - /data:/var/lib/mysql
-  web2:
-    build: .
-    command: python3 Server/manage.py runserver
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+      MYSQL_DATABASE: ktest
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: AA-koala123456
+      MYSQL_ROOT_PASSWORD: AA-koala123456
+#    volumes:
+#      - /data:/var/lib/mysql
+#  web2:
+#    build: .
+##    command: python3 Server/manage.py runserver 0.0.0.0:8000
+#    command: sh -c "/docker-entrypoint.sh"
+#    volumes:
+#      - .:/code
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#    environment:
+#      - WAIT_HOSTS=mysql:3306
+#      - WAIT_HOSTS_TIMEOUT=300
+#      - WAIT_SLEEP_INTERVAL=30
+#      - WAIT_HOST_CONNECT_TIMEOUT=30

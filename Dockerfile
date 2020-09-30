@@ -10,6 +10,9 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
 COPY . /code
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 RUN apt-get update -y
 RUN apt-get install -y python3.6-dev
 RUN apt-get install -y libmysqlclient-dev
