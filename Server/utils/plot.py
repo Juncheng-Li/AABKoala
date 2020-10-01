@@ -40,7 +40,7 @@ def NDS_3DCRT(data_list, series_name, mode):
             # flatten code in data into list x
             length = len(measurements)
             for i in range(0, length):
-                x.append(code_to_x(code))
+                x.append(code_to_x_3dcrt(code))
         # scatter plot
         if mode == "history":
             Data_Series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
@@ -62,9 +62,9 @@ def NDS_3DCRT(data_list, series_name, mode):
     plt.title("3DCRT Results", fontsize=7, fontweight="bold")
 
     # add green background
-    ax1 = plt.gca()
-    ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
-    ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    ax = plt.gca()
+    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+    ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
 
     # set white margins
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
@@ -118,15 +118,27 @@ def NDS_3DCRT(data_list, series_name, mode):
     return response
 
 
-def NDS_IMRT(df, series_name, mode):
+def NDS_IMRT(series_data, series_name, mode):
     matplotlib.pyplot.switch_backend('Agg')
-    x = df["x"].values.tolist()
-    y = df["y"].values.tolist()
+    # x = df["x"].values.tolist()
+    # y = df["y"].values.tolist()
 
-    Data_series = []
     # plot
-    Data_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
-    Data_series.append(plt.scatter(x, y, s=4, c="blue", zorder=5))
+    plot_series = []
+    for series in series_data:
+        x = []
+        y = []
+        for code in series:
+            # flatten measurements in data into list y
+            measurements = series[code]
+            for measurement in measurements:
+                y.append(measurement)
+            # flatten code in data into list x
+            length = len(measurements)
+            for i in range(0, length):
+                x.append(code_to_x_imrt(code))
+        # scatter plot
+        plot_series.append(plt.scatter(x, y, s=4, zorder=5))
 
     # set axis
     xlabel_pos = [8, 25, 42, 59, 76, 93]
@@ -134,26 +146,23 @@ def NDS_IMRT(df, series_name, mode):
     plt.xlim(0, 102)
     plt.yticks(fontsize=6)
     plt.ylim(-0.1, 0.1)
-    # plt.title("3DCRT Results", fontsize=7, fontweight="bold")
-    # plt.suptitle("where is subtitle?", fontsize=10)
 
     # set white margins
-    # plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
     plt.subplots_adjust(bottom=0.13)
 
     # add green background
-    ax1 = plt.gca()
-    ax1.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
-    ax1.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    ax = plt.gca()
+    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+    ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
 
     # configure plot boundaries
-    ax1.spines["top"].set_edgecolor("white")
-    ax1.spines["bottom"].set_edgecolor("white")
-    ax1.spines["right"].set_edgecolor("white")
-    ax1.tick_params(bottom=False)
+    ax.spines["top"].set_edgecolor("white")
+    ax.spines["bottom"].set_edgecolor("white")
+    ax.spines["right"].set_edgecolor("white")
+    ax.tick_params(bottom=False)
 
     # set title and sub title
-    ax1.set_title('IMRT Results', y=1.1, horizontalalignment='center' , pad=-4, size=10, fontweight='bold')
+    ax.set_title('IMRT Results', y=1.1, horizontalalignment='center', pad=-4, size=10, fontweight='bold')
     if mode == 'all':
         plt.suptitle("All in-volume points", y=0.93, x=0.51, fontsize=8)
     elif mode == 'average':
@@ -174,15 +183,14 @@ def NDS_IMRT(df, series_name, mode):
     plt.text(74, -0.119, "10X", fontsize=6, zorder=6)
 
     # add legend
-    # plt.legend(Data_series, series_name, loc='lower center', prop={'size': 6}, ncol=len(series_name))
-    # plt.legend(Data_series, series_name, bbox_to_anchor=(0.62, -0.11), prop={'size': 8}, ncol=len(series_name),
-    #            frameon=False)
-    ax1.legend(Data_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8, frameon=False)
+    ax.legend(plot_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8,
+               frameon=False)
 
+    # save plot
     plt.savefig("./imrtPP.png", dpi=300)
 
 
-def code_to_x(input_code):
+def code_to_x_3dcrt(input_code):
     switcher = {
         "101106": 0,
         "110106": 1,
@@ -226,50 +234,53 @@ def code_to_x(input_code):
     return switcher.get(input_code)
 
 
-# if __name__ == '__main__':
-#     data = {'101106': [float('-0.00840'), float('0.00400')], '110106': [float('-0.02060'), float('-0.00190')],
-#             '205106': [float('-0.01770'), float('0.00300')], '208106': [float('-0.00460'), float('0.00470')],
-#             '205206': [float('-0.01330'), float('0.00000')], '208206': [float('-0.11110'), float('0.08240')],
-#             '205306': [float('0.00760'), float('-0.00600')], '208306': [float('-0.01500'), float('-0.02630')],
-#             '303106': [float('-0.00690'), float('-0.00250')], '305106': [float('-0.00390'), float('0.00050')],
-#             '403106': [float('0.01010'), float('-0.00150')], '405106': [float('0.01150'), float('0.00230')],
-#             '103110': [float('-0.00600'), float('0.00650')], '110110': [float('-0.01600'), float('0.00300')],
-#             '303110': [float('-0.00450'), float('0.00000')], '305110': [float('0.00340'), float('0.00340')],
-#             '403110': [float('0.00600'), float('-0.01280')], '405110': [float('-0.00430'), float('-0.02740')],
-#             '103115': [None, None], '110115': [None, None], '303115': [None, None], '305115': [None, None],
-#             '403115': [None, None], '405115': [None, None], '103118': [None, None], '110118': [None, None],
-#             '303118': [None, None], '305118': [None, None], '403118': [None, None], '405118': [None, None],
-#             '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
-#             '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
-#     data1 = {'101106': [float('-0.01840'), float('0.01400')], '110106': [float('-0.02060'), float('-0.00290')],
-#              '205106': [float('-0.01070'), float('0.01300')], '208106': [float('-0.00460'), float('0.01470')],
-#              '205206': [float('-0.01330'), float('0.00100')], '208206': [float('-0.11110'), float('0.08240')],
-#              '205306': [float('0.00160'), float('-0.01600')], '208306': [float('-0.01500'), float('-0.01630')],
-#              '303106': [float('-0.00190'), float('-0.01250')], '305106': [float('-0.00390'), float('0.01050')],
-#              '403106': [float('0.01510'), float('-0.00250')], '405106': [float('0.01150'), float('0.00230')],
-#              '103110': [float('-0.00600'), float('0.00150')], '110110': [float('-0.01600'), float('0.00300')],
-#              '303110': [float('-0.00150'), float('0.00100')], '305110': [float('0.00340'), float('0.00340')],
-#              '403110': [float('0.00300'), float('-0.01780')], '405110': [float('-0.00430'), float('-0.02740')],
-#              '103115': [None, None], '110115': [None, None], '303115': [None, None], '305115': [None, None],
-#              '403115': [None, None], '405115': [None, None], '103118': [None, None], '110118': [None, None],
-#              '303118': [None, None], '305118': [None, None], '403118': [None, None], '405118': [None, None],
-#              '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
-#              '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
-#     data3 = {'101106': [float('-0.01840'), float('0.01400')], '110106': [float('-0.02060'), float('-0.00290')],
-#              '205106': [float('-0.01070'), float('0.01300')], '208106': [float('-0.00460'), float('0.01470')],
-#              '205206': [float('-0.01330'), float('0.00100')], '208206': [float('-0.11110'), float('0.08240')],
-#              '205306': [float('0.00160'), float('-0.01600')], '208306': [float('-0.01500'), float('-0.01630')],
-#              '303106': [float('-0.00190'), float('-0.01250')], '305106': [float('-0.00390'), float('0.01050')],
-#              '403106': [float('0.01510'), float('-0.00250')], '405106': [float('0.01150'), float('0.00230')],
-#              '103110': [float('-0.00600'), float('0.00150')], '110110': [float('-0.01600'), float('0.00300')],
-#              '303110': [float('-0.00150'), float('0.00100')], '305110': [float('0.00340'), float('0.00340')],
-#              '403110': [float('0.00300'), float('-0.01780')], '405110': [float('-0.00430'), float('-0.02740')],
-#              '103115': [None, None], '110115': [None, None], '303115': [None, None], '305115': [None, None],
-#              '403115': [None, None], '405115': [None, None], '103118': [None, None], '110118': [None, None],
-#              '303118': [None, None], '305118': [None, None], '403118': [None, None], '405118': [None, None],
-#              '101105': [None, None], '110105': [None, None], '303105': [None, None], '305105': [None, None],
-#              '103109': [None, None], '110109': [None, None], '303109': [None, None], '305109': [None, None]}
-#     NDS_3DCRT(data, data1, data3)
+def code_to_x_imrt(input_code):
+    switcher = {
+        "c6_p11_6": 1,
+        "c6_p12_6": 2,
+        "c6_p13_6": 3,
+        "c6_p14_6": None,
+        "c6_p15_6": 5,
+        "c6_p16_6": 6,
+        "c6_p17_6": 7,
+        "c7_p11_6": 18,
+        "c7_p12_6": 19,
+        "c7_p13_6": 20,
+        "c7_p14_6": None,
+        "c7_p15_6": 22,
+        "c7_p16_6": 23,
+        "c7_p17_6": 24,
+        "c8_p11_6": 35,
+        "c8_p12_6": 36,
+        "c8_p13_6": 37,
+        "c8_p14_6": None,
+        "c8_p15_6": 39,
+        "c8_p17_6": 40,
+        "c8_p18_6": 41,
+        "c6_p11_10": 52,
+        "c6_p12_10": 53,
+        "c6_p13_10": 54,
+        "c6_p14_10": None,
+        "c6_p15_10": 56,
+        "c6_p16_10": 57,
+        "c6_p17_10": 58,
+        "c7_p11_10": 69,
+        "c7_p12_10": 70,
+        "c7_p13_10": 71,
+        "c7_p14_10": None,
+        "c7_p15_10": 73,
+        "c7_p16_10": 74,
+        "c7_p17_10": 75,
+        "c8_p11_10": 86,
+        "c8_p12_10": 87,
+        "c8_p13_10": 88,
+        "c8_p14_10": None,
+        "c8_p15_10": 90,
+        "c8_p17_10": 91,
+        "c8_p18_10": 92,
+    }
+    return switcher.get(input_code)
+
 
 if __name__ == '__main__':
     df = pd.read_excel("./imrt.xlsx")
