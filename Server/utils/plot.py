@@ -57,6 +57,7 @@ def NDS_3DCRT(data_list, series_name, mode):
                             "6", "10", "15", '18', '6FFF', '10FFF',
                             '6', '10', "15", "18",
                             "6", "10", "15", "18"), rotation=90, fontsize=7)
+    plt.xlim(-1, 65)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
     plt.title("3DCRT Results", fontsize=7, fontweight="bold")
@@ -75,7 +76,7 @@ def NDS_3DCRT(data_list, series_name, mode):
     # add split lines
     plt.axvline(x=12, c="black", linewidth=0.4)
     plt.axvline(x=32, c="black", linewidth=0.4)
-    plt.axvline(x=48.25, c="black", linewidth=0.4)
+    plt.axvline(x=47, c="black", linewidth=0.4)
     plt.axvline(x=5.5, c="black", linewidth=0.3, linestyle="dashed")
     plt.axvline(x=39.5, c="black", linewidth=0.3, linestyle="dashed")
     plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
@@ -102,11 +103,11 @@ def NDS_3DCRT(data_list, series_name, mode):
 
     # add RSN
     RNS_image = plt.imread(get_sample_data(RNS_path))
-    RNSax = fig.add_axes([-0.014, 0.403, 0.4, 0.495], anchor='NE', zorder=3)
+    RNSax = fig.add_axes([-0.035, 0.403, 0.4, 0.495], anchor='NE', zorder=3)
     RNSax.imshow(RNS_image, alpha=0.65)
     RNSax.axis('off')
     RNS_image = plt.imread(get_sample_data(RNS_path))
-    RNSax2 = fig.add_axes([0.068, 0.403, 0.4, 0.495], anchor='NE', zorder=3)
+    RNSax2 = fig.add_axes([0.05, 0.403, 0.4, 0.495], anchor='NE', zorder=3)
     RNSax2.imshow(RNS_image, alpha=0.65)
     RNSax2.axis('off')
 
@@ -187,7 +188,7 @@ def NDS_IMRT(series_data, series_name, mode):
                frameon=False)
 
     # save plot
-    plt.savefig("./imrtPP.png", dpi=300)
+    plt.savefig("./plGraphs/imrtPP.png", dpi=300)
 
 
 def code_to_x_3dcrt(input_code):
@@ -281,8 +282,3 @@ def code_to_x_imrt(input_code):
     }
     return switcher.get(input_code)
 
-
-if __name__ == '__main__':
-    df = pd.read_excel("./imrt.xlsx")
-    series_name = ["All", "New"]
-    NDS_IMRT(df, series_name, "all")
