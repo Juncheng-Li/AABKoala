@@ -7,7 +7,8 @@ import os
 import time
 
 
-def NDS_3DCRT(data_list, series_name, mode):
+def NDS_3DCRT(series_data, series_name, mode):
+    # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
     path = os.path.split(os.path.realpath(__file__))[0]
     imagePath = path + '/images/case1.png'
@@ -28,10 +29,10 @@ def NDS_3DCRT(data_list, series_name, mode):
     plt.figure(figsize=(7.4, 4.8))
 
     # plot series
-    Data_Series = []
-    for series in data_list:
-        x = []
-        y = []
+    plot_series = []
+    x = []
+    y = []
+    for series in series_data:
         for code in series:
             # flatten measurements in data into list y
             measurements = series[code]
@@ -43,10 +44,10 @@ def NDS_3DCRT(data_list, series_name, mode):
                 x.append(code_to_x_3dcrt(code))
         # scatter plot
         if mode == "history":
-            Data_Series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+            plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
             mode = "others"
         else:
-            Data_Series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
 
     # set axis
     xlabel_pos = np.unique(x)
@@ -71,7 +72,7 @@ def NDS_3DCRT(data_list, series_name, mode):
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
-    plt.legend(Data_Series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
+    plt.legend(plot_series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
 
     # add split lines
     plt.axvline(x=12, c="black", linewidth=0.4)
@@ -120,15 +121,14 @@ def NDS_3DCRT(data_list, series_name, mode):
 
 
 def NDS_IMRT(series_data, series_name, mode):
+    # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
-    # x = df["x"].values.tolist()
-    # y = df["y"].values.tolist()
 
     # plot
     plot_series = []
+    x = []
+    y = []
     for series in series_data:
-        x = []
-        y = []
         for code in series:
             # flatten measurements in data into list y
             measurements = series[code]
