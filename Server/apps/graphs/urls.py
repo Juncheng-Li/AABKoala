@@ -5,16 +5,16 @@ from rest_framework.routers import DefaultRouter
 
 # Create a router and register our viewsets with it.
 from apps.graphs import views
-from apps.graphs.views import GraphViewSet
+from apps.graphs.views import GraphViewSet, ResultListViewSet
 
 router = DefaultRouter()
 router.register(r'results', views.ResultViewSet, basename='results')
-router.register(r'resultsList', views.ResultListViewSet, basename='resultsList')
 
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
     path('graphManage/', GraphViewSet.as_view()),
+    path('resultsList/', ResultListViewSet.as_view()),
 
 ]
