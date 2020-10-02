@@ -2,9 +2,12 @@ import os
 
 from django.contrib.auth.models import User
 from rest_framework import generics, viewsets, permissions, mixins, status
+from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
+
+from rest_framework.viewsets import GenericViewSet
 
 from apps.graphs import models
 from apps.graphs.models import Result, Graph, Reading
@@ -18,6 +21,14 @@ class ResultViewSet(viewsets.ModelViewSet):
     `update` and `destroy` actions.
     """
     queryset = Result.objects.all()
+    serializer_class = ResultSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class ResultListViewSet(CreateModelMixin, GenericViewSet):
     serializer_class = ResultSerializer
     permission_classes = [permissions.IsAuthenticated]
 

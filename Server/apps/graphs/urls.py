@@ -9,7 +9,7 @@ from apps.graphs.views import GraphViewSet
 
 router = DefaultRouter()
 router.register(r'results', views.ResultViewSet, basename='results')
-# router.register(r'graphManage', views.GraphViewSet, basename="Graph")
+router.register(r'resultsList', views.ResultListViewSet, basename='resultsList')
 
 
 # The API URLs are now determined automatically by the router.
