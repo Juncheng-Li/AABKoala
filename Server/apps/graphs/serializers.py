@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db.models.functions import datetime
 from rest_framework import serializers
 
-from apps.graphs.models import FacilityOutput, TPR, Reading, Misdelivery, Graph, Result
+from apps.graphs.models import FacilityOutput, TPR, Reading, Misdelivery, Graph, Result, IMRT
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -60,6 +60,18 @@ class MisdeliverySerializer(serializers.ModelSerializer):
                   ]
 
 
+class IMRTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IMRT
+        fields = ["c6_p11_6", "c6_p12_6", "c6_p13_6", "c6_p14_6", "c6_p15_6", "c6_p16_6", "c6_p17_6", "c7_p11_6",
+                  "c7_p12_6", "c7_p13_6", "c7_p14_6", "c7_p15_6", "c7_p16_6", "c7_p17_6", "c8_p11_6", "c8_p12_6",
+                  "c8_p13_6", "c8_p14_6", "c8_p15_6", "c8_p17_6", "c8_p18_6", "c6_p11_10", "c6_p12_10", "c6_p13_10",
+                  "c6_p14_10", "c6_p15_10", "c6_p16_10", "c6_p17_10", "c7_p11_10", "c7_p12_10", "c7_p13_10",
+                  "c7_p14_10", "c7_p15_10", "c7_p16_10", "c7_p17_10", "c8_p11_10", "c8_p12_10", "c8_p13_10",
+                  "c8_p14_10", "c8_p15_10", "c8_p17_10", "c8_p18_10"
+                  ]
+
+
 class GraphSerializer(serializers.ModelSerializer):
     class Meta:
         model = Graph
@@ -73,6 +85,7 @@ class ResultSerializer(serializers.ModelSerializer):
     TPR = TPRSerializer(many=True)
     Reading = ReadingSerializer(many=True)
     Misdelivery = MisdeliverySerializer(many=True)
+    IMRT = IMRTSerializer(many=True)
 
     class Meta:
         model = Result
@@ -83,6 +96,7 @@ class ResultSerializer(serializers.ModelSerializer):
         trps_data = validated_data.pop('TPR')
         Readings_data = validated_data.pop('Reading')
         Misdeliveries_data = validated_data.pop('Misdelivery')
+        IMRTs_data = validated_data.pop('IMRT')
 
         result = Result.objects.create(**validated_data)
         for facility_output_data in facility_outputs_data:
@@ -93,6 +107,8 @@ class ResultSerializer(serializers.ModelSerializer):
             Reading.objects.create(result=result, **Reading_data)
         for Misdelivery_data in Misdeliveries_data:
             Misdelivery.objects.create(result=result, **Misdelivery_data)
+        for IMRT_data in IMRTs_data:
+            IMRT.objects.create(result=result, **IMRT_data)
         return result
 
     def update(self, instance, validated_data):
@@ -111,6 +127,10 @@ class ResultSerializer(serializers.ModelSerializer):
         misdeliveries_data = validated_data.pop('Misdelivery')
         Misdeliveries = (instance.Misdelivery).all()
         Misdeliveries = list(Misdeliveries)
+
+        IMRTs_data = validated_data.pop('IMRT')
+        IMRTs = (instance.IMRT).all()
+        IMRTs = list(IMRTs)
 
         instance.updated = datetime.datetime.now()
         instance.AuditID = validated_data.get('AuditID', instance.AuditID)
@@ -238,4 +258,51 @@ class ResultSerializer(serializers.ModelSerializer):
             Misdelivery.Misdelivery_305109 = misdelivery_data.get('Misdelivery_305109', Misdelivery.Misdelivery_305109)
             Misdelivery.Misdelivery_110118 = misdelivery_data.get('Misdelivery_110118', Misdelivery.Misdelivery_110118)
             Misdelivery.save()
+
+        for IMRT_data in IMRTs_data:
+            IMRT = IMRTs.pop(0)
+            IMRT.updated = datetime.datetime.now()
+            IMRT.c6_p11_6 = IMRT_data.get(' c6_p11_6 ', IMRT.c6_p11_6)
+            IMRT.c6_p12_6 = IMRT_data.get(' c6_p12_6 ', IMRT.c6_p12_6)
+            IMRT.c6_p13_6 = IMRT_data.get(' c6_p13_6 ', IMRT.c6_p13_6)
+            IMRT.c6_p14_6 = IMRT_data.get(' c6_p14_6 ', IMRT.c6_p14_6)
+            IMRT.c6_p15_6 = IMRT_data.get(' c6_p15_6 ', IMRT.c6_p15_6)
+            IMRT.c6_p16_6 = IMRT_data.get(' c6_p16_6 ', IMRT.c6_p16_6)
+            IMRT.c6_p17_6 = IMRT_data.get(' c6_p17_6 ', IMRT.c6_p17_6)
+            IMRT.c7_p11_6 = IMRT_data.get(' c7_p11_6 ', IMRT.c7_p11_6)
+            IMRT.c7_p12_6 = IMRT_data.get(' c7_p12_6 ', IMRT.c7_p12_6)
+            IMRT.c7_p13_6 = IMRT_data.get(' c7_p13_6 ', IMRT.c7_p13_6)
+            IMRT.c7_p14_6 = IMRT_data.get(' c7_p14_6 ', IMRT.c7_p14_6)
+            IMRT.c7_p15_6 = IMRT_data.get(' c7_p15_6 ', IMRT.c7_p15_6)
+            IMRT.c7_p16_6 = IMRT_data.get(' c7_p16_6 ', IMRT.c7_p16_6)
+            IMRT.c7_p17_6 = IMRT_data.get(' c7_p17_6 ', IMRT.c7_p17_6)
+            IMRT.c8_p11_6 = IMRT_data.get(' c8_p11_6 ', IMRT.c8_p11_6)
+            IMRT.c8_p12_6 = IMRT_data.get(' c8_p12_6 ', IMRT.c8_p12_6)
+            IMRT.c8_p13_6 = IMRT_data.get(' c8_p13_6 ', IMRT.c8_p13_6)
+            IMRT.c8_p14_6 = IMRT_data.get(' c8_p14_6 ', IMRT.c8_p14_6)
+            IMRT.c8_p15_6 = IMRT_data.get(' c8_p15_6 ', IMRT.c8_p15_6)
+            IMRT.c8_p17_6 = IMRT_data.get(' c8_p17_6 ', IMRT.c8_p17_6)
+            IMRT.c8_p18_6 = IMRT_data.get(' c8_p18_6 ', IMRT.c8_p18_6)
+            IMRT.c6_p11_10 = IMRT_data.get(' c6_p11_10 ', IMRT.c6_p11_10)
+            IMRT.c6_p12_10 = IMRT_data.get(' c6_p12_10 ', IMRT.c6_p12_10)
+            IMRT.c6_p13_10 = IMRT_data.get(' c6_p13_10 ', IMRT.c6_p13_10)
+            IMRT.c6_p14_10 = IMRT_data.get(' c6_p14_10 ', IMRT.c6_p14_10)
+            IMRT.c6_p15_10 = IMRT_data.get(' c6_p15_10 ', IMRT.c6_p15_10)
+            IMRT.c6_p16_10 = IMRT_data.get(' c6_p16_10 ', IMRT.c6_p16_10)
+            IMRT.c6_p17_10 = IMRT_data.get(' c6_p17_10 ', IMRT.c6_p17_10)
+            IMRT.c7_p11_10 = IMRT_data.get(' c7_p11_10 ', IMRT.c7_p11_10)
+            IMRT.c7_p12_10 = IMRT_data.get(' c7_p12_10 ', IMRT.c7_p12_10)
+            IMRT.c7_p13_10 = IMRT_data.get(' c7_p13_10 ', IMRT.c7_p13_10)
+            IMRT.c7_p14_10 = IMRT_data.get(' c7_p14_10 ', IMRT.c7_p14_10)
+            IMRT.c7_p15_10 = IMRT_data.get(' c7_p15_10 ', IMRT.c7_p15_10)
+            IMRT.c7_p16_10 = IMRT_data.get(' c7_p16_10 ', IMRT.c7_p16_10)
+            IMRT.c7_p17_10 = IMRT_data.get(' c7_p17_10 ', IMRT.c7_p17_10)
+            IMRT.c8_p11_10 = IMRT_data.get(' c8_p11_10 ', IMRT.c8_p11_10)
+            IMRT.c8_p12_10 = IMRT_data.get(' c8_p12_10 ', IMRT.c8_p12_10)
+            IMRT.c8_p13_10 = IMRT_data.get(' c8_p13_10 ', IMRT.c8_p13_10)
+            IMRT.c8_p14_10 = IMRT_data.get(' c8_p14_10 ', IMRT.c8_p14_10)
+            IMRT.c8_p15_10 = IMRT_data.get(' c8_p15_10 ', IMRT.c8_p15_10)
+            IMRT.c8_p17_10 = IMRT_data.get(' c8_p17_10 ', IMRT.c8_p17_10)
+            IMRT.c8_p18_10 = IMRT_data.get(' c8_p18_10 ', IMRT.c8_p18_10)
+            IMRT.save()
         return instance
