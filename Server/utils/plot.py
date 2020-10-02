@@ -30,9 +30,9 @@ def NDS_3DCRT(series_data, series_name, mode):
 
     # plot series
     plot_series = []
-    x = []
-    y = []
     for series in series_data:
+        x = []
+        y = []
         for code in series:
             # flatten measurements in data into list y
             measurements = series[code]
@@ -126,9 +126,9 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # plot
     plot_series = []
-    x = []
-    y = []
     for series in series_data:
+        x = []
+        y = []
         for code in series:
             # flatten measurements in data into list y
             measurements = series[code]
