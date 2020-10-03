@@ -2,15 +2,19 @@ import os
 
 from django.contrib.auth.models import User
 from rest_framework import generics, viewsets, permissions, mixins, status
+from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
+
+from rest_framework.viewsets import GenericViewSet
 
 from apps.graphs import models
 from apps.graphs.models import Result, Graph, Reading
 from apps.graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
 
+from django_pandas.io import read_frame
 
 class ResultViewSet(viewsets.ModelViewSet):
     """
@@ -23,6 +27,23 @@ class ResultViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class ResultListViewSet(APIView):
+    serializer_class = ResultSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        if isinstance(request.data, list):
+            serializer = ResultSerializer(data=request.data, many=True)
+        else:
+            serializer = ResultSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -62,12 +83,12 @@ class GraphViewSet(APIView):
             for key in data.keys():
                 temp = "data[key].append(reading.Reading_" + key + ")"
                 exec(temp)
-        print(data)
 
         # If mode is history, load history readings from the DB
         if mode == "history":
             # Load all history readings
             history_readings = Reading.objects.all()
+
             history_data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [],
                             "205306": [],
                             "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [],
@@ -83,14 +104,11 @@ class GraphViewSet(APIView):
                 for history_key in history_data.keys():
                     tmp = "history_data[history_key].append(history_reading.Reading_" + history_key + ")"
                     exec(tmp)
-            print("history_data: ")
-            print(history_data)
             # Plot with history data
             data_list = [history_data, data]
             graph_info = plot.NDS_3DCRT(data_list, series_name, mode)
         else:
             # Plot without history data
-            print("not")
             data_list = [data]
             graph_info = plot.NDS_3DCRT(data_list, series_name, mode)
 
