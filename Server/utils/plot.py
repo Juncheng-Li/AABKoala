@@ -137,7 +137,12 @@ def NDS_IMRT(series_data, series_name, mode):
             # flatten code in data into list x
             length = len(measurements)
             for i in range(0, length):
-                x.append(code_to_x_imrt(code))
+                if mode == "all":
+                    x.append(code_to_x_imrt(code))
+                elif mode == "average":
+                    x.append(avg_to_x(code))
+                elif mode == "std":
+                    x.append(std_to_x(code))
         # scatter plot
         plot_series.append(plt.scatter(x, y, s=4, zorder=5))
 
@@ -282,3 +287,26 @@ def code_to_x_imrt(input_code):
     }
     return switcher.get(input_code)
 
+
+def avg_to_x(input_code):
+    switcher = {
+        "average1": 4,
+        "average2": 21,
+        "average3": 38,
+        "average4": 55,
+        "average5": 72,
+        "average6": 89,
+    }
+    return switcher.get(input_code)
+
+
+def std_to_x(input_code):
+    switcher = {
+        "average1": 4,
+        "average2": 21,
+        "average3": 38,
+        "average4": 55,
+        "average5": 72,
+        "average6": 89,
+    }
+    return switcher.get(input_code)

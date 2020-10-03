@@ -11,6 +11,7 @@ from apps.graphs.models import Result, Graph, Reading
 from apps.graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
 
+from django_pandas.io import read_frame
 
 class ResultViewSet(viewsets.ModelViewSet):
     """
@@ -62,12 +63,12 @@ class GraphViewSet(APIView):
             for key in data.keys():
                 temp = "data[key].append(reading.Reading_" + key + ")"
                 exec(temp)
-        print(data)
 
         # If mode is history, load history readings from the DB
         if mode == "history":
             # Load all history readings
             history_readings = Reading.objects.all()
+
             history_data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [],
                             "205306": [],
                             "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [],
@@ -83,14 +84,11 @@ class GraphViewSet(APIView):
                 for history_key in history_data.keys():
                     tmp = "history_data[history_key].append(history_reading.Reading_" + history_key + ")"
                     exec(tmp)
-            print("history_data: ")
-            print(history_data)
             # Plot with history data
             data_list = [history_data, data]
             graph_info = plot.NDS_3DCRT(data_list, series_name, mode)
         else:
             # Plot without history data
-            print("not")
             data_list = [data]
             graph_info = plot.NDS_3DCRT(data_list, series_name, mode)
 
