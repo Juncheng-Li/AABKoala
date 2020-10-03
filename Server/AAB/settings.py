@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
+
+
+
 import os
 import sys
 from pathlib import Path
@@ -83,7 +87,7 @@ DATABASES = {
         'NAME': 'AABKoalaTest',
         'HOST': '35.189.21.28',
         'PORT': 3306,
-        'USER': 'yunning',  # use own database account name
+        'USER': 'ziping',  # use own database account name
         'PASSWORD': 'AA-koala123456',  # use own database account password
     }
 }

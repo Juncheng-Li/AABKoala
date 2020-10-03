@@ -18,21 +18,31 @@ class resultRequest:
 
     def parseExcel(self):
         filename = "upload/uploadingData.xlsx"
-        df = pd.read_excel(filename)
+        df = pd.read_excel(filename) # read uploadingData.xlsx
         df["AuditDate"] = pd.to_datetime(df["AuditDate"], errors='coerce')
-        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
+        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d") # covert 10/5/2016 to 2016-10-05
         resultList = []
         ids = []
 
         for i in range(len(df)):
             id = df.loc[i,'id']
-            if not math.isnan(id):
-                ids.append(str(int(id)))
+            if not math.isnan(id): # Check whether id is not NaN
+                ids.append(str(int(id))) # append each id into ids
+
             unested = df.loc[i,"AuditID":"Phantom"].to_json()
+            # get excel content from "AuditID" to "Phantom"as JSON
+
             facilityOutput = df.loc[i,"fac_6":"fac_10FFF"].to_json().replace("fac","energy")
+            # replace 'fac' as 'energy' from "fac_6" to "fac_10FFF"
+
             tpr = df.loc[i,"TPR_6":"TPR_10FFF"].to_json().replace("TPR","energy")
+            # replace 'fac' as 'energy' from "TPR_6" to "TPR_10FFF"
+
             readings = df.loc[i,"Reading_101106":"Reading_305109"].to_json()
+            # get excel content from "AuditID" to "Phantom"as JSON
+
             misdelivery = df.loc[i,"Misdelivery_101106":"Misdelivery_305109"].to_json()
+            # get excel content from "Misdelivery_101106" to "Misdelivery_305109"as JSON
 
             result = json.loads(unested)
             result.update({"facilityOutput":[json.loads(facilityOutput)]})
@@ -41,8 +51,10 @@ class resultRequest:
             result.update({"Misdelivery":[json.loads(misdelivery)]})
 
             resultList.append(json.dumps(result))
-
+            # append facilityOutput dataset,TPR dataset,Reading dataset,Misdelivery dataset into resultList
+        print(resultList)
         return (resultList, ids)
+
 
     def insertNewResult(self):
         resultsList = self.parseExcel()[0]
@@ -149,3 +161,6 @@ class resultRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
+
+resultRequest().parseExcel()
+resultRequest().insertNewResult()

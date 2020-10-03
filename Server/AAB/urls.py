@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
-
 from AAB import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('graphs/', include('apps.graphs.urls')),
-
     re_path(r"^graph/(?P<path>.*)/", serve, {"document_root": settings.MEDIA_ROOT}),
 ]
+
+
+#https://www.youtube.com/watch?v=0MrgsYswT1c&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=2
