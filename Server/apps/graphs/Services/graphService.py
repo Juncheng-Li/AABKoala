@@ -67,6 +67,9 @@ def plot_NDS_3DCRT(self, request):
 
 
 def plot_NDS_IMRT(self, request):
-    results_list = json.loads(request.body.decode('utf-8')).get('results_list')
+    facilitys = json.loads(request.body.decode('utf-8')).get('facilitys')
     mode = json.loads(request.body.decode('utf-8')).get('mode')
+
+    all_results = Result.objects.exclude(FacilityName__in=facilitys)
+
     return Response(status=status.HTTP_200_OK)
