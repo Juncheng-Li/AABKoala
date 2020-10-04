@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db.models.functions import datetime
 from rest_framework import serializers
 
-from apps.graphs.models import FacilityOutput, TPR, Reading, Misdelivery, Graph, Result, IMRT
+from apps.graphs.models import FacilityOutput, TPR, Reading, Misdelivery, Graph, Result, IMRT, IMRT_misdelivery
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -72,6 +72,18 @@ class IMRTSerializer(serializers.ModelSerializer):
                   ]
 
 
+class IMRTmisdeliverySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IMRT_misdelivery
+        fields = ["c6_p11_6", "c6_p12_6", "c6_p13_6", "c6_p14_6", "c6_p15_6", "c6_p16_6", "c6_p17_6", "c7_p11_6",
+                  "c7_p12_6", "c7_p13_6", "c7_p14_6", "c7_p15_6", "c7_p16_6", "c7_p17_6", "c8_p11_6", "c8_p12_6",
+                  "c8_p13_6", "c8_p14_6", "c8_p15_6", "c8_p17_6", "c8_p18_6", "c6_p11_10", "c6_p12_10", "c6_p13_10",
+                  "c6_p14_10", "c6_p15_10", "c6_p16_10", "c6_p17_10", "c7_p11_10", "c7_p12_10", "c7_p13_10",
+                  "c7_p14_10", "c7_p15_10", "c7_p16_10", "c7_p17_10", "c8_p11_10", "c8_p12_10", "c8_p13_10",
+                  "c8_p14_10", "c8_p15_10", "c8_p17_10", "c8_p18_10"
+                  ]
+
+
 class GraphSerializer(serializers.ModelSerializer):
     class Meta:
         model = Graph
@@ -86,6 +98,8 @@ class ResultSerializer(serializers.ModelSerializer):
     Reading = ReadingSerializer(many=True)
     Misdelivery = MisdeliverySerializer(many=True)
     IMRT = IMRTSerializer(many=True)
+    IMRT_misdelivery = IMRTmisdeliverySerializer(many=True)
+
 
     class Meta:
         model = Result
@@ -97,6 +111,7 @@ class ResultSerializer(serializers.ModelSerializer):
         Readings_data = validated_data.pop('Reading')
         Misdeliveries_data = validated_data.pop('Misdelivery')
         IMRTs_data = validated_data.pop('IMRT')
+        IMRT_misdeliveries_data = validated_data.pop('IMRT_misdelivery')
 
         result = Result.objects.create(**validated_data)
         for facility_output_data in facility_outputs_data:
@@ -109,6 +124,8 @@ class ResultSerializer(serializers.ModelSerializer):
             Misdelivery.objects.create(result=result, **Misdelivery_data)
         for IMRT_data in IMRTs_data:
             IMRT.objects.create(result=result, **IMRT_data)
+        for IMRT_misdelivery_data in IMRT_misdeliveries_data:
+            IMRT_misdelivery.objects.create(result=result, **IMRT_misdelivery_data)
         return result
 
     def update(self, instance, validated_data):
@@ -131,6 +148,10 @@ class ResultSerializer(serializers.ModelSerializer):
         IMRTs_data = validated_data.pop('IMRT')
         IMRTs = (instance.IMRT).all()
         IMRTs = list(IMRTs)
+
+        IMRT_misdeliveries_data = validated_data.pop('IMRT_misdelivery')
+        IMRT_misdeliveries = (instance.IMRT_misdelivery).all()
+        IMRT_misdeliveries = list(IMRT_misdeliveries)
 
         instance.updated = datetime.datetime.now()
         instance.AuditID = validated_data.get('AuditID', instance.AuditID)
@@ -305,4 +326,52 @@ class ResultSerializer(serializers.ModelSerializer):
             IMRT.c8_p17_10 = IMRT_data.get(' c8_p17_10 ', IMRT.c8_p17_10)
             IMRT.c8_p18_10 = IMRT_data.get(' c8_p18_10 ', IMRT.c8_p18_10)
             IMRT.save()
+
+        for IMRT_misdelivery_data in IMRT_misdeliveries_data:
+            IMRT_misdelivery = IMRT_misdeliveries.pop(0)
+            IMRT_misdelivery.updated = datetime.datetime.now()
+            IMRT_misdelivery.c6_p11_6 = IMRT_misdelivery_data.get(' c6_p11_6 ', IMRT_misdelivery.c6_p11_6)
+            IMRT_misdelivery.c6_p12_6 = IMRT_misdelivery_data.get(' c6_p12_6 ', IMRT_misdelivery.c6_p12_6)
+            IMRT_misdelivery.c6_p13_6 = IMRT_misdelivery_data.get(' c6_p13_6 ', IMRT_misdelivery.c6_p13_6)
+            IMRT_misdelivery.c6_p14_6 = IMRT_misdelivery_data.get(' c6_p14_6 ', IMRT_misdelivery.c6_p14_6)
+            IMRT_misdelivery.c6_p15_6 = IMRT_misdelivery_data.get(' c6_p15_6 ', IMRT_misdelivery.c6_p15_6)
+            IMRT_misdelivery.c6_p16_6 = IMRT_misdelivery_data.get(' c6_p16_6 ', IMRT_misdelivery.c6_p16_6)
+            IMRT_misdelivery.c6_p17_6 = IMRT_misdelivery_data.get(' c6_p17_6 ', IMRT_misdelivery.c6_p17_6)
+            IMRT_misdelivery.c7_p11_6 = IMRT_misdelivery_data.get(' c7_p11_6 ', IMRT_misdelivery.c7_p11_6)
+            IMRT_misdelivery.c7_p12_6 = IMRT_misdelivery_data.get(' c7_p12_6 ', IMRT_misdelivery.c7_p12_6)
+            IMRT_misdelivery.c7_p13_6 = IMRT_misdelivery_data.get(' c7_p13_6 ', IMRT_misdelivery.c7_p13_6)
+            IMRT_misdelivery.c7_p14_6 = IMRT_misdelivery_data.get(' c7_p14_6 ', IMRT_misdelivery.c7_p14_6)
+            IMRT_misdelivery.c7_p15_6 = IMRT_misdelivery_data.get(' c7_p15_6 ', IMRT_misdelivery.c7_p15_6)
+            IMRT_misdelivery.c7_p16_6 = IMRT_misdelivery_data.get(' c7_p16_6 ', IMRT_misdelivery.c7_p16_6)
+            IMRT_misdelivery.c7_p17_6 = IMRT_misdelivery_data.get(' c7_p17_6 ', IMRT_misdelivery.c7_p17_6)
+            IMRT_misdelivery.c8_p11_6 = IMRT_misdelivery_data.get(' c8_p11_6 ', IMRT_misdelivery.c8_p11_6)
+            IMRT_misdelivery.c8_p12_6 = IMRT_misdelivery_data.get(' c8_p12_6 ', IMRT_misdelivery.c8_p12_6)
+            IMRT_misdelivery.c8_p13_6 = IMRT_misdelivery_data.get(' c8_p13_6 ', IMRT_misdelivery.c8_p13_6)
+            IMRT_misdelivery.c8_p14_6 = IMRT_misdelivery_data.get(' c8_p14_6 ', IMRT_misdelivery.c8_p14_6)
+            IMRT_misdelivery.c8_p15_6 = IMRT_misdelivery_data.get(' c8_p15_6 ', IMRT_misdelivery.c8_p15_6)
+            IMRT_misdelivery.c8_p17_6 = IMRT_misdelivery_data.get(' c8_p17_6 ', IMRT_misdelivery.c8_p17_6)
+            IMRT_misdelivery.c8_p18_6 = IMRT_misdelivery_data.get(' c8_p18_6 ', IMRT_misdelivery.c8_p18_6)
+            IMRT_misdelivery.c6_p11_10 = IMRT_misdelivery_data.get(' c6_p11_10 ', IMRT_misdelivery.c6_p11_10)
+            IMRT_misdelivery.c6_p12_10 = IMRT_misdelivery_data.get(' c6_p12_10 ', IMRT_misdelivery.c6_p12_10)
+            IMRT_misdelivery.c6_p13_10 = IMRT_misdelivery_data.get(' c6_p13_10 ', IMRT_misdelivery.c6_p13_10)
+            IMRT_misdelivery.c6_p14_10 = IMRT_misdelivery_data.get(' c6_p14_10 ', IMRT_misdelivery.c6_p14_10)
+            IMRT_misdelivery.c6_p15_10 = IMRT_misdelivery_data.get(' c6_p15_10 ', IMRT_misdelivery.c6_p15_10)
+            IMRT_misdelivery.c6_p16_10 = IMRT_misdelivery_data.get(' c6_p16_10 ', IMRT_misdelivery.c6_p16_10)
+            IMRT_misdelivery.c6_p17_10 = IMRT_misdelivery_data.get(' c6_p17_10 ', IMRT_misdelivery.c6_p17_10)
+            IMRT_misdelivery.c7_p11_10 = IMRT_misdelivery_data.get(' c7_p11_10 ', IMRT_misdelivery.c7_p11_10)
+            IMRT_misdelivery.c7_p12_10 = IMRT_misdelivery_data.get(' c7_p12_10 ', IMRT_misdelivery.c7_p12_10)
+            IMRT_misdelivery.c7_p13_10 = IMRT_misdelivery_data.get(' c7_p13_10 ', IMRT_misdelivery.c7_p13_10)
+            IMRT_misdelivery.c7_p14_10 = IMRT_misdelivery_data.get(' c7_p14_10 ', IMRT_misdelivery.c7_p14_10)
+            IMRT_misdelivery.c7_p15_10 = IMRT_misdelivery_data.get(' c7_p15_10 ', IMRT_misdelivery.c7_p15_10)
+            IMRT_misdelivery.c7_p16_10 = IMRT_misdelivery_data.get(' c7_p16_10 ', IMRT_misdelivery.c7_p16_10)
+            IMRT_misdelivery.c7_p17_10 = IMRT_misdelivery_data.get(' c7_p17_10 ', IMRT_misdelivery.c7_p17_10)
+            IMRT_misdelivery.c8_p11_10 = IMRT_misdelivery_data.get(' c8_p11_10 ', IMRT_misdelivery.c8_p11_10)
+            IMRT_misdelivery.c8_p12_10 = IMRT_misdelivery_data.get(' c8_p12_10 ', IMRT_misdelivery.c8_p12_10)
+            IMRT_misdelivery.c8_p13_10 = IMRT_misdelivery_data.get(' c8_p13_10 ', IMRT_misdelivery.c8_p13_10)
+            IMRT_misdelivery.c8_p14_10 = IMRT_misdelivery_data.get(' c8_p14_10 ', IMRT_misdelivery.c8_p14_10)
+            IMRT_misdelivery.c8_p15_10 = IMRT_misdelivery_data.get(' c8_p15_10 ', IMRT_misdelivery.c8_p15_10)
+            IMRT_misdelivery.c8_p17_10 = IMRT_misdelivery_data.get(' c8_p17_10 ', IMRT_misdelivery.c8_p17_10)
+            IMRT_misdelivery.c8_p18_10 = IMRT_misdelivery_data.get(' c8_p18_10 ', IMRT_misdelivery.c8_p18_10)
+            IMRT_misdelivery.save()
+
         return instance
