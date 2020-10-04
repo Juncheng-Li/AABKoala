@@ -1,5 +1,6 @@
 import json
 
+import numpy as np
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -105,6 +106,12 @@ def plot_NDS_IMRT(self, request):
         series_name = ["All"]
         series_name.extend(facilitys)
         graph_info = plot.NDS_IMRT(averageCalculation(data_list), series_name, mode)
+        # print(graph_info)
+
+    elif mode == "std":
+        series_name = ["All"]
+        series_name.extend(facilitys)
+        graph_info = plot.NDS_IMRT(standardDeviationCalculation(data_list), series_name, mode)
         print(graph_info)
 
     return Response(status=status.HTTP_200_OK)
@@ -146,7 +153,7 @@ def averageCalculation(data_list):
             if None in arr1:
                 average1 = None
             else:
-                average1 = round(sum(arr1)/len(arr1), 3)
+                average1 = round(sum(arr1) / len(arr1), 3)
 
             # average2 = np.mean(c7_p11_6, c7_p12_6, c7_p13_6, c7_p15_6, c7_p16_6, c7_p17_6)
             arr2 = [data["c7_p11_6"][i], data["c7_p12_6"][i], data["c7_p13_6"][i], data["c7_p15_6"][i],
@@ -154,7 +161,7 @@ def averageCalculation(data_list):
             if None in arr2:
                 average2 = None
             else:
-                average2 = round(sum(arr2)/len(arr2), 3)
+                average2 = round(sum(arr2) / len(arr2), 3)
 
             # average3 = np.mean(c8_p11_6, c8_p12_6, c8_p13_6, c8_p15_6, c8_p17_6, c8_p18_6)
             arr3 = [data["c8_p11_6"][i], data["c8_p12_6"][i], data["c8_p13_6"][i], data["c8_p15_6"][i],
@@ -162,7 +169,7 @@ def averageCalculation(data_list):
             if None in arr3:
                 average3 = None
             else:
-                average3 = round(sum(arr3)/len(arr3), 3)
+                average3 = round(sum(arr3) / len(arr3), 3)
 
             # average4 = np.mean(c6_p11_10, c6_p12_10, c6_p13_10, c6_p15_10, c6_p16_10, c6_p17_10)
             arr4 = [data["c6_p11_10"][i], data["c6_p12_10"][i], data["c6_p13_10"][i], data["c6_p15_10"][i],
@@ -170,7 +177,7 @@ def averageCalculation(data_list):
             if None in arr4:
                 average4 = None
             else:
-                average4 = round(sum(arr4)/len(arr4), 3)
+                average4 = round(sum(arr4) / len(arr4), 3)
 
             # average5 = np.mean(c7_p11_10, c7_p12_10, c7_p13_10, c7_p15_10, c7_p16_10, c7_p17_10)
             arr5 = [data["c7_p11_10"][i], data["c7_p12_10"][i], data["c7_p13_10"][i], data["c7_p15_10"][i],
@@ -178,15 +185,15 @@ def averageCalculation(data_list):
             if None in arr5:
                 average5 = None
             else:
-                average5 = round(sum(arr5)/len(arr5), 3)
+                average5 = round(sum(arr5) / len(arr5), 3)
 
             # average6 = np.mean(c8_p11_10, c8_p12_10, c8_p13_10, c8_p15_10, c8_p17_10, c8_p18_10)
             arr6 = [data["c8_p11_10"][i], data["c8_p12_10"][i], data["c8_p13_10"][i], data["c8_p15_10"][i],
-                            data["c8_p17_10"][i], data["c8_p18_10"][i]]
+                    data["c8_p17_10"][i], data["c8_p18_10"][i]]
             if None in arr6:
                 average6 = None
             else:
-                average6 = round(sum(arr6)/len(arr6), 3)
+                average6 = round(sum(arr6) / len(arr6), 3)
 
             avgdata_format["average1"].append(average1)
             avgdata_format["average2"].append(average2)
@@ -198,3 +205,75 @@ def averageCalculation(data_list):
         avg_data_list.append(avgdata_format)
 
     return avg_data_list
+
+
+def standardDeviationCalculation(data_list):
+    std_data_list = []
+
+    for data in data_list:
+        print(data)
+        avgdata_format = {
+            "std1": [], "std2": [], "std3": [], "std4": [], "std5": [], "std6": []
+        }
+        formatsize = len(data["c6_p11_6"])
+
+        for i in range(formatsize):
+            print(i)
+            # std1 = std (c6_p11_6，c6_p12_6， c6_p13_6，  c6_p15_6， c6_p16_6，c6_p17_6)
+            std1_arr = [data["c6_p11_6"][i], data["c6_p12_6"][i], data["c6_p13_6"][i], data["c6_p15_6"][i],
+                        data["c6_p16_6"][i], data["c6_p17_6"][i]]
+            if None in std1_arr:
+                std1 = None
+            else:
+                std1 = np.std(std1_arr, ddof=1)
+
+            # std2 = std（c7_p11_6， c7_p12_6， c7_p13_6，  c7_p15_6， c7_p16_6， c7_p17_6）
+            std2_arr = [data["c7_p11_6"][i], data["c7_p12_6"][i], data["c7_p13_6"][i], data["c7_p15_6"][i],
+                        data["c7_p16_6"][i], data["c6_p17_6"][i]]
+            if None in std2_arr:
+                std2 = None
+            else:
+                std2 = np.std(std2_arr, ddof=1)
+
+            # std3 = std（c8_p11_6，c8_p12_6， c8_p13_6，  c8_p15_6， c8_p17_6， c8_p18_6）
+            std3_arr = [data["c8_p11_6"][i], data["c8_p12_6"][i], data["c8_p13_6"][i], data["c8_p15_6"][i],
+                        data["c8_p17_6"][i], data["c8_p18_6"][i]]
+            if None in std3_arr:
+                std3 = None
+            else:
+                std3 = np.std(std3_arr, ddof=1)
+
+            # std4 = std（c6_p11_10， c6_p12_10， c6_p13_10， c6_p15_10， c6_p16_10， c6_p17_10）
+            std4_arr = [data["c6_p11_10"][i], data["c6_p12_10"][i], data["c6_p13_10"][i], data["c6_p15_10"][i],
+                        data["c6_p16_10"][i], data["c6_p17_10"][i]]
+            if None in std4_arr:
+                std4 = None
+            else:
+                std4 = np.std(std4_arr, ddof=1)
+
+            # std5 = std（c7_p11_10， c7_p12_10， c7_p13_10， c7_p15_10， c7_p16_10， c7_p17_10
+            std5_arr = [data["c7_p11_10"][i], data["c7_p12_10"][i], data["c7_p13_10"][i], data["c7_p15_10"][i],
+                        data["c7_p16_10"][i], data["c7_p17_10"][i]]
+            if None in std5_arr:
+                std5 = None
+            else:
+                std5 = np.std(std5_arr, ddof=1)
+
+            # std6 = std（c8_p11_10，c8_p12_10， c8_p13_10，  c8_p15_10， c8_p17_10， c8_p18_10）
+            std6_arr = [data["c8_p11_10"][i], data["c8_p12_10"][i], data["c8_p13_10"][i], data["c8_p15_10"][i],
+                        data["c8_p17_10"][i], data["c8_p18_10"][i]]
+            if None in std6_arr:
+                std6 = None
+            else:
+                std6 = np.std(std6_arr, ddof=1)
+
+            avgdata_format["std1"].append(std1)
+            avgdata_format["std2"].append(std2)
+            avgdata_format["std3"].append(std3)
+            avgdata_format["std4"].append(std4)
+            avgdata_format["std5"].append(std5)
+            avgdata_format["std6"].append(std6)
+
+        std_data_list.append(avgdata_format)
+
+    return std_data_list
