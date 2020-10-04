@@ -14,7 +14,6 @@ from apps.graphs.models import Result, Graph, Reading
 from apps.graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 from utils import plot
 
-from django_pandas.io import read_frame
 
 class ResultViewSet(viewsets.ModelViewSet):
     """
