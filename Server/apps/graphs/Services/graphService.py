@@ -70,6 +70,7 @@ def plot_NDS_IMRT(self, request):
     facilitys = json.loads(request.body.decode('utf-8')).get('facilitys')
     mode = json.loads(request.body.decode('utf-8')).get('mode')
 
+    data_list = []
     data_format = ["c6_p11_6", "c6_p12_6", "c6_p13_6", "c6_p14_6", "c6_p15_6", "c6_p16_6", "c6_p17_6", "c7_p11_6",
                    "c7_p12_6", "c7_p13_6", "c7_p14_6", "c7_p15_6", "c7_p16_6", "c7_p17_6", "c8_p11_6", "c8_p12_6",
                    "c8_p13_6", "c8_p14_6", "c8_p15_6", "c8_p17_6", "c8_p18_6", "c6_p11_10", "c6_p12_10", "c6_p13_10",
@@ -81,13 +82,26 @@ def plot_NDS_IMRT(self, request):
     all_IMRTs = IMRT.objects.filter(result_id__in=all_results)
     all_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=all_results)
     all_data = excludeMisdeliveryData(all_IMRTs, all_IMRT_misdeliveries, data_format)
-    print(all_data)
+    data_list.append(all_data)
+    print("all_data: ", all_data)
 
-    facilitys_results = Result.objects.all().filter(FacilityName__in=facilitys)
-    facilitys_IMRTs = IMRT.objects.filter(result_id__in=facilitys_results)
-    facilitys_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=facilitys_results)
-    facilitys_data = excludeMisdeliveryData(facilitys_IMRTs, facilitys_IMRT_misdeliveries, data_format)
-    print(facilitys_data)
+    for facility in facilitys:
+        facility_results = Result.objects.all().filter(FacilityName=facility)
+        facility_IMRTs = IMRT.objects.filter(result_id__in=facility_results)
+        facility_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=facility_results)
+        facility_data = excludeMisdeliveryData(facility_IMRTs, facility_IMRT_misdeliveries, data_format)
+        data_list.append(facility_data)
+        print(facility, ":", facility_data)
+
+    print(data_list)
+
+    if mode == "all":
+        series_name = ["All"]
+        series_name.extend(facilitys)
+        print(series_name)
+        mode = "all"
+        graph_info = plot.NDS_IMRT(data_list, series_name, mode)
+        print(graph_info)
 
     return Response(status=status.HTTP_200_OK)
 
