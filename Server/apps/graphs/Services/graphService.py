@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from apps.graphs import models
-from apps.graphs.models import Result, Reading
+from apps.graphs.models import Result, Reading, IMRT, IMRT_misdelivery
 from utils import plot
 
 
@@ -70,6 +70,35 @@ def plot_NDS_IMRT(self, request):
     facilitys = json.loads(request.body.decode('utf-8')).get('facilitys')
     mode = json.loads(request.body.decode('utf-8')).get('mode')
 
+    data_format = {"c6_p11_6": [], "c6_p12_6": [], "c6_p13_6": [], "c6_p14_6": [], "c6_p15_6": [], "c6_p16_6": [],
+                   "c6_p17_6": [], "c7_p11_6": [], "c7_p12_6": [], "c7_p13_6": [], "c7_p14_6": [], "c7_p15_6": [],
+                   "c7_p16_6": [], "c7_p17_6": [], "c8_p11_6": [], "c8_p12_6": [], "c8_p13_6": [], "c8_p14_6": [],
+                   "c8_p15_6": [], "c8_p17_6": [], "c8_p18_6": [], "c6_p11_10": [], "c6_p12_10": [], "c6_p13_10": [],
+                   "c6_p14_10": [], "c6_p15_10": [], "c6_p16_10": [], "c6_p17_10": [], "c7_p11_10": [], "c7_p12_10": [],
+                   "c7_p13_10": [], "c7_p14_10": [], "c7_p15_10": [], "c7_p16_10": [], "c7_p17_10": [], "c8_p11_10": [],
+                   "c8_p12_10": [], "c8_p13_10": [], "c8_p14_10": [], "c8_p15_10": [], "c8_p17_10": [], "c8_p18_10": []}
+
     all_results = Result.objects.exclude(FacilityName__in=facilitys)
+    all_IMRTs = IMRT.objects.filter(result_id__in=all_results)
+    all_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=all_results)
+
+    all_data = excludeMisdeliveryData(all_IMRTs, all_IMRT_misdeliveries, data_format)
+    print(all_data)
 
     return Response(status=status.HTTP_200_OK)
+
+
+def excludeMisdeliveryData(dataset, dataset_misdeliveries, data_format):
+    for data in dataset:
+        dataset_misdelivery = dataset_misdeliveries.filter(result_id=data.result_id)
+        misdelivery = dataset_misdelivery[0]
+
+        for key in data_format.keys():
+            temp = """
+if misdelivery.""" + key + """ == 1:
+    data_format[\"""" + key + """\"].append(None)
+else:
+    data_format[\"""" + key + """\"].append(data.""" + key + """)
+                """
+            exec(temp)
+    return data_format
