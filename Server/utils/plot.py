@@ -123,6 +123,7 @@ def NDS_3DCRT(series_data, series_name, mode):
 def NDS_IMRT(series_data, series_name, mode):
     # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
+    path = os.path.split(os.path.realpath(__file__))[0]
 
     # plot
     plot_series = []
@@ -193,7 +194,11 @@ def NDS_IMRT(series_data, series_name, mode):
                frameon=False)
 
     # save plot
-    plt.savefig("./plGraphs/imrtPP.png", dpi=300)
+    ticks = time.time()
+    ticks = str(round(ticks * 1000))
+    plt.savefig(path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png", dpi=300)
+    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png", "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
+    return response
 
 
 def code_to_x_3dcrt(input_code):
