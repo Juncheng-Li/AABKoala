@@ -84,8 +84,8 @@ def plot_NDS_IMRT(self, request):
     all_data = excludeMisdeliveryData(all_IMRTs, all_IMRT_misdeliveries, data_format)
     data_list.append(all_data)
 
-    for facility in facilitys:
-        facility_results = Result.objects.all().filter(FacilityName=facility)
+    for facility in facilitys.keys():
+        facility_results = Result.objects.all().filter(FacilityName=facility).filter(pk__in=facilitys[facility])
         facility_IMRTs = IMRT.objects.filter(result_id__in=facility_results)
         facility_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=facility_results)
         facility_data = excludeMisdeliveryData(facility_IMRTs, facility_IMRT_misdeliveries, data_format)
