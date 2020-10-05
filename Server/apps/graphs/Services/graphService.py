@@ -17,8 +17,7 @@ def plot_NDS_3DCRT(self, request):
         current_results = Result.objects.filter(id=resultID)
         for current_result in current_results:
             series_name.append(current_result.FacilityName)
-    print("Series name:")
-    print(series_name)
+
     readings = Reading.objects.filter(result_id__in=results_list)
     data = {"101106": [], "110106": [], "205106": [], "208106": [], "205206": [], "208206": [], "205306": [],
             "208306": [], "303106": [], "305106": [], "403106": [], "405106": [], "103110": [], "110110": [],
@@ -84,7 +83,6 @@ def plot_NDS_IMRT(self, request):
     all_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=all_results)
     all_data = excludeMisdeliveryData(all_IMRTs, all_IMRT_misdeliveries, data_format)
     data_list.append(all_data)
-    # print("all_data: ", all_data)
 
     for facility in facilitys:
         facility_results = Result.objects.all().filter(FacilityName=facility)
@@ -92,29 +90,28 @@ def plot_NDS_IMRT(self, request):
         facility_IMRT_misdeliveries = IMRT_misdelivery.objects.filter(result_id__in=facility_results)
         facility_data = excludeMisdeliveryData(facility_IMRTs, facility_IMRT_misdeliveries, data_format)
         data_list.append(facility_data)
-        # print(facility, ":", facility_data)
-
-    # print(data_list)
 
     if mode == "all":
         series_name = ["All"]
         series_name.extend(facilitys)
         graph_info = plot.NDS_IMRT(data_list, series_name, mode)
-        # print(graph_info)
 
     elif mode == "average":
         series_name = ["All"]
         series_name.extend(facilitys)
         graph_info = plot.NDS_IMRT(averageCalculation(data_list), series_name, mode)
-        # print(graph_info)
 
     elif mode == "std":
         series_name = ["All"]
         series_name.extend(facilitys)
         graph_info = plot.NDS_IMRT(standardDeviationCalculation(data_list), series_name, mode)
-        print(graph_info)
 
-    return Response(status=status.HTTP_200_OK)
+    graph_obj = models.Graph.objects.create(url=graph_info['url'], fileName=graph_info['fileName'])
+    facility_results = Result.objects.all().filter(FacilityName__in=facilitys)
+    facility_results_obj = models.Result.objects.filter(pk__in=facility_results)
+    graph_obj.result.add(*facility_results_obj)
+    graph_obj.save()
+    return Response(graph_info, status=status.HTTP_200_OK)
 
 
 def excludeMisdeliveryData(dataset, dataset_misdeliveries, data_format):
@@ -139,14 +136,12 @@ def averageCalculation(data_list):
     avg_data_list = []
 
     for data in data_list:
-        print(data)
         avgdata_format = {
             "average1": [], "average2": [], "average3": [], "average4": [], "average5": [], "average6": []
         }
         formatsize = len(data["c6_p11_6"])
 
         for i in range(formatsize):
-            print(i)
             # average1 = np.mean(c6_p11_6, c6_p12_6, c6_p13_6, c6_p15_6, c6_p16_6,c6_p17_6)
             arr1 = [data["c6_p11_6"][i], data["c6_p12_6"][i], data["c6_p13_6"][i], data["c6_p15_6"][i],
                     data["c6_p16_6"][i], data["c6_p17_6"][i]]
@@ -211,14 +206,12 @@ def standardDeviationCalculation(data_list):
     std_data_list = []
 
     for data in data_list:
-        print(data)
         avgdata_format = {
             "std1": [], "std2": [], "std3": [], "std4": [], "std5": [], "std6": []
         }
         formatsize = len(data["c6_p11_6"])
 
         for i in range(formatsize):
-            print(i)
             # std1 = std (c6_p11_6，c6_p12_6， c6_p13_6，  c6_p15_6， c6_p16_6，c6_p17_6)
             std1_arr = [data["c6_p11_6"][i], data["c6_p12_6"][i], data["c6_p13_6"][i], data["c6_p15_6"][i],
                         data["c6_p16_6"][i], data["c6_p17_6"][i]]
