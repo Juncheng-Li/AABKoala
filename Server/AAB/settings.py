@@ -26,7 +26,7 @@ SECRET_KEY = 'tt9@unroa8=(%cv_wve*j=urc$5xn7zueaf@o=k(z8u=2c(g^0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.189.21.28']
 
 
 # Application definition
@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'AAB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'AABKoalaTest',
+        'NAME': 'dockerTest',
         'HOST': '35.189.21.28',
         'PORT': 3306,
-        'USER': 'ziping',  # use own database account name
+        'USER': 'client3',  # use own database account name
         'PASSWORD': 'AA-koala123456',  # use own database account password
     }
 }
