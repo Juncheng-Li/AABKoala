@@ -8,13 +8,13 @@ g = graphRequest()
 r.listResults()
 
 #inserting new result into the database
-r.insertNewResult()
+# r.insertNewResult()
 
 #plot this result and retrive the graph generated
-g.plot_graph([31],"history")
+# g.plot_graph([31],"history")
 
 #update results
-r.updateResults()
+# r.updateResults()
 
 #delete results
-r.deleteResultWithID("31")
+# r.deleteResultWithID("31")

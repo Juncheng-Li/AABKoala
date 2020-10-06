@@ -1,6 +1,6 @@
 # This is the configuration files for the local program
 # It can be replaced with more advanced configuration package
 
-authorization = "Basic cm9vdDpyb290"
-host = "127.0.0.1"
-port = 8000
+authorization = "Basic Y2xpZW50MzpBQS1rb2FsYTEyMzQ1Ng=="
+host = "35.189.21.28"
+port = 5000
