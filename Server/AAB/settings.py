@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'AAB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dockerTest',
-        'HOST': '35.189.21.28',
-        'PORT': 3306,
+        'NAME': 'dockerSample',
+        'HOST': 'db',
+        'PORT': 3305,
         'USER': 'client3',  # use own database account name
         'PASSWORD': 'AA-koala123456',  # use own database account password
     }
