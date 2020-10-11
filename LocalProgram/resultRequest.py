@@ -81,7 +81,10 @@ class resultRequest:
             print(data.decode("utf-8"))
         else:
             # when there are multiple results to be inserted, use this one instead
-            payload = json.dumps(resultsList)
+            payload = []
+            for result in resultsList:
+                payload.append(json.loads(result))
+            payload = json.dumps(payload)
             headers = {
                 'Authorization': self.authorization,
                 'Content-Type': 'application/json'
