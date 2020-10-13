@@ -18,48 +18,56 @@ class resultRequest:
 
     def parseExcel(self):
         filename = "upload/uploadingData.xlsx"
-        df = pd.read_excel(filename) # read uploadingData.xlsx
+        df = pd.read_excel(filename)
         df["AuditDate"] = pd.to_datetime(df["AuditDate"], errors='coerce')
-        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d") # covert 10/5/2016 to 2016-10-05
+        df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
         resultList = []
         ids = []
+        roundIndex = ['Reading_101106','Reading_110106', 'Reading_205106', 'Reading_208106',	'Reading_205206',
+                                 'Reading_208206', 'Reading_205306', 'Reading_208306', 'Reading_303106', 'Reading_305106',
+                                 'Reading_403106', 'Reading_405106', 'Reading_103110', 'Reading_110110', 'Reading_303110',
+                                 'Reading_305110', 'Reading_403110', 'Reading_405110', 'Reading_103115', 'Reading_110115',
+                                 'Reading_303115', 'Reading_305115', 'Reading_403115', 'Reading_405115', 'Reading_103118',
+                                 'Reading_110118', 'Reading_303118', 'Reading_305118', 'Reading_403118', 'Reading_405118',
+                                 'Reading_101105', 'Reading_110105', 'Reading_303105', 'Reading_305105', 'Reading_103109',
+                                 'Reading_110109', 'Reading_303109', 'Reading_305109', 'c6_p11_6', 'c6_p12_6', 'c6_p13_6',
+                      'c6_p14_6', 'c6_p15_6', 'c6_p16_6', 'c6_p17_6', 'c7_p11_6', 'c7_p12_6', 'c7_p13_6', 'c7_p14_6',
+                      'c7_p15_6', 'c7_p16_6', 'c7_p17_6', 'c8_p11_6', 'c8_p12_6', 'c8_p13_6', 'c8_p14_6', 'c8_p15_6',
+                      'c8_p17_6', 'c8_p18_6', 'c6_p11_10', 'c6_p12_10', 'c6_p13_10', 'c6_p14_10', 'c6_p15_10',
+                      'c6_p16_10', 'c6_p17_10', 'c7_p11_10', 'c7_p12_10', 'c7_p13_10', 'c7_p14_10', 'c7_p15_10'
+                      'c7_p16_10', 'c7_p17_10', 'c8_p11_10', 'c8_p12_10', 'c8_p13_10', 'c8_p14_10', 'c8_p15_10',
+                      'c8_p17_10', 'c8_p18_10']
+        decimals = pd.Series([4 for _ in range(79)], index=roundIndex)
+        df = df.round(decimals)
 
         for i in range(len(df)):
             id = df.loc[i,'id']
-            if not math.isnan(id): # Check whether id is not NaN
-                ids.append(str(int(id))) # append each id into ids
-
+            if not math.isnan(id):
+                ids.append(str(int(id)))
             unested = df.loc[i,"AuditID":"Phantom"].to_json()
-            # get excel content from "AuditID" to "Phantom"as JSON
-
             facilityOutput = df.loc[i,"fac_6":"fac_10FFF"].to_json().replace("fac","energy")
-            # replace 'fac' as 'energy' from "fac_6" to "fac_10FFF"
-
             tpr = df.loc[i,"TPR_6":"TPR_10FFF"].to_json().replace("TPR","energy")
-            # replace 'fac' as 'energy' from "TPR_6" to "TPR_10FFF"
-
             readings = df.loc[i,"Reading_101106":"Reading_305109"].to_json()
-            # get excel content from "AuditID" to "Phantom"as JSON
-
             misdelivery = df.loc[i,"Misdelivery_101106":"Misdelivery_305109"].to_json()
-            # get excel content from "Misdelivery_101106" to "Misdelivery_305109"as JSON
+            imrt = df.loc[i, "c6_p11_6":"c8_p18_10"].to_json()
+            imrt_misdelivery = df.loc[i, "imrt_misdelivery_c6_p11_6":"imrt_misdelivery_c8_p18_10"].to_json().replace("imrt_misdelivery_","")
 
             result = json.loads(unested)
             result.update({"facilityOutput":[json.loads(facilityOutput)]})
             result.update({"TPR":[json.loads(tpr)]})
             result.update({"Reading":[json.loads(readings)]})
             result.update({"Misdelivery":[json.loads(misdelivery)]})
+            result.update({"IMRT":[json.loads(imrt)]})
+            result.update({"IMRT_misdelivery":[json.loads(imrt_misdelivery)]})
 
             resultList.append(json.dumps(result))
-            # append facilityOutput dataset,TPR dataset,Reading dataset,Misdelivery dataset into resultList
-        print(resultList)
-        return (resultList, ids)
 
+        return (resultList, ids)
 
     def insertNewResult(self):
         resultsList = self.parseExcel()[0]
-        for result in resultsList:
-            payload = result
+        if len(resultsList) == 1:
+            payload = resultsList[0]
             headers = {
                 'Authorization': self.authorization,
                 'Content-Type': 'application/json'
@@ -69,7 +77,26 @@ class resultRequest:
             res = self.conn.getresponse()
             time2 = time.time()
             data = res.read()
-            print("insert request completed, takes time %d" %(time2-time1) + data.decode("utf-8"))
+            print("insert request completed, takes time %d" % (time2 - time1) + " seconds")
+            print(data.decode("utf-8"))
+        else:
+            # when there are multiple results to be inserted, use this one instead
+            payload = []
+            for result in resultsList:
+                payload.append(json.loads(result))
+            payload = json.dumps(payload)
+            headers = {
+                'Authorization': self.authorization,
+                'Content-Type': 'application/json'
+            }
+            time1 = time.time()
+            self.conn.request("POST", "/graphs/resultsList/", payload, headers)
+            res = self.conn.getresponse()
+            time2 = time.time()
+            data = res.read()
+            print("insert request completed, takes time %d" % (time2 - time1) + " seconds")
+            print(data.decode("utf-8"))
+
 
     def listResults(self):
         payload = ''
@@ -105,7 +132,10 @@ class resultRequest:
                                  'Reading_110109', 'Reading_303109', 'Reading_305109']]
         misdelivery_df = json_normalize(contentInJson, record_path='Misdelivery')
 
-        table = pd.concat([df, fac_df,tpr_df,reading_df, misdelivery_df], axis=1)
+        imrt_df = json_normalize(contentInJson, record_path='IMRT')
+        imrt_misdelivery_df = json_normalize(contentInJson, record_path='IMRT_misdelivery', record_prefix='imrt_misdelivery_')
+
+        table = pd.concat([df, fac_df,tpr_df,reading_df, misdelivery_df, imrt_df, imrt_misdelivery_df], axis=1)
         table.to_excel("download/" + "list" + ".xlsx", index=False)
         print(data.decode("utf-8"))
 
@@ -161,6 +191,3 @@ class resultRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
-
-resultRequest().parseExcel()
-resultRequest().insertNewResult()

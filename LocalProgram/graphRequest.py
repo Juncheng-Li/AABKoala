@@ -49,5 +49,5 @@ class graphRequest:
 
 #graphRequest().list_graphs()
 #graphRequest().delete_graph(36)
-graphRequest().plot_graph("[50]")
+graphRequest().plot_graph("[31]")
 #graphRequest().retrieve_graph("3DCRT_1600914975424.png")
