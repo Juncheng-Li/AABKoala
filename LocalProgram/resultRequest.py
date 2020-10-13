@@ -34,10 +34,11 @@ class resultRequest:
                       'c6_p14_6', 'c6_p15_6', 'c6_p16_6', 'c6_p17_6', 'c7_p11_6', 'c7_p12_6', 'c7_p13_6', 'c7_p14_6',
                       'c7_p15_6', 'c7_p16_6', 'c7_p17_6', 'c8_p11_6', 'c8_p12_6', 'c8_p13_6', 'c8_p14_6', 'c8_p15_6',
                       'c8_p17_6', 'c8_p18_6', 'c6_p11_10', 'c6_p12_10', 'c6_p13_10', 'c6_p14_10', 'c6_p15_10',
-                      'c6_p16_10', 'c6_p17_10', 'c7_p11_10', 'c7_p12_10', 'c7_p13_10', 'c7_p14_10', 'c7_p15_10'
+                      'c6_p16_10', 'c6_p17_10', 'c7_p11_10', 'c7_p12_10', 'c7_p13_10', 'c7_p14_10', 'c7_p15_10',
                       'c7_p16_10', 'c7_p17_10', 'c8_p11_10', 'c8_p12_10', 'c8_p13_10', 'c8_p14_10', 'c8_p15_10',
-                      'c8_p17_10', 'c8_p18_10']
-        decimals = pd.Series([4 for _ in range(79)], index=roundIndex)
+                      'c8_p17_10', 'c8_p18_10', 'fac_6', 'fac_10', 'fac_15', 'fac_18', 'fac_6FFF', 'fac_10FFF', 'TPR_6',
+                      'TPR_10', 'TPR_15', 'TPR_18', 'TPR_6FFF', 'TPR_10FFF', ]
+        decimals = pd.Series([4 for _ in range(92)], index=roundIndex)
         df = df.round(decimals)
 
         for i in range(len(df)):
