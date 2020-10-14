@@ -18,7 +18,7 @@ def NDS_3DCRT(series_data, series_name, mode):
     RNS_path = path + '/images/RNS.png'
     Series_names = []
 
-    if mode == "history":
+    if mode == "all":
         Series_names.append("All Data")
         for name in series_name:
             Series_names.append(name)
@@ -30,11 +30,13 @@ def NDS_3DCRT(series_data, series_name, mode):
 
     # plot series
     plot_series = []
-    for series in series_data:
+    for i in range(0, len(series_data)):
+        series = series_data[i]
+        s_name = series_name[i]
         x = []
         y = []
         for code in series:
-            # flatten measurements in data into list y
+            # flatten measurements in data into a list of y value
             measurements = series[code]
             for measurement in measurements:
                 y.append(measurement)
@@ -43,10 +45,11 @@ def NDS_3DCRT(series_data, series_name, mode):
             for i in range(0, length):
                 x.append(code_to_x_3dcrt(code))
         # scatter plot
-        if mode == "history":
+        if s_name == "all":
+            # plot "All data" data points in black
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
-            mode = "others"
         else:
+            # plot other facility data points in random colors
             plot_series.append(plt.scatter(x, y, s=4, zorder=5))
 
     # set axis
@@ -112,7 +115,7 @@ def NDS_3DCRT(series_data, series_name, mode):
     RNSax2.imshow(RNS_image, alpha=0.65)
     RNSax2.axis('off')
 
-    # plotsave fig
+    # plot fig
     ticks = time.time()
     ticks = str(round(ticks * 1000))
     plt.savefig(path + "/plGraphs/3DCRT_" + ticks + ".png", dpi=300)
@@ -127,7 +130,9 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # plot
     plot_series = []
-    for series in series_data:
+    for i in range(0, series_data):
+        series = series_data[i]
+        s_name = series_data[i]
         x = []
         y = []
         for code in series:
@@ -145,7 +150,10 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
-        plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+        if s_name == "all":
+            plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+        else:
+            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
 
     # set axis
     xlabel_pos = [8, 25, 42, 59, 76, 93]
