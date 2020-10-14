@@ -7,6 +7,7 @@ from LocalProgram.config import *
 from datetime import datetime
 import time
 import math
+import requests
 
 class resultRequest:
 
@@ -61,11 +62,15 @@ class resultRequest:
             result.update({"IMRT_misdelivery":[json.loads(imrt_misdelivery)]})
 
             resultList.append(json.dumps(result))
+            print(resultList)
 
         return (resultList, ids)
 
+
     def insertNewResult(self):
         resultsList = self.parseExcel()[0]
+        print(resultsList)
+
         if len(resultsList) == 1:
             payload = resultsList[0]
             headers = {
@@ -79,6 +84,10 @@ class resultRequest:
             data = res.read()
             print("insert request completed, takes time %d" % (time2 - time1) + " seconds")
             print(data.decode("utf-8"))
+            print("---JASO---")
+            print(json.loads(data.decode("utf-8")))
+            return json.loads(data.decode("utf-8"))
+
         else:
             # when there are multiple results to be inserted, use this one instead
             payload = []
@@ -95,7 +104,15 @@ class resultRequest:
             time2 = time.time()
             data = res.read()
             print("insert request completed, takes time %d" % (time2 - time1) + " seconds")
+            print('post')
             print(data.decode("utf-8"))
+
+            print(json.loads(data.decode("utf-8")))
+            return json.loads(data.decode("utf-8"))
+
+
+
+
 
 
     def listResults(self):
@@ -153,6 +170,7 @@ class resultRequest:
             self.conn.request("PUT", "/graphs/results/" + resultIds[i] + "/", payload, headers)
             res = self.conn.getresponse()
             data = res.read()
+
             print(data.decode("utf-8"))
 
     def updateResults(self):
@@ -191,3 +209,12 @@ class resultRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
+
+
+
+
+object = resultRequest()
+object.insertNewResult()
+
+
+
