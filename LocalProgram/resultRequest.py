@@ -17,7 +17,7 @@ class resultRequest:
         self.conn = http.client.HTTPConnection(self.host,self.port)
 
     def parseExcel(self):
-        filename = "upload/uploadingData.xlsx"
+        filename = "upload/AllData.xlsx"
         df = pd.read_excel(filename)
         df["AuditDate"] = pd.to_datetime(df["AuditDate"], errors='coerce')
         df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
