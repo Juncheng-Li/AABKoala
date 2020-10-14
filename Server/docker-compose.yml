@@ -7,7 +7,7 @@ services:
     ports:
       - "3304:3306"
     environment:
-      MYSQL_DATABASE: dockerSampleT
+      MYSQL_DATABASE: NDS
       MYSQL_ROOT_PASSWORD: AA-koala123456
     volumes:
       - /data:/var/lib/mysql
