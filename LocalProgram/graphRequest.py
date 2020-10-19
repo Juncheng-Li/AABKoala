@@ -19,6 +19,7 @@ class graphRequest:
         res = self.conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
+        return res
 
     def retrieve_graph(self, fileName):
         localPath = os.path.split(os.path.realpath(__file__))[0]+"/download/"+fileName
@@ -46,8 +47,33 @@ class graphRequest:
         data = res.read()
         print(data.decode("utf-8"))
 
+    # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Get request method                                                                 #
+    # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-graphRequest().list_graphs()
+    def get_list_graphs_HTTPRequest(self):
+        request = self.list_graphs()
+        if request.status == 200:
+            return request.status
+        else:
+            print("The list_graphs request has not succeeded ")
+            return None
+
+
+
+
+
+
+
+
+
+
+
+obj = graphRequest()
+#graphRequest().list_graphs()
+
 #graphRequest().delete_graph(36)
-#graphRequest().plot_graph("[31]")
+graphRequest().plot_graph("[31]")
 #graphRequest().retrieve_graph("3DCRT_1600914975424.png")
+
+#obj.get_list_graphs_HTTPRequest()

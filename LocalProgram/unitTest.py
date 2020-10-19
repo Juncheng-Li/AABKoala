@@ -1,10 +1,14 @@
 import unittest
 from unittest.mock import patch
 from LocalProgram.resultRequest import resultRequest
+from LocalProgram.graphRequest import graphRequest
 
 
 
-class TestResultRequest(unittest.TestCase):
+class UnitTest(unittest.TestCase):
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Unittest for result request class                                                   #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     def test_insertNewResultRequest(self):
         try:
             obj = resultRequest()
@@ -55,3 +59,16 @@ class TestResultRequest(unittest.TestCase):
 
         except AssertionError:
             print("The deleteResultWithID request has not succeeded ")
+
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Unittest for graph request class                                                    #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+    def test_list_graphs_Request(self):
+        try:
+            obj = graphRequest()
+            response = obj.get_list_graphs_HTTPRequest()
+            self.assertEqual(response, 200)
+            print("The list_graphs HTTP 200 OK success status response code")
+        except AssertionError:
+            print("The list_graphs request has not succeeded ")

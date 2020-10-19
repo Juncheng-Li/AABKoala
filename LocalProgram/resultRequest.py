@@ -220,7 +220,9 @@ class resultRequest:
         print(data.decode("utf-8"))
         return res
 
-    # get request method
+    # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # Get request method                                                                 #
+    # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     def get_insertNewResult_HTTPRequest(self):
         request = self.insertNewResult()
         # print(request)
