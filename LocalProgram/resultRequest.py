@@ -214,23 +214,18 @@ class resultRequest:
         }
         self.conn.request("DELETE", "/graphs/results/" + resultID + "/", payload, headers)
         res = self.conn.getresponse()
-        print("deleteResultWithID: res.status, res.reason")
-        print(res.status, res.reason)
+        # print("deleteResultWithID: res.status, res.reason")
+        # print(res.status, res.reason)
         data = res.read()
         print(data.decode("utf-8"))
         return res
 
     # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    # Get request method                                                                 #
+    # Get resultRequest HTTP method                                                      #
     # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     def get_insertNewResult_HTTPRequest(self):
         request = self.insertNewResult()
-        # print(request)
-        # print(request.status)
         if request.status == 201:
-            # print("The HTTP 201 Created success status response code")
-            # print("request")
-            # print(request.status, request.reason)
             return request.status
         else:
             print("The insertNewResult request has not succeeded ")
@@ -238,8 +233,6 @@ class resultRequest:
 
     def get_listResults_HTTPRequest(self):
         request = self.listResults()
-        # print("request")
-        # print(request.status)
         if request.status == 200:
             # print("The HTTP 200 OK success status response code")
             # print("request")
@@ -251,12 +244,7 @@ class resultRequest:
 
     def get_updateResults_HTTPRequest(self):
         request = self.updateResults()
-        # print("request")
-        # print(request.status)
         if request.status == 200:
-            # print("The updateResults HTTP 200 OK success status response code")
-            # print("request")
-            # print(request.status, request.reason)
             return request.status
         else:
             print("The updateResults request has not succeeded ")
@@ -268,8 +256,6 @@ class resultRequest:
         print(request.status)
         if request.status == 200:
             print("The retrieveResultWithID HTTP 200 OK success status response code")
-            # print("request")
-            # print(request.status, request.reason)
             return request.status
         else:
             print("The retrieveResultWithID request has not succeeded ")
@@ -280,12 +266,8 @@ class resultRequest:
         print("request")
         print(request.status)
         if request.status == 204:
-            # print("The deleteResultWithID HTTP 204 No Content success status response code")
-            # print(request.status, request.reason)
             return request.status
         if request.status == 404:
-            # print("The deleteResultWithID HTTP 404 Not Found success status response code")
-            # print(request.status, request.reason)
             return request.status
         else:
             print("The deleteResultWithID Request has not succeeded ")
@@ -297,11 +279,6 @@ obj = resultRequest()
 # obj.updateResultsWithIDs('84')
 # obj.updateResults()
 # obj.retrieveResultWithID('61')
-# obj.get_deleteResultWithID_HTTPRequest('2')
 
-# get Testing request
-# obj.get_insertNewResult_HTTPRequest()
-# obj.get_listResults_HTTPRequest()
-# obj.get_updateResults_HTTPRequest()
-# obj.get_retrieveResultWithID_HTTPRequest('61')
-# obj.get_retrieveResultWithID_HTTPRequest('61')
+
+

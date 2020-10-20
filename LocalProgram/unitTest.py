@@ -3,11 +3,9 @@ from unittest.mock import patch
 from LocalProgram.resultRequest import resultRequest
 from LocalProgram.graphRequest import graphRequest
 
-
-
 class UnitTest(unittest.TestCase):
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    # Unittest for result request class                                                   #
+    # Unittest for resultRequest class                                                   #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     def test_insertNewResultRequest(self):
         try:
@@ -61,7 +59,7 @@ class UnitTest(unittest.TestCase):
             print("The deleteResultWithID request has not succeeded ")
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    # Unittest for graph request class                                                    #
+    # Unittest for graphRequest class                                                    #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
     def test_list_graphs_Request(self):
@@ -72,3 +70,31 @@ class UnitTest(unittest.TestCase):
             print("The list_graphs HTTP 200 OK success status response code")
         except AssertionError:
             print("The list_graphs request has not succeeded ")
+
+    def test_get_delete_graph_Request(self):
+        try:
+            obj = graphRequest()
+            response = obj.get_delete_graph_HTTPRequest('2')
+            self.assertEqual(response, 200)
+            print("The delete_graph HTTP 200 OK success status response code")
+        except AssertionError:
+            print("The delete_graph request has not succeeded ")
+
+    def test_plot_graph_NDS_3DCRT_Request(self):
+        try:
+            obj = graphRequest()
+            response = obj.get_plot_graph_NDS_3DCRT_HTTPRequest("all", '{"Drever": [308], "Avocet": [106, 302]}')
+            self.assertEqual(response, 200)
+            print("The plot_graph_NDS_3DCRT HTTP 200 OK success status response code")
+        except AssertionError:
+            print("The plot_graph_NDS_3DCRT request has not succeeded ")
+
+
+    def test_get_plot_graph_NDS_IMR_Request(self):
+        try:
+            obj = graphRequest()
+            response = obj.get_plot_graph_NDS_IMRT_HTTPRequest("std", '{"Drever": [308], "Avocet": [106, 302]}')
+            self.assertEqual(response, 200)
+            print("The plot_graph_NDS_IMR HTTP 200 OK success status response code")
+        except AssertionError:
+            print("The plot_graph_NDS_IMR request has not succeeded ")
