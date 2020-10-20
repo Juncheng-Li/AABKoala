@@ -14,7 +14,19 @@ class Validator:
             return False
         if ' ' in auditID:
             return False  # if auditID have space is ture, so return False, AssertFalse is true
+        if len(auditID) < 4:
+            return False
+        if len(auditID) > 4:
+            return False
+        return True  # if auditID have space is false, return true, AssertTure is true
 
+    """ facilityName should not none or less than 4 character"""""
+    def check_facilityNameValue_is_valid(self, facilityName):
+        if facilityName == '':
+            return False
+
+        if len(facilityName) < 4:
+            return False
         return True  # if auditID have space is false, return true, AssertTure is true
 
     """ RevisionNumber only contain numbers revisionNumber_is_valid """
@@ -30,15 +42,9 @@ class Validator:
             return True
         return True
 
-    """ facilityName should not none or less than 4 character"""""
 
-    def check_facilityNameValue_is_valid(self, facilityName):
-        if facilityName == '':
-            return False
 
-        if len(facilityName) < 4:
-            return False
-        return True  # if auditID have space is false, return true, AssertTure is true
+
 
     """ facilityID should not none"""""
 
@@ -52,7 +58,7 @@ class Validator:
     """ Auditor1 should not none"""""
 
     def check_auditor1_is_valid(self, auditor1):
-        if auditor1 == '' or math.isnan(float(auditor1)):
+        if auditor1 == '':
             return False
         return True
 
@@ -65,6 +71,10 @@ class Validator:
 
     """ repDate should not none"""""
 
+    def check_linacModel_is_valid(self, linacModel):
+        if linacModel == '':
+            return False
+        return True
 
     def check_facsValue_decimalNum(self, decimalNum):
         if decimalNum < -3:

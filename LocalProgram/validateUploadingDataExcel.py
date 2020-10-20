@@ -225,15 +225,12 @@ class TestValidator(unittest.TestCase):
         try:
             # Assume
             auditID = getTestingValue.auditIdValue
-
             for eachAuditID in auditID:
-                print(eachAuditID)
+                #print(eachAuditID)
                 # Action
                 result = self.validator.check_auditID_is_valid(eachAuditID)
-
                 # Assert
                 self.assertTrue(result)
-
         except AssertionError:
             print(eachAuditID + ' is not valid AuditID . ')
             print('Please check: 1. AuditID should have 4 digit. 2. No space between AuditID. 3. AuditID can not be '
@@ -242,12 +239,10 @@ class TestValidator(unittest.TestCase):
     def test_it_will_accept_a_valid_FacilityName(self):
         try:
             facilityName = getTestingValue.facilityNameValue
-
             for eachFacilityName in facilityName:
-                # print(eachFacilityName)
+                print(eachFacilityName)
                 result = self.validator.check_facilityNameValue_is_valid(eachFacilityName)
                 self.assertTrue(result)
-
         except AssertionError:
             print(eachFacilityName + ' is not valid FacilityName '
                                      '\nPlease check: '
@@ -255,12 +250,9 @@ class TestValidator(unittest.TestCase):
                                      '2. FacilityName should greater then 4 char. '
                   )
 
-    # FacilityID can be null. Contains number and character
-
     def test_it_will_accept_a_valid_Auditor1(self):
         try:
             auditor1 = getTestingValue.auditor1Value
-
             for eachAuditor1 in auditor1:
                 result = self.validator.check_auditor1_is_valid(eachAuditor1)
                 self.assertTrue(result)
@@ -291,7 +283,7 @@ class TestValidator(unittest.TestCase):
             linacModel = getTestingValue.linacModelValue
             for eachLinacModel in linacModel:
                 print(eachLinacModel)
-                result = self.validator.check_repDate_is_valid(eachLinacModel)
+                result = self.validator.check_linacModel_is_valid(eachLinacModel)
                 self.assertTrue(result)
         except AssertionError:
             print(eachLinacModel + ' is not valid LinacModel '
@@ -383,7 +375,6 @@ class TestValidator(unittest.TestCase):
             for fac_10FFF in fac_10FFF:
                 facs.append(fac_10FFF)
 
-            # print(facs)
             for facsValue in facs:
                 result = self.validator.check_facsValue_is_valid(facsValue)
                 self.assertTrue(result)
