@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'AAB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'AABKoalaTest',
+        'NAME': 'AABKoalaTest2',
         'HOST': '35.189.21.28',
         'PORT': 3306,
         'USER': 'yunning',  # use own database account name

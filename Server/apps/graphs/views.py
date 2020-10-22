@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 import json
 
 from apps.graphs.Services import graphService
-from apps.graphs.models import Result, Graph, Reading
+from apps.graphs.models import Result, Graph, Nds_3dcrt
 from apps.graphs.serializers import ResultSerializer, UserSerializer, GraphSerializer
 
 
