@@ -1,6 +1,7 @@
 import os
 
 from django.contrib.auth.models import User
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -51,6 +52,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GraphViewSet(APIView):
+    @swagger_auto_schema(operation_description="GET /graphs/graphManage/")
     def get(self, request):
         graphs = Graph.objects.all()
         serializer = GraphSerializer(graphs, many=True)
