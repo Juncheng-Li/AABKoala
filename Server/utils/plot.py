@@ -130,7 +130,7 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # plot
     plot_series = []
-    for i in range(0, series_data):
+    for i in range(0, len(series_data)):
         series = series_data[i]
         s_name = series_data[i]
         x = []
