@@ -1,10 +1,12 @@
-import matplotlib.pyplot as plt
-import matplotlib
-import numpy as np
-import pandas as pd
-from matplotlib.cbook import get_sample_data
 import os
-import time, random
+import random
+import time
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.cbook import get_sample_data
+
 
 def NDS_3DCRT(series_data, series_name, mode):
     # allow matplotlib to plot at background
@@ -166,10 +168,14 @@ def NDS_IMRT(series_data, series_name, mode):
     # set white margins
     plt.subplots_adjust(bottom=0.13)
 
-    # add green background
+    # add green/grey background
     ax = plt.gca()
-    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
-    ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    if mode == "all":
+        ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+        ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    else:
+        ax.axhspan(-0.03, 0.03, facecolor="#BABAAB", alpha=1, zorder=2)
+        ax.axhspan(-0.05, 0.05, facecolor="#E8E8E3", alpha=1, zorder=1)
 
     # configure plot boundaries
     ax.spines["top"].set_edgecolor("white")
@@ -327,8 +333,8 @@ def std_to_x(input_code):
 
 
 def get_color(i):
-    if i > 6:
+    color_list = ["#454545", "#FF2A00", "#FFD500", "#00CCAA", "#CC8800", "#9933FF", "#0066CC"]
+    if i > len(color_list):
         rgb = (random.random(), random.random(), random.random())
         return rgb
-    color_list = ["#454545", "#FF2A00", "#FF7733"]
     return color_list[i]
