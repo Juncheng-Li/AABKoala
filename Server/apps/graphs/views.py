@@ -1,6 +1,7 @@
 import os
 
 from django.contrib.auth.models import User
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
@@ -32,6 +33,8 @@ class ResultListViewSet(APIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    @swagger_auto_schema(operation_description="insert list of results. \n [{Result1},{Result2}...]",
+                         request_body=ResultSerializer(many=True))
     def post(self, request, *args, **kwargs):
         if isinstance(request.data, list):
             serializer = ResultSerializer(data=request.data, many=True)
@@ -52,12 +55,25 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GraphViewSet(APIView):
-    @swagger_auto_schema(operation_description="GET /graphs/graphManage/")
+    @swagger_auto_schema(operation_description="get all graphs information",
+                         responses={200: openapi.Response('list of all graphs information', GraphSerializer)})
     def get(self, request):
         graphs = Graph.objects.all()
         serializer = GraphSerializer(graphs, many=True)
         return Response(serializer.data)
 
+    @swagger_auto_schema(operation_description="plot graph",
+     request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'graphType': openapi.Schema(type=openapi.TYPE_STRING, description="Type of ploting graph"),
+            'mode': openapi.Schema(type=openapi.TYPE_STRING, description="Mode of ploting graph"),
+            'facilitys': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                '{FacilityName}': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.TYPE_INTEGER,
+                                                 description='resultids (example: [99, 101])'),
+            }),
+        }
+    ))
     def post(self, request):
         graphType = json.loads(request.body.decode('utf-8')).get('graphType')
         if graphType == "NDS_3DCRT":
@@ -65,6 +81,14 @@ class GraphViewSet(APIView):
         elif graphType == "NDS_IMRT":
             return graphService.plot_NDS_IMRT(self, request)
 
+    @swagger_auto_schema(operation_description="delete graph according ids ",
+     request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'graphs_list': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.TYPE_INTEGER,
+                                          description='resultids (example: [99, 101])')
+        }
+    ))
     def delete(self, request):
         graphs_list = json.loads(request.body.decode('utf-8')).get('graphs_list')
 
@@ -76,5 +100,3 @@ class GraphViewSet(APIView):
             graph_obj.delete()
 
         return Response(status=status.HTTP_200_OK)
-
-
