@@ -4,8 +4,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.cbook import get_sample_data
 import os
-import time
-
+import time, random
 
 def NDS_3DCRT(series_data, series_name, mode):
     # allow matplotlib to plot at background
@@ -42,7 +41,7 @@ def NDS_3DCRT(series_data, series_name, mode):
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
-            for i in range(0, length):
+            for k in range(0, length):
                 x.append(code_to_x_3dcrt(code))
         # scatter plot
         if s_name == "all":
@@ -132,7 +131,7 @@ def NDS_IMRT(series_data, series_name, mode):
     plot_series = []
     for i in range(0, len(series_data)):
         series = series_data[i]
-        s_name = series_data[i]
+        s_name = series_name[i]
         x = []
         y = []
         for code in series:
@@ -142,7 +141,7 @@ def NDS_IMRT(series_data, series_name, mode):
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
-            for i in range(0, length):
+            for k in range(0, length):
                 if mode == "all":
                     x.append(code_to_x_imrt(code))
                 elif mode == "average":
@@ -150,10 +149,12 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
-        if s_name == "all":
+        print(s_name)
+        print(i)
+        if s_name == "All":
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
         else:
-            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=4, c=get_color(i), zorder=5))
 
     # set axis
     xlabel_pos = [8, 25, 42, 59, 76, 93]
@@ -323,3 +324,11 @@ def std_to_x(input_code):
         "average6": 89,
     }
     return switcher.get(input_code)
+
+
+def get_color(i):
+    if i > 6:
+        rgb = (random.random(), random.random(), random.random())
+        return rgb
+    color_list = ["#454545", "#FF2A00", "#FF7733"]
+    return color_list[i]
