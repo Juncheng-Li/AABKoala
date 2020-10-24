@@ -17,15 +17,7 @@ def NDS_3DCRT(series_data, series_name, mode):
     image3Path = path + '/images/case3.png'
     image4Path = path + '/images/case4.png'
     RNS_path = path + '/images/RNS.png'
-    Series_names = []
 
-    if mode == "all":
-        Series_names.append("All Data")
-        for name in series_name:
-            Series_names.append(name)
-    else:
-        for name in series_name:
-            Series_names.append(name)
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
@@ -76,7 +68,7 @@ def NDS_3DCRT(series_data, series_name, mode):
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
-    plt.legend(plot_series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
+    plt.legend(plot_series, series_name, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
 
     # add split lines
     plt.axvline(x=15.4, c="black", linewidth=0.4)
