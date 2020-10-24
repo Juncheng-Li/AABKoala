@@ -62,7 +62,7 @@ def NDS_3DCRT(series_data, series_name, mode):
                             "6", "10", "15", '18', '6FFF', '10FFF',
                             '6', '10', "15", "18",
                             "6", "10", "15", "18"), rotation=90, fontsize=7)
-    plt.xlim(-1, 65)
+    plt.xlim(0, 67.9)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
     plt.title("3DCRT Results", fontsize=7, fontweight="bold")
@@ -79,12 +79,12 @@ def NDS_3DCRT(series_data, series_name, mode):
     plt.legend(plot_series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
 
     # add split lines
-    plt.axvline(x=12, c="black", linewidth=0.4)
-    plt.axvline(x=32, c="black", linewidth=0.4)
-    plt.axvline(x=47, c="black", linewidth=0.4)
-    plt.axvline(x=5.5, c="black", linewidth=0.3, linestyle="dashed")
-    plt.axvline(x=39.5, c="black", linewidth=0.3, linestyle="dashed")
-    plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=15.4, c="black", linewidth=0.4)
+    plt.axvline(x=35.7, c="black", linewidth=0.4)
+    plt.axvline(x=51.95, c="black", linewidth=0.4)
+    plt.axvline(x=8.35, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=43.05, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=59.7, c="black", linewidth=0.3, linestyle="dashed")
     plt.axhline(y=0, c="black", linewidth=0.4)
 
     # add case images
@@ -204,56 +204,57 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # add legend
     ax.legend(plot_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8,
-               frameon=False)
+              frameon=False)
 
     # save plot
     ticks = time.time()
     ticks = str(round(ticks * 1000))
     plt.savefig(path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png", dpi=300)
-    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png", "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
+    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png",
+                "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
     return response
 
 
 def code_to_x_3dcrt(input_code):
     switcher = {
-        "101106": 0,
-        "110106": 1,
-        "205106": 2,
-        "208106": 3,
-        "205206": 4,
-        "208206": 5,
-        "205306": 6,
-        "208306": 7,
-        "303106": 8,
-        "305106": 9,
-        "403106": 10,
-        "405106": 11,
-        "103110": 13,
-        "110110": 15.5,
-        "303110": 20.5,
-        "305110": 23,
-        "403110": 27,
-        "405110": 30.5,
-        "103115": 33.5,
-        "110115": 34.5,
-        "303115": 35.5,
-        "305115": 36.5,
-        "403115": 37.5,
-        "405115": 38.5,
-        "103118": 40.5,
-        "110118": 41.5,
-        "303118": 42.5,
-        "305118": 43.5,
-        "403118": 44.5,
-        "405118": 45.5,
-        "101105": 51,
-        "110105": 52,
-        "303105": 53,
-        "305105": 54,
-        "103109": 58,
-        "110109": 59,
-        "303109": 60,
-        "305109": 61
+        "101106": 2.3,
+        "110106": 3.4,
+        "205106": 4.5,
+        "208106": 5.6,
+        "205206": 6.7,
+        "208206": 7.8,
+        "205306": 8.9,
+        "208306": 10.,
+        "303106": 11.1,
+        "305106": 12.2,
+        "403106": 13.3,
+        "405106": 14.4,
+        "103110": 16.4,
+        "110110": 18.9,
+        "303110": 23.9,
+        "305110": 26.4,
+        "403110": 31.7,
+        "405110": 34.2,
+        "103115": 36.9,
+        "110115": 37.9,
+        "303115": 38.9,
+        "305115": 39.9,
+        "403115": 40.9,
+        "405115": 41.9,
+        "103118": 44.2,
+        "110118": 45.2,
+        "303118": 46.2,
+        "305118": 47.2,
+        "403118": 48.2,
+        "405118": 49.2,
+        "101105": 54.7,
+        "110105": 55.7,
+        "303105": 56.7,
+        "305105": 57.7,
+        "103109": 61.7,
+        "110109": 62.7,
+        "303109": 63.7,
+        "305109": 64.7,
     }
     return switcher.get(input_code)
 
