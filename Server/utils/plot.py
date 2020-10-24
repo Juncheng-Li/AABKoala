@@ -9,8 +9,6 @@ from matplotlib.cbook import get_sample_data
 
 
 def NDS_3DCRT(series_data, series_name, mode):
-    print(series_data)
-    print(series_name)
     # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
     path = os.path.split(os.path.realpath(__file__))[0]
@@ -48,7 +46,6 @@ def NDS_3DCRT(series_data, series_name, mode):
             plot_series.append(plt.scatter(x, y, s=3.7, c=get_color(i), zorder=5))
 
     # set axis
-    print(x)
     xlabel_pos = np.unique(x)
     plt.xticks(xlabel_pos, ('6', '10', '15', '18', '6FFF', "10FFF",
                             "6", "10", "15", '18', '6FFF', '10FFF',
@@ -120,14 +117,13 @@ def NDS_3DCRT(series_data, series_name, mode):
 
 
 def NDS_IMRT(series_data, series_name, mode):
-    print(series_data)
-    print(series_name)
     # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
     path = os.path.split(os.path.realpath(__file__))[0]
 
     # plot
     plot_series = []
+    count = 0
     for i in range(0, len(series_data)):
         series = series_data[i]
         s_name = series_name[i]
@@ -137,6 +133,8 @@ def NDS_IMRT(series_data, series_name, mode):
             # flatten measurements in data into list y
             measurements = series[code]
             for measurement in measurements:
+                if measurement != None:
+                    count += 1
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
@@ -148,13 +146,21 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
+        print(y)
+        print(len(y))
         if s_name == "All":
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
         else:
             plot_series.append(plt.scatter(x, y, s=4, c=get_color(i), zorder=5))
 
-    # set axis
+    # x positions
     xlabel_pos = [8, 25, 42, 59, 76, 93]
+    # drw std with a different function
+    print(count)
+    if mode == "std":
+        return plot_std(plot_series, series_name, xlabel_pos, path)
+
+    # set axis
     plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=6)
     plt.xlim(0, 102)
     plt.yticks(fontsize=6)
@@ -330,3 +336,47 @@ def get_color(i):
         rgb = (random.random(), random.random(), random.random())
         return rgb
     return color_list[i]
+
+
+def plot_std(plot_series, series_name, xlabel_pos, path):
+    # set axis
+    plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=6)
+    plt.xlim(0, 102)
+    plt.yticks(fontsize=6)
+    plt.ylim(0, 0.04)
+
+    # set white margins
+    plt.subplots_adjust(bottom=0.13)
+
+    ax = plt.gca()
+    # configure plot boundaries
+    ax.spines["top"].set_edgecolor("white")
+    ax.spines["right"].set_edgecolor("white")
+    ax.tick_params(bottom=False)
+
+    # set title and sub title
+    ax.set_title('IMRT Results', y=1.1, horizontalalignment='center', pad=-4, size=10, fontweight='bold')
+    plt.suptitle("Standard Deviation of in-volume points", y=0.93, x=0.51, fontsize=8)
+
+    # add line
+    plt.axvline(x=17, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=34, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=51, c="black", linewidth=0.4)
+    plt.axvline(x=68, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=85, c="black", linewidth=0.3, linestyle="dashed")
+
+    # add energy text
+    plt.text(23, -0.119, "6X", fontsize=6, zorder=6)
+    plt.text(74, -0.119, "10X", fontsize=6, zorder=6)
+
+    # add legend
+    ax.legend(plot_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8,
+              frameon=False)
+
+    # save plot
+    ticks = time.time()
+    ticks = str(round(ticks * 1000))
+    plt.savefig(path + "/plGraphs/IMRT_std_" + ticks + ".png", dpi=300)
+    response = {"fileName": "IMRT_std_" + ticks + ".png",
+                "url": path + "/plGraphs/IMRT_std_" + ticks + ".png"}
+    return response
