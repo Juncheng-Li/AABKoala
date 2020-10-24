@@ -38,6 +38,3 @@ urlpatterns = [
     re_path(r"^graph/(?P<path>.*)/", serve, {"document_root": settings.MEDIA_ROOT}),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
-
-
-#https://www.youtube.com/watch?v=0MrgsYswT1c&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=2

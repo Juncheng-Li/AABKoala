@@ -229,7 +229,12 @@ class AccountTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         result = Result.objects.get(id=2)
         self.assertEqual(result.FacilityName, 'Drever')
+        self.assertEqual(result.facilityOutput.get().energy_6, 1)
+        self.assertEqual(result.TPR.get().energy_6, 1)
+        self.assertEqual(result.Nds_3dcrt.get().code_101106, decimal.Decimal('0.01000'))
+        self.assertEqual(result.Nds_3dcrt_misdelivery.get().code_101106, 0)
         self.assertEqual(result.Nds_imrt.get().code_c6_p11_6, decimal.Decimal('0.02600'))
+        self.assertEqual(result.Nds_imrt_misdelivery.get().code_c6_p11_6, 1)
 
     def test_list_result(self):
         client = APIClient()
@@ -270,14 +275,14 @@ class AccountTests(APITestCase):
             "ACDS": "3",
             "Phantom": "3",
             "facilityOutput": [
-                {"energy_6": 1, "energy_10": 1, "energy_15": 1, "energy_18": 1, "energy_6FFF": 1, "energy_10FFF": 1}
+                {"energy_6": 0, "energy_10": 1, "energy_15": 1, "energy_18": 1, "energy_6FFF": 1, "energy_10FFF": 1}
             ],
             "TPR": [
-                {"energy_6": 1, "energy_10": 1, "energy_15": 1, "energy_18": 1, "energy_6FFF": 1, "energy_10FFF": 1}
+                {"energy_6": 0, "energy_10": 1, "energy_15": 1, "energy_18": 1, "energy_6FFF": 1, "energy_10FFF": 1}
             ],
             "Nds_3dcrt": [
                 {
-                    "code_101106": 0.01, "code_110106": 0.01, "code_205106": 0.01, "code_208106": 0.01,
+                    "code_101106": 0.02, "code_110106": 0.01, "code_205106": 0.01, "code_208106": 0.01,
                     "code_205206": 0.01,
                     "code_208206": 0.01, "code_205306": 0.01, "code_208306": 0.01, "code_303106": 0.01,
                     "code_305106": 0.01,
@@ -295,7 +300,7 @@ class AccountTests(APITestCase):
             ],
             "Nds_3dcrt_misdelivery": [
                 {
-                    "code_101106": 0, "code_110106": 0, "code_205106": 0, "code_208106": 0, "code_205206": 0,
+                    "code_101106": 1, "code_110106": 0, "code_205106": 0, "code_208106": 0, "code_205206": 0,
                     "code_208206": 0, "code_205306": 1, "code_208306": 0, "code_303106": 0, "code_305106": 0,
                     "code_403106": 0, "code_405106": 0, "code_103110": 0, "code_110110": 0, "code_303110": 0,
                     "code_305110": 0, "code_403110": 0, "code_405110": 1, "code_103115": 1, "code_110115": 0,
@@ -328,7 +333,7 @@ class AccountTests(APITestCase):
             ],
             "Nds_imrt_misdelivery": [
                 {
-                    "code_c6_p11_6": 1, "code_c6_p12_6": 0, "code_c6_p13_6": 0, "code_c6_p14_6": 0, "code_c6_p15_6": 0,
+                    "code_c6_p11_6": 0, "code_c6_p12_6": 0, "code_c6_p13_6": 0, "code_c6_p14_6": 0, "code_c6_p15_6": 0,
                     "code_c6_p16_6": 0, "code_c6_p17_6": 0,
                     "code_c7_p11_6": 0, "code_c7_p12_6": 0, "code_c7_p13_6": 0, "code_c7_p14_6": 0, "code_c7_p15_6": 0,
                     "code_c7_p16_6": 0, "code_c7_p17_6": 0,
@@ -350,4 +355,17 @@ class AccountTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         result = Result.objects.get(id=1)
         self.assertEqual(result.FacilityName, 'ABCDEFG')
+        self.assertEqual(result.facilityOutput.get().energy_6, 0)
+        self.assertEqual(result.TPR.get().energy_6, 0)
+        self.assertEqual(result.Nds_3dcrt.get().code_101106, decimal.Decimal('0.02000'))
+        self.assertEqual(result.Nds_3dcrt_misdelivery.get().code_101106, 1)
         self.assertEqual(result.Nds_imrt.get().code_c6_p11_6, decimal.Decimal('0.06600'))
+        self.assertEqual(result.Nds_imrt_misdelivery.get().code_c6_p11_6, 0)
+
+    def test_destroy_result(self):
+        client = APIClient()
+        client.login(username='root', password='root')
+        url = '/graphs/results/1/'
+        response = client.delete(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Result.objects.count(), 0)
