@@ -9,6 +9,8 @@ from matplotlib.cbook import get_sample_data
 
 
 def NDS_3DCRT(series_data, series_name, mode):
+    print(series_data)
+    print(series_name)
     # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
     path = os.path.split(os.path.realpath(__file__))[0]
@@ -46,6 +48,7 @@ def NDS_3DCRT(series_data, series_name, mode):
             plot_series.append(plt.scatter(x, y, s=3.7, c=get_color(i), zorder=5))
 
     # set axis
+    print(x)
     xlabel_pos = np.unique(x)
     plt.xticks(xlabel_pos, ('6', '10', '15', '18', '6FFF', "10FFF",
                             "6", "10", "15", '18', '6FFF', '10FFF',
@@ -117,6 +120,8 @@ def NDS_3DCRT(series_data, series_name, mode):
 
 
 def NDS_IMRT(series_data, series_name, mode):
+    print(series_data)
+    print(series_name)
     # allow matplotlib to plot at background
     matplotlib.pyplot.switch_backend('Agg')
     path = os.path.split(os.path.realpath(__file__))[0]
@@ -160,12 +165,8 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # add green/grey background
     ax = plt.gca()
-    if mode == "all":
-        ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
-        ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
-    else:
-        ax.axhspan(-0.03, 0.03, facecolor="#BABAAB", alpha=1, zorder=2)
-        ax.axhspan(-0.05, 0.05, facecolor="#E8E8E3", alpha=1, zorder=1)
+    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+    ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
 
     # configure plot boundaries
     ax.spines["top"].set_edgecolor("white")
@@ -209,92 +210,92 @@ def NDS_IMRT(series_data, series_name, mode):
 
 def code_to_x_3dcrt(input_code):
     switcher = {
-        "101106": 2.3,
-        "110106": 3.4,
-        "205106": 4.5,
-        "208106": 5.6,
-        "205206": 6.7,
-        "208206": 7.8,
-        "205306": 8.9,
-        "208306": 10.,
-        "303106": 11.1,
-        "305106": 12.2,
-        "403106": 13.3,
-        "405106": 14.4,
-        "103110": 16.4,
-        "110110": 18.9,
-        "303110": 23.9,
-        "305110": 26.4,
-        "403110": 31.7,
-        "405110": 34.2,
-        "103115": 36.9,
-        "110115": 37.9,
-        "303115": 38.9,
-        "305115": 39.9,
-        "403115": 40.9,
-        "405115": 41.9,
-        "103118": 44.2,
-        "110118": 45.2,
-        "303118": 46.2,
-        "305118": 47.2,
-        "403118": 48.2,
-        "405118": 49.2,
-        "101105": 54.7,
-        "110105": 55.7,
-        "303105": 56.7,
-        "305105": 57.7,
-        "103109": 61.7,
-        "110109": 62.7,
-        "303109": 63.7,
-        "305109": 64.7,
+        "code_101106": 2.3,
+        "code_110106": 3.4,
+        "code_205106": 4.5,
+        "code_208106": 5.6,
+        "code_205206": 6.7,
+        "code_208206": 7.8,
+        "code_205306": 8.9,
+        "code_208306": 10.,
+        "code_303106": 11.1,
+        "code_305106": 12.2,
+        "code_403106": 13.3,
+        "code_405106": 14.4,
+        "code_103110": 16.4,
+        "code_110110": 18.9,
+        "code_303110": 23.9,
+        "code_305110": 26.4,
+        "code_403110": 31.7,
+        "code_405110": 34.2,
+        "code_103115": 36.9,
+        "code_110115": 37.9,
+        "code_303115": 38.9,
+        "code_305115": 39.9,
+        "code_403115": 40.9,
+        "code_405115": 41.9,
+        "code_103118": 44.2,
+        "code_110118": 45.2,
+        "code_303118": 46.2,
+        "code_305118": 47.2,
+        "code_403118": 48.2,
+        "code_405118": 49.2,
+        "code_101105": 54.7,
+        "code_110105": 55.7,
+        "code_303105": 56.7,
+        "code_305105": 57.7,
+        "code_103109": 61.7,
+        "code_110109": 62.7,
+        "code_303109": 63.7,
+        "code_305109": 64.7,
     }
     return switcher.get(input_code)
 
 
 def code_to_x_imrt(input_code):
     switcher = {
-        "c6_p11_6": 1,
-        "c6_p12_6": 2,
-        "c6_p13_6": 3,
-        "c6_p14_6": None,
-        "c6_p15_6": 5,
-        "c6_p16_6": 6,
-        "c6_p17_6": 7,
-        "c7_p11_6": 18,
-        "c7_p12_6": 19,
-        "c7_p13_6": 20,
-        "c7_p14_6": None,
-        "c7_p15_6": 22,
-        "c7_p16_6": 23,
-        "c7_p17_6": 24,
-        "c8_p11_6": 35,
-        "c8_p12_6": 36,
-        "c8_p13_6": 37,
-        "c8_p14_6": None,
-        "c8_p15_6": 39,
-        "c8_p17_6": 40,
-        "c8_p18_6": 41,
-        "c6_p11_10": 52,
-        "c6_p12_10": 53,
-        "c6_p13_10": 54,
-        "c6_p14_10": None,
-        "c6_p15_10": 56,
-        "c6_p16_10": 57,
-        "c6_p17_10": 58,
-        "c7_p11_10": 69,
-        "c7_p12_10": 70,
-        "c7_p13_10": 71,
-        "c7_p14_10": None,
-        "c7_p15_10": 73,
-        "c7_p16_10": 74,
-        "c7_p17_10": 75,
-        "c8_p11_10": 86,
-        "c8_p12_10": 87,
-        "c8_p13_10": 88,
-        "c8_p14_10": None,
-        "c8_p15_10": 90,
-        "c8_p17_10": 91,
-        "c8_p18_10": 92,
+        "code_c6_p11_6": 1,
+        "code_c6_p12_6": 2,
+        "code_c6_p13_6": 3,
+        "code_c6_p14_6": None,
+        "code_c6_p15_6": 5,
+        "code_c6_p16_6": 6,
+        "code_c6_p17_6": 7,
+        "code_c7_p11_6": 18,
+        "code_c7_p12_6": 19,
+        "code_c7_p13_6": 20,
+        "code_c7_p14_6": None,
+        "code_c7_p15_6": 22,
+        "code_c7_p16_6": 23,
+        "code_c7_p17_6": 24,
+        "code_c8_p11_6": 35,
+        "code_c8_p12_6": 36,
+        "code_c8_p13_6": 37,
+        "code_c8_p14_6": None,
+        "code_c8_p15_6": 39,
+        "code_c8_p17_6": 40,
+        "code_c8_p18_6": 41,
+        "code_c6_p11_10": 52,
+        "code_c6_p12_10": 53,
+        "code_c6_p13_10": 54,
+        "code_c6_p14_10": None,
+        "code_c6_p15_10": 56,
+        "code_c6_p16_10": 57,
+        "code_c6_p17_10": 58,
+        "code_c7_p11_10": 69,
+        "code_c7_p12_10": 70,
+        "code_c7_p13_10": 71,
+        "code_c7_p14_10": None,
+        "code_c7_p15_10": 73,
+        "code_c7_p16_10": 74,
+        "code_c7_p17_10": 75,
+        "code_c8_p11_10": 86,
+        "code_c8_p12_10": 87,
+        "code_c8_p13_10": 88,
+        "code_c8_p14_10": None,
+        "code_c8_p15_10": 90,
+        "code_c8_p17_10": 91,
+        "code_c8_p18_10": 92,
     }
     return switcher.get(input_code)
 
@@ -313,12 +314,12 @@ def avg_to_x(input_code):
 
 def std_to_x(input_code):
     switcher = {
-        "average1": 4,
-        "average2": 21,
-        "average3": 38,
-        "average4": 55,
-        "average5": 72,
-        "average6": 89,
+        "std1": 4,
+        "std2": 21,
+        "std3": 38,
+        "std4": 55,
+        "std5": 72,
+        "std6": 89,
     }
     return switcher.get(input_code)
 

@@ -130,7 +130,7 @@ def averageCalculation(data_list):
         avgdata_format = {
             "average1": [], "average2": [], "average3": [], "average4": [], "average5": [], "average6": []
         }
-        formatsize = len(data["c6_p11_6"])
+        formatsize = len(data["code_c6_p11_6"])
 
         for i in range(formatsize):
             # average1 = np.mean(c6_p11_6, c6_p12_6, c6_p13_6, c6_p15_6, c6_p16_6,c6_p17_6)
