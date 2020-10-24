@@ -22,6 +22,7 @@ dfTest.py
 /Server/apps/graphs/__pycache__/
 /Server/apps/graphs/migrations/__pycache__/
 /Server/apps/graphs/Services/__pycache__/
+/Server/apps/graphs/tests/__pycache__/
 /Server/utils/__pycache__/
 /Server/__pycache__/
 /Server/*/__pycache__/
