@@ -46,12 +46,12 @@ def NDS_3DCRT(series_data, series_name, mode):
             for k in range(0, length):
                 x.append(code_to_x_3dcrt(code))
         # scatter plot
-        if s_name == "all":
+        if s_name == "All":
             # plot "All data" data points in black
-            plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+            plot_series.append(plt.scatter(x, y, s=3.7, c="#454545", zorder=5))
         else:
             # plot other facility data points in random colors
-            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=3.7, c=get_color(i), zorder=5))
 
     # set axis
     xlabel_pos = np.unique(x)
@@ -151,8 +151,6 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
-        print(s_name)
-        print(i)
         if s_name == "All":
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
         else:
