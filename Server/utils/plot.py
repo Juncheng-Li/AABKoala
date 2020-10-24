@@ -1,10 +1,11 @@
-import matplotlib.pyplot as plt
-import matplotlib
-import numpy as np
-import pandas as pd
-from matplotlib.cbook import get_sample_data
 import os
+import random
 import time
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.cbook import get_sample_data
 
 
 def NDS_3DCRT(series_data, series_name, mode):
@@ -16,15 +17,7 @@ def NDS_3DCRT(series_data, series_name, mode):
     image3Path = path + '/images/case3.png'
     image4Path = path + '/images/case4.png'
     RNS_path = path + '/images/RNS.png'
-    Series_names = []
 
-    if mode == "all":
-        Series_names.append("All Data")
-        for name in series_name:
-            Series_names.append(name)
-    else:
-        for name in series_name:
-            Series_names.append(name)
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
@@ -42,15 +35,15 @@ def NDS_3DCRT(series_data, series_name, mode):
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
-            for i in range(0, length):
+            for k in range(0, length):
                 x.append(code_to_x_3dcrt(code))
         # scatter plot
-        if s_name == "all":
+        if s_name == "All":
             # plot "All data" data points in black
-            plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+            plot_series.append(plt.scatter(x, y, s=3.7, c="#454545", zorder=5))
         else:
             # plot other facility data points in random colors
-            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=3.7, c=get_color(i), zorder=5))
 
     # set axis
     xlabel_pos = np.unique(x)
@@ -61,7 +54,7 @@ def NDS_3DCRT(series_data, series_name, mode):
                             "6", "10", "15", '18', '6FFF', '10FFF',
                             '6', '10', "15", "18",
                             "6", "10", "15", "18"), rotation=90, fontsize=7)
-    plt.xlim(-1, 65)
+    plt.xlim(0, 67.9)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
     plt.title("3DCRT Results", fontsize=7, fontweight="bold")
@@ -75,15 +68,15 @@ def NDS_3DCRT(series_data, series_name, mode):
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
-    plt.legend(plot_series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
+    plt.legend(plot_series, series_name, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
 
     # add split lines
-    plt.axvline(x=12, c="black", linewidth=0.4)
-    plt.axvline(x=32, c="black", linewidth=0.4)
-    plt.axvline(x=47, c="black", linewidth=0.4)
-    plt.axvline(x=5.5, c="black", linewidth=0.3, linestyle="dashed")
-    plt.axvline(x=39.5, c="black", linewidth=0.3, linestyle="dashed")
-    plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=15.4, c="black", linewidth=0.4)
+    plt.axvline(x=35.7, c="black", linewidth=0.4)
+    plt.axvline(x=51.95, c="black", linewidth=0.4)
+    plt.axvline(x=8.35, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=43.05, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=59.7, c="black", linewidth=0.3, linestyle="dashed")
     plt.axhline(y=0, c="black", linewidth=0.4)
 
     # add case images
@@ -132,7 +125,7 @@ def NDS_IMRT(series_data, series_name, mode):
     plot_series = []
     for i in range(0, len(series_data)):
         series = series_data[i]
-        s_name = series_data[i]
+        s_name = series_name[i]
         x = []
         y = []
         for code in series:
@@ -142,7 +135,7 @@ def NDS_IMRT(series_data, series_name, mode):
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
-            for i in range(0, length):
+            for k in range(0, length):
                 if mode == "all":
                     x.append(code_to_x_imrt(code))
                 elif mode == "average":
@@ -150,10 +143,10 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
-        if s_name == "all":
+        if s_name == "All":
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
         else:
-            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=4, c=get_color(i), zorder=5))
 
     # set axis
     xlabel_pos = [8, 25, 42, 59, 76, 93]
@@ -165,10 +158,14 @@ def NDS_IMRT(series_data, series_name, mode):
     # set white margins
     plt.subplots_adjust(bottom=0.13)
 
-    # add green background
+    # add green/grey background
     ax = plt.gca()
-    ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
-    ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    if mode == "all":
+        ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
+        ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
+    else:
+        ax.axhspan(-0.03, 0.03, facecolor="#BABAAB", alpha=1, zorder=2)
+        ax.axhspan(-0.05, 0.05, facecolor="#E8E8E3", alpha=1, zorder=1)
 
     # configure plot boundaries
     ax.spines["top"].set_edgecolor("white")
@@ -199,56 +196,57 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # add legend
     ax.legend(plot_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8,
-               frameon=False)
+              frameon=False)
 
     # save plot
     ticks = time.time()
     ticks = str(round(ticks * 1000))
     plt.savefig(path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png", dpi=300)
-    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png", "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
+    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png",
+                "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
     return response
 
 
 def code_to_x_3dcrt(input_code):
     switcher = {
-        "101106": 0,
-        "110106": 1,
-        "205106": 2,
-        "208106": 3,
-        "205206": 4,
-        "208206": 5,
-        "205306": 6,
-        "208306": 7,
-        "303106": 8,
-        "305106": 9,
-        "403106": 10,
-        "405106": 11,
-        "103110": 13,
-        "110110": 15.5,
-        "303110": 20.5,
-        "305110": 23,
-        "403110": 27,
-        "405110": 30.5,
-        "103115": 33.5,
-        "110115": 34.5,
-        "303115": 35.5,
-        "305115": 36.5,
-        "403115": 37.5,
-        "405115": 38.5,
-        "103118": 40.5,
-        "110118": 41.5,
-        "303118": 42.5,
-        "305118": 43.5,
-        "403118": 44.5,
-        "405118": 45.5,
-        "101105": 51,
-        "110105": 52,
-        "303105": 53,
-        "305105": 54,
-        "103109": 58,
-        "110109": 59,
-        "303109": 60,
-        "305109": 61
+        "101106": 2.3,
+        "110106": 3.4,
+        "205106": 4.5,
+        "208106": 5.6,
+        "205206": 6.7,
+        "208206": 7.8,
+        "205306": 8.9,
+        "208306": 10.,
+        "303106": 11.1,
+        "305106": 12.2,
+        "403106": 13.3,
+        "405106": 14.4,
+        "103110": 16.4,
+        "110110": 18.9,
+        "303110": 23.9,
+        "305110": 26.4,
+        "403110": 31.7,
+        "405110": 34.2,
+        "103115": 36.9,
+        "110115": 37.9,
+        "303115": 38.9,
+        "305115": 39.9,
+        "403115": 40.9,
+        "405115": 41.9,
+        "103118": 44.2,
+        "110118": 45.2,
+        "303118": 46.2,
+        "305118": 47.2,
+        "403118": 48.2,
+        "405118": 49.2,
+        "101105": 54.7,
+        "110105": 55.7,
+        "303105": 56.7,
+        "305105": 57.7,
+        "103109": 61.7,
+        "110109": 62.7,
+        "303109": 63.7,
+        "305109": 64.7,
     }
     return switcher.get(input_code)
 
@@ -323,3 +321,11 @@ def std_to_x(input_code):
         "average6": 89,
     }
     return switcher.get(input_code)
+
+
+def get_color(i):
+    color_list = ["#454545", "#FF2A00", "#FFD500", "#00CCAA", "#CC8800", "#9933FF", "#0066CC"]
+    if i > len(color_list):
+        rgb = (random.random(), random.random(), random.random())
+        return rgb
+    return color_list[i]
