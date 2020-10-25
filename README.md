@@ -18,4 +18,5 @@ Additionally, an local program is developed as a substitution of front-end to al
 * Database
 * Backend
 * Local Program
-* Deployment guide
+* [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
+
