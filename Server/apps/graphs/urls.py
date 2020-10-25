@@ -14,7 +14,7 @@ router.register(r'results', views.ResultViewSet, basename='results')
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
-    path('graphManage/', GraphViewSet.as_view()),
-    path('resultsList/', ResultListViewSet.as_view()),
+    path('graphManage/', GraphViewSet.as_view(), name='graph_manage'),
+    path('resultsList/', ResultListViewSet.as_view(), name='results_list'),
 
 ]

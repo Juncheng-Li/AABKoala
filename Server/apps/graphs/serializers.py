@@ -320,136 +320,136 @@ class ResultSerializer(serializers.ModelSerializer):
         for Nds_imrt_data in Nds_imrts_data:
             Nds_imrt = Nds_imrts.pop(0)
             Nds_imrt.updated = datetime.datetime.now()
-            Nds_imrt.code_c6_p11_6 = Nds_imrt_data.get(' code_c6_p11_6 ', Nds_imrt.code_c6_p11_6)
-            Nds_imrt.code_c6_p12_6 = Nds_imrt_data.get(' code_c6_p12_6 ', Nds_imrt.code_c6_p12_6)
-            Nds_imrt.code_c6_p13_6 = Nds_imrt_data.get(' code_c6_p13_6 ', Nds_imrt.code_c6_p13_6)
-            Nds_imrt.code_c6_p14_6 = Nds_imrt_data.get(' code_c6_p14_6 ', Nds_imrt.code_c6_p14_6)
-            Nds_imrt.code_c6_p15_6 = Nds_imrt_data.get(' code_c6_p15_6 ', Nds_imrt.code_c6_p15_6)
-            Nds_imrt.code_c6_p16_6 = Nds_imrt_data.get(' code_c6_p16_6 ', Nds_imrt.code_c6_p16_6)
-            Nds_imrt.code_c6_p17_6 = Nds_imrt_data.get(' code_c6_p17_6 ', Nds_imrt.code_c6_p17_6)
-            Nds_imrt.code_c7_p11_6 = Nds_imrt_data.get(' code_c7_p11_6 ', Nds_imrt.code_c7_p11_6)
-            Nds_imrt.code_c7_p12_6 = Nds_imrt_data.get(' code_c7_p12_6 ', Nds_imrt.code_c7_p12_6)
-            Nds_imrt.code_c7_p13_6 = Nds_imrt_data.get(' code_c7_p13_6 ', Nds_imrt.code_c7_p13_6)
-            Nds_imrt.code_c7_p14_6 = Nds_imrt_data.get(' code_c7_p14_6 ', Nds_imrt.code_c7_p14_6)
-            Nds_imrt.code_c7_p15_6 = Nds_imrt_data.get(' code_c7_p15_6 ', Nds_imrt.code_c7_p15_6)
-            Nds_imrt.code_c7_p16_6 = Nds_imrt_data.get(' code_c7_p16_6 ', Nds_imrt.code_c7_p16_6)
-            Nds_imrt.code_c7_p17_6 = Nds_imrt_data.get(' code_c7_p17_6 ', Nds_imrt.code_c7_p17_6)
-            Nds_imrt.code_c8_p11_6 = Nds_imrt_data.get(' code_c8_p11_6 ', Nds_imrt.code_c8_p11_6)
-            Nds_imrt.code_c8_p12_6 = Nds_imrt_data.get(' code_c8_p12_6 ', Nds_imrt.code_c8_p12_6)
-            Nds_imrt.code_c8_p13_6 = Nds_imrt_data.get(' code_c8_p13_6 ', Nds_imrt.code_c8_p13_6)
-            Nds_imrt.code_c8_p14_6 = Nds_imrt_data.get(' code_c8_p14_6 ', Nds_imrt.code_c8_p14_6)
-            Nds_imrt.code_c8_p15_6 = Nds_imrt_data.get(' code_c8_p15_6 ', Nds_imrt.code_c8_p15_6)
-            Nds_imrt.code_c8_p17_6 = Nds_imrt_data.get(' code_c8_p17_6 ', Nds_imrt.code_c8_p17_6)
-            Nds_imrt.code_c8_p18_6 = Nds_imrt_data.get(' code_c8_p18_6 ', Nds_imrt.code_c8_p18_6)
-            Nds_imrt.code_c6_p11_10 = Nds_imrt_data.get(' code_c6_p11_10 ', Nds_imrt.code_c6_p11_10)
-            Nds_imrt.code_c6_p12_10 = Nds_imrt_data.get(' code_c6_p12_10 ', Nds_imrt.code_c6_p12_10)
-            Nds_imrt.code_c6_p13_10 = Nds_imrt_data.get(' code_c6_p13_10 ', Nds_imrt.code_c6_p13_10)
-            Nds_imrt.code_c6_p14_10 = Nds_imrt_data.get(' code_c6_p14_10 ', Nds_imrt.code_c6_p14_10)
-            Nds_imrt.code_c6_p15_10 = Nds_imrt_data.get(' code_c6_p15_10 ', Nds_imrt.code_c6_p15_10)
-            Nds_imrt.code_c6_p16_10 = Nds_imrt_data.get(' code_c6_p16_10 ', Nds_imrt.code_c6_p16_10)
-            Nds_imrt.code_c6_p17_10 = Nds_imrt_data.get(' code_c6_p17_10 ', Nds_imrt.code_c6_p17_10)
-            Nds_imrt.code_c7_p11_10 = Nds_imrt_data.get(' code_c7_p11_10 ', Nds_imrt.code_c7_p11_10)
-            Nds_imrt.code_c7_p12_10 = Nds_imrt_data.get(' code_c7_p12_10 ', Nds_imrt.code_c7_p12_10)
-            Nds_imrt.code_c7_p13_10 = Nds_imrt_data.get(' code_c7_p13_10 ', Nds_imrt.code_c7_p13_10)
-            Nds_imrt.code_c7_p14_10 = Nds_imrt_data.get(' code_c7_p14_10 ', Nds_imrt.code_c7_p14_10)
-            Nds_imrt.code_c7_p15_10 = Nds_imrt_data.get(' code_c7_p15_10 ', Nds_imrt.code_c7_p15_10)
-            Nds_imrt.code_c7_p16_10 = Nds_imrt_data.get(' code_c7_p16_10 ', Nds_imrt.code_c7_p16_10)
-            Nds_imrt.code_c7_p17_10 = Nds_imrt_data.get(' code_c7_p17_10 ', Nds_imrt.code_c7_p17_10)
-            Nds_imrt.code_c8_p11_10 = Nds_imrt_data.get(' code_c8_p11_10 ', Nds_imrt.code_c8_p11_10)
-            Nds_imrt.code_c8_p12_10 = Nds_imrt_data.get(' code_c8_p12_10 ', Nds_imrt.code_c8_p12_10)
-            Nds_imrt.code_c8_p13_10 = Nds_imrt_data.get(' code_c8_p13_10 ', Nds_imrt.code_c8_p13_10)
-            Nds_imrt.code_c8_p14_10 = Nds_imrt_data.get(' code_c8_p14_10 ', Nds_imrt.code_c8_p14_10)
-            Nds_imrt.code_c8_p15_10 = Nds_imrt_data.get(' code_c8_p15_10 ', Nds_imrt.code_c8_p15_10)
-            Nds_imrt.code_c8_p17_10 = Nds_imrt_data.get(' code_c8_p17_10 ', Nds_imrt.code_c8_p17_10)
-            Nds_imrt.code_c8_p18_10 = Nds_imrt_data.get(' code_c8_p18_10 ', Nds_imrt.code_c8_p18_10)
+            Nds_imrt.code_c6_p11_6 = Nds_imrt_data.get('code_c6_p11_6', Nds_imrt.code_c6_p11_6)
+            Nds_imrt.code_c6_p12_6 = Nds_imrt_data.get('code_c6_p12_6', Nds_imrt.code_c6_p12_6)
+            Nds_imrt.code_c6_p13_6 = Nds_imrt_data.get('code_c6_p13_6', Nds_imrt.code_c6_p13_6)
+            Nds_imrt.code_c6_p14_6 = Nds_imrt_data.get('code_c6_p14_6', Nds_imrt.code_c6_p14_6)
+            Nds_imrt.code_c6_p15_6 = Nds_imrt_data.get('code_c6_p15_6', Nds_imrt.code_c6_p15_6)
+            Nds_imrt.code_c6_p16_6 = Nds_imrt_data.get('code_c6_p16_6', Nds_imrt.code_c6_p16_6)
+            Nds_imrt.code_c6_p17_6 = Nds_imrt_data.get('code_c6_p17_6', Nds_imrt.code_c6_p17_6)
+            Nds_imrt.code_c7_p11_6 = Nds_imrt_data.get('code_c7_p11_6', Nds_imrt.code_c7_p11_6)
+            Nds_imrt.code_c7_p12_6 = Nds_imrt_data.get('code_c7_p12_6', Nds_imrt.code_c7_p12_6)
+            Nds_imrt.code_c7_p13_6 = Nds_imrt_data.get('code_c7_p13_6', Nds_imrt.code_c7_p13_6)
+            Nds_imrt.code_c7_p14_6 = Nds_imrt_data.get('code_c7_p14_6', Nds_imrt.code_c7_p14_6)
+            Nds_imrt.code_c7_p15_6 = Nds_imrt_data.get('code_c7_p15_6', Nds_imrt.code_c7_p15_6)
+            Nds_imrt.code_c7_p16_6 = Nds_imrt_data.get('code_c7_p16_6', Nds_imrt.code_c7_p16_6)
+            Nds_imrt.code_c7_p17_6 = Nds_imrt_data.get('code_c7_p17_6', Nds_imrt.code_c7_p17_6)
+            Nds_imrt.code_c8_p11_6 = Nds_imrt_data.get('code_c8_p11_6', Nds_imrt.code_c8_p11_6)
+            Nds_imrt.code_c8_p12_6 = Nds_imrt_data.get('code_c8_p12_6', Nds_imrt.code_c8_p12_6)
+            Nds_imrt.code_c8_p13_6 = Nds_imrt_data.get('code_c8_p13_6', Nds_imrt.code_c8_p13_6)
+            Nds_imrt.code_c8_p14_6 = Nds_imrt_data.get('code_c8_p14_6', Nds_imrt.code_c8_p14_6)
+            Nds_imrt.code_c8_p15_6 = Nds_imrt_data.get('code_c8_p15_6', Nds_imrt.code_c8_p15_6)
+            Nds_imrt.code_c8_p17_6 = Nds_imrt_data.get('code_c8_p17_6', Nds_imrt.code_c8_p17_6)
+            Nds_imrt.code_c8_p18_6 = Nds_imrt_data.get('code_c8_p18_6', Nds_imrt.code_c8_p18_6)
+            Nds_imrt.code_c6_p11_10 = Nds_imrt_data.get('code_c6_p11_10', Nds_imrt.code_c6_p11_10)
+            Nds_imrt.code_c6_p12_10 = Nds_imrt_data.get('code_c6_p12_10', Nds_imrt.code_c6_p12_10)
+            Nds_imrt.code_c6_p13_10 = Nds_imrt_data.get('code_c6_p13_10', Nds_imrt.code_c6_p13_10)
+            Nds_imrt.code_c6_p14_10 = Nds_imrt_data.get('code_c6_p14_10', Nds_imrt.code_c6_p14_10)
+            Nds_imrt.code_c6_p15_10 = Nds_imrt_data.get('code_c6_p15_10', Nds_imrt.code_c6_p15_10)
+            Nds_imrt.code_c6_p16_10 = Nds_imrt_data.get('code_c6_p16_10', Nds_imrt.code_c6_p16_10)
+            Nds_imrt.code_c6_p17_10 = Nds_imrt_data.get('code_c6_p17_10', Nds_imrt.code_c6_p17_10)
+            Nds_imrt.code_c7_p11_10 = Nds_imrt_data.get('code_c7_p11_10', Nds_imrt.code_c7_p11_10)
+            Nds_imrt.code_c7_p12_10 = Nds_imrt_data.get('code_c7_p12_10', Nds_imrt.code_c7_p12_10)
+            Nds_imrt.code_c7_p13_10 = Nds_imrt_data.get('code_c7_p13_10', Nds_imrt.code_c7_p13_10)
+            Nds_imrt.code_c7_p14_10 = Nds_imrt_data.get('code_c7_p14_10', Nds_imrt.code_c7_p14_10)
+            Nds_imrt.code_c7_p15_10 = Nds_imrt_data.get('code_c7_p15_10', Nds_imrt.code_c7_p15_10)
+            Nds_imrt.code_c7_p16_10 = Nds_imrt_data.get('code_c7_p16_10', Nds_imrt.code_c7_p16_10)
+            Nds_imrt.code_c7_p17_10 = Nds_imrt_data.get('code_c7_p17_10', Nds_imrt.code_c7_p17_10)
+            Nds_imrt.code_c8_p11_10 = Nds_imrt_data.get('code_c8_p11_10', Nds_imrt.code_c8_p11_10)
+            Nds_imrt.code_c8_p12_10 = Nds_imrt_data.get('code_c8_p12_10', Nds_imrt.code_c8_p12_10)
+            Nds_imrt.code_c8_p13_10 = Nds_imrt_data.get('code_c8_p13_10', Nds_imrt.code_c8_p13_10)
+            Nds_imrt.code_c8_p14_10 = Nds_imrt_data.get('code_c8_p14_10', Nds_imrt.code_c8_p14_10)
+            Nds_imrt.code_c8_p15_10 = Nds_imrt_data.get('code_c8_p15_10', Nds_imrt.code_c8_p15_10)
+            Nds_imrt.code_c8_p17_10 = Nds_imrt_data.get('code_c8_p17_10', Nds_imrt.code_c8_p17_10)
+            Nds_imrt.code_c8_p18_10 = Nds_imrt_data.get('code_c8_p18_10', Nds_imrt.code_c8_p18_10)
             Nds_imrt.save()
 
         for Nds_imrt_misdelivery_data in Nds_imrt_misdeliveries_data:
             Nds_imrt_misdelivery = Nds_imrt_misdeliveries.pop(0)
             Nds_imrt_misdelivery.updated = datetime.datetime.now()
-            Nds_imrt_misdelivery.code_c6_p11_6 = Nds_imrt_misdelivery_data.get(' code_c6_p11_6 ',
+            Nds_imrt_misdelivery.code_c6_p11_6 = Nds_imrt_misdelivery_data.get('code_c6_p11_6',
                                                                                Nds_imrt_misdelivery.code_c6_p11_6)
-            Nds_imrt_misdelivery.code_c6_p12_6 = Nds_imrt_misdelivery_data.get(' code_c6_p12_6 ',
+            Nds_imrt_misdelivery.code_c6_p12_6 = Nds_imrt_misdelivery_data.get('code_c6_p12_6',
                                                                                Nds_imrt_misdelivery.code_c6_p12_6)
-            Nds_imrt_misdelivery.code_c6_p13_6 = Nds_imrt_misdelivery_data.get(' code_c6_p13_6 ',
+            Nds_imrt_misdelivery.code_c6_p13_6 = Nds_imrt_misdelivery_data.get('code_c6_p13_6',
                                                                                Nds_imrt_misdelivery.code_c6_p13_6)
-            Nds_imrt_misdelivery.code_c6_p14_6 = Nds_imrt_misdelivery_data.get(' code_c6_p14_6 ',
+            Nds_imrt_misdelivery.code_c6_p14_6 = Nds_imrt_misdelivery_data.get('code_c6_p14_6',
                                                                                Nds_imrt_misdelivery.code_c6_p14_6)
-            Nds_imrt_misdelivery.code_c6_p15_6 = Nds_imrt_misdelivery_data.get(' code_c6_p15_6 ',
+            Nds_imrt_misdelivery.code_c6_p15_6 = Nds_imrt_misdelivery_data.get('code_c6_p15_6',
                                                                                Nds_imrt_misdelivery.code_c6_p15_6)
-            Nds_imrt_misdelivery.code_c6_p16_6 = Nds_imrt_misdelivery_data.get(' code_c6_p16_6 ',
+            Nds_imrt_misdelivery.code_c6_p16_6 = Nds_imrt_misdelivery_data.get('code_c6_p16_6',
                                                                                Nds_imrt_misdelivery.code_c6_p16_6)
-            Nds_imrt_misdelivery.code_c6_p17_6 = Nds_imrt_misdelivery_data.get(' code_c6_p17_6 ',
+            Nds_imrt_misdelivery.code_c6_p17_6 = Nds_imrt_misdelivery_data.get('code_c6_p17_6',
                                                                                Nds_imrt_misdelivery.code_c6_p17_6)
-            Nds_imrt_misdelivery.code_c7_p11_6 = Nds_imrt_misdelivery_data.get(' code_c7_p11_6 ',
+            Nds_imrt_misdelivery.code_c7_p11_6 = Nds_imrt_misdelivery_data.get('code_c7_p11_6',
                                                                                Nds_imrt_misdelivery.code_c7_p11_6)
-            Nds_imrt_misdelivery.code_c7_p12_6 = Nds_imrt_misdelivery_data.get(' code_c7_p12_6 ',
+            Nds_imrt_misdelivery.code_c7_p12_6 = Nds_imrt_misdelivery_data.get('code_c7_p12_6',
                                                                                Nds_imrt_misdelivery.code_c7_p12_6)
-            Nds_imrt_misdelivery.code_c7_p13_6 = Nds_imrt_misdelivery_data.get(' code_c7_p13_6 ',
+            Nds_imrt_misdelivery.code_c7_p13_6 = Nds_imrt_misdelivery_data.get('code_c7_p13_6',
                                                                                Nds_imrt_misdelivery.code_c7_p13_6)
-            Nds_imrt_misdelivery.code_c7_p14_6 = Nds_imrt_misdelivery_data.get(' code_c7_p14_6 ',
+            Nds_imrt_misdelivery.code_c7_p14_6 = Nds_imrt_misdelivery_data.get('code_c7_p14_6',
                                                                                Nds_imrt_misdelivery.code_c7_p14_6)
-            Nds_imrt_misdelivery.code_c7_p15_6 = Nds_imrt_misdelivery_data.get(' code_c7_p15_6 ',
+            Nds_imrt_misdelivery.code_c7_p15_6 = Nds_imrt_misdelivery_data.get('code_c7_p15_6',
                                                                                Nds_imrt_misdelivery.code_c7_p15_6)
-            Nds_imrt_misdelivery.code_c7_p16_6 = Nds_imrt_misdelivery_data.get(' code_c7_p16_6 ',
+            Nds_imrt_misdelivery.code_c7_p16_6 = Nds_imrt_misdelivery_data.get('code_c7_p16_6',
                                                                                Nds_imrt_misdelivery.code_c7_p16_6)
-            Nds_imrt_misdelivery.code_c7_p17_6 = Nds_imrt_misdelivery_data.get(' code_c7_p17_6 ',
+            Nds_imrt_misdelivery.code_c7_p17_6 = Nds_imrt_misdelivery_data.get('code_c7_p17_6',
                                                                                Nds_imrt_misdelivery.code_c7_p17_6)
-            Nds_imrt_misdelivery.code_c8_p11_6 = Nds_imrt_misdelivery_data.get(' code_c8_p11_6 ',
+            Nds_imrt_misdelivery.code_c8_p11_6 = Nds_imrt_misdelivery_data.get('code_c8_p11_6',
                                                                                Nds_imrt_misdelivery.code_c8_p11_6)
-            Nds_imrt_misdelivery.code_c8_p12_6 = Nds_imrt_misdelivery_data.get(' code_c8_p12_6 ',
+            Nds_imrt_misdelivery.code_c8_p12_6 = Nds_imrt_misdelivery_data.get('code_c8_p12_6',
                                                                                Nds_imrt_misdelivery.code_c8_p12_6)
-            Nds_imrt_misdelivery.code_c8_p13_6 = Nds_imrt_misdelivery_data.get(' code_c8_p13_6 ',
+            Nds_imrt_misdelivery.code_c8_p13_6 = Nds_imrt_misdelivery_data.get('code_c8_p13_6',
                                                                                Nds_imrt_misdelivery.code_c8_p13_6)
-            Nds_imrt_misdelivery.code_c8_p14_6 = Nds_imrt_misdelivery_data.get(' code_c8_p14_6 ',
+            Nds_imrt_misdelivery.code_c8_p14_6 = Nds_imrt_misdelivery_data.get('code_c8_p14_6',
                                                                                Nds_imrt_misdelivery.code_c8_p14_6)
-            Nds_imrt_misdelivery.code_c8_p15_6 = Nds_imrt_misdelivery_data.get(' code_c8_p15_6 ',
+            Nds_imrt_misdelivery.code_c8_p15_6 = Nds_imrt_misdelivery_data.get('code_c8_p15_6',
                                                                                Nds_imrt_misdelivery.code_c8_p15_6)
-            Nds_imrt_misdelivery.code_c8_p17_6 = Nds_imrt_misdelivery_data.get(' code_c8_p17_6 ',
+            Nds_imrt_misdelivery.code_c8_p17_6 = Nds_imrt_misdelivery_data.get('code_c8_p17_6',
                                                                                Nds_imrt_misdelivery.code_c8_p17_6)
-            Nds_imrt_misdelivery.code_c8_p18_6 = Nds_imrt_misdelivery_data.get(' code_c8_p18_6 ',
+            Nds_imrt_misdelivery.code_c8_p18_6 = Nds_imrt_misdelivery_data.get('code_c8_p18_6',
                                                                                Nds_imrt_misdelivery.code_c8_p18_6)
-            Nds_imrt_misdelivery.code_c6_p11_10 = Nds_imrt_misdelivery_data.get(' code_c6_p11_10 ',
+            Nds_imrt_misdelivery.code_c6_p11_10 = Nds_imrt_misdelivery_data.get('code_c6_p11_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p11_10)
-            Nds_imrt_misdelivery.code_c6_p12_10 = Nds_imrt_misdelivery_data.get(' code_c6_p12_10 ',
+            Nds_imrt_misdelivery.code_c6_p12_10 = Nds_imrt_misdelivery_data.get('code_c6_p12_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p12_10)
-            Nds_imrt_misdelivery.code_c6_p13_10 = Nds_imrt_misdelivery_data.get(' code_c6_p13_10 ',
+            Nds_imrt_misdelivery.code_c6_p13_10 = Nds_imrt_misdelivery_data.get('code_c6_p13_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p13_10)
-            Nds_imrt_misdelivery.code_c6_p14_10 = Nds_imrt_misdelivery_data.get(' code_c6_p14_10 ',
+            Nds_imrt_misdelivery.code_c6_p14_10 = Nds_imrt_misdelivery_data.get('code_c6_p14_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p14_10)
-            Nds_imrt_misdelivery.code_c6_p15_10 = Nds_imrt_misdelivery_data.get(' code_c6_p15_10 ',
+            Nds_imrt_misdelivery.code_c6_p15_10 = Nds_imrt_misdelivery_data.get('code_c6_p15_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p15_10)
-            Nds_imrt_misdelivery.code_c6_p16_10 = Nds_imrt_misdelivery_data.get(' code_c6_p16_10 ',
+            Nds_imrt_misdelivery.code_c6_p16_10 = Nds_imrt_misdelivery_data.get('code_c6_p16_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p16_10)
-            Nds_imrt_misdelivery.code_c6_p17_10 = Nds_imrt_misdelivery_data.get(' code_c6_p17_10 ',
+            Nds_imrt_misdelivery.code_c6_p17_10 = Nds_imrt_misdelivery_data.get('code_c6_p17_10',
                                                                                 Nds_imrt_misdelivery.code_c6_p17_10)
-            Nds_imrt_misdelivery.code_c7_p11_10 = Nds_imrt_misdelivery_data.get(' code_c7_p11_10 ',
+            Nds_imrt_misdelivery.code_c7_p11_10 = Nds_imrt_misdelivery_data.get('code_c7_p11_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p11_10)
-            Nds_imrt_misdelivery.code_c7_p12_10 = Nds_imrt_misdelivery_data.get(' code_c7_p12_10 ',
+            Nds_imrt_misdelivery.code_c7_p12_10 = Nds_imrt_misdelivery_data.get('code_c7_p12_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p12_10)
-            Nds_imrt_misdelivery.code_c7_p13_10 = Nds_imrt_misdelivery_data.get(' code_c7_p13_10 ',
+            Nds_imrt_misdelivery.code_c7_p13_10 = Nds_imrt_misdelivery_data.get('code_c7_p13_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p13_10)
-            Nds_imrt_misdelivery.code_c7_p14_10 = Nds_imrt_misdelivery_data.get(' code_c7_p14_10 ',
+            Nds_imrt_misdelivery.code_c7_p14_10 = Nds_imrt_misdelivery_data.get('code_c7_p14_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p14_10)
-            Nds_imrt_misdelivery.code_c7_p15_10 = Nds_imrt_misdelivery_data.get(' code_c7_p15_10 ',
+            Nds_imrt_misdelivery.code_c7_p15_10 = Nds_imrt_misdelivery_data.get('code_c7_p15_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p15_10)
-            Nds_imrt_misdelivery.code_c7_p16_10 = Nds_imrt_misdelivery_data.get(' code_c7_p16_10 ',
+            Nds_imrt_misdelivery.code_c7_p16_10 = Nds_imrt_misdelivery_data.get('code_c7_p16_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p16_10)
-            Nds_imrt_misdelivery.code_c7_p17_10 = Nds_imrt_misdelivery_data.get(' code_c7_p17_10 ',
+            Nds_imrt_misdelivery.code_c7_p17_10 = Nds_imrt_misdelivery_data.get('code_c7_p17_10',
                                                                                 Nds_imrt_misdelivery.code_c7_p17_10)
-            Nds_imrt_misdelivery.code_c8_p11_10 = Nds_imrt_misdelivery_data.get(' code_c8_p11_10 ',
+            Nds_imrt_misdelivery.code_c8_p11_10 = Nds_imrt_misdelivery_data.get('code_c8_p11_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p11_10)
-            Nds_imrt_misdelivery.code_c8_p12_10 = Nds_imrt_misdelivery_data.get(' code_c8_p12_10 ',
+            Nds_imrt_misdelivery.code_c8_p12_10 = Nds_imrt_misdelivery_data.get('code_c8_p12_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p12_10)
-            Nds_imrt_misdelivery.code_c8_p13_10 = Nds_imrt_misdelivery_data.get(' code_c8_p13_10 ',
+            Nds_imrt_misdelivery.code_c8_p13_10 = Nds_imrt_misdelivery_data.get('code_c8_p13_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p13_10)
-            Nds_imrt_misdelivery.code_c8_p14_10 = Nds_imrt_misdelivery_data.get(' code_c8_p14_10 ',
+            Nds_imrt_misdelivery.code_c8_p14_10 = Nds_imrt_misdelivery_data.get('code_c8_p14_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p14_10)
-            Nds_imrt_misdelivery.code_c8_p15_10 = Nds_imrt_misdelivery_data.get(' code_c8_p15_10 ',
+            Nds_imrt_misdelivery.code_c8_p15_10 = Nds_imrt_misdelivery_data.get('code_c8_p15_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p15_10)
-            Nds_imrt_misdelivery.code_c8_p17_10 = Nds_imrt_misdelivery_data.get(' code_c8_p17_10 ',
+            Nds_imrt_misdelivery.code_c8_p17_10 = Nds_imrt_misdelivery_data.get('code_c8_p17_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p17_10)
-            Nds_imrt_misdelivery.code_c8_p18_10 = Nds_imrt_misdelivery_data.get(' code_c8_p18_10 ',
+            Nds_imrt_misdelivery.code_c8_p18_10 = Nds_imrt_misdelivery_data.get('code_c8_p18_10',
                                                                                 Nds_imrt_misdelivery.code_c8_p18_10)
             Nds_imrt_misdelivery.save()
 
