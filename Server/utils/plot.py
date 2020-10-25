@@ -146,8 +146,6 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
-        print(y)
-        print(len(y))
         if s_name == "All":
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
         else:
@@ -156,7 +154,6 @@ def NDS_IMRT(series_data, series_name, mode):
     # x positions
     xlabel_pos = [8, 25, 42, 59, 76, 93]
     # drw std with a different function
-    print(count)
     if mode == "std":
         return plot_std(plot_series, series_name, xlabel_pos, path)
 

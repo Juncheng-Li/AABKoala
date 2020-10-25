@@ -55,6 +55,8 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GraphViewSet(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     @swagger_auto_schema(operation_description="get all graphs information",
                          responses={200: openapi.Response('list of all graphs information', GraphSerializer)})
     def get(self, request):

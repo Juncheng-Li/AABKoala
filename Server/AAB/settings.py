@@ -95,10 +95,11 @@ DATABASES = {
         'NAME': 'AABKoalaTest2',
         'HOST': '35.189.21.28',
         'PORT': 3306,
-        'USER': 'juncheng',  # use own database account name
+        'USER': 'root',  # use own database account name
         'PASSWORD': 'AA-koala123456',  # use own database account password
     }
 }
+
 
 
 # Password validation
@@ -125,13 +126,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Melbourne'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
