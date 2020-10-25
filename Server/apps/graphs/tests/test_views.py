@@ -2084,31 +2084,31 @@ class ViewsTests(APITestCase):
         print(json.loads(response.content))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_retrieve_result(self):
-        url = '/graphs/results/1/'
-        response = self.client.get(url, format='json')
-        print(json.loads(response.content))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_update_result(self):
-        url = '/graphs/results/1/'
-        data = self.result3
-        response = self.client.put(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        result = Result.objects.get(id=1)
-        self.assertEqual(result.FacilityName, 'Collie')
-        self.assertEqual(result.facilityOutput.get().energy_6, decimal.Decimal('0.9936'))
-        self.assertEqual(result.TPR.get().energy_6, decimal.Decimal('0.6800'))
-        self.assertEqual(result.Nds_3dcrt.get().code_101106, decimal.Decimal('0.01470'))
-        self.assertEqual(result.Nds_3dcrt_misdelivery.get().code_101106, 0)
-        self.assertEqual(result.Nds_imrt.get().code_c6_p11_6, decimal.Decimal('0.00190'))
-        self.assertEqual(result.Nds_imrt_misdelivery.get().code_c6_p11_6, 0)
-
-    def test_destroy_result(self):
-        url = '/graphs/results/1/'
-        response = self.client.delete(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Result.objects.count(), 8)
+    # def test_retrieve_result(self):
+    #     url = '/graphs/results/1/'
+    #     response = self.client.get(url, format='json')
+    #     print(json.loads(response.content))
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #
+    # def test_update_result(self):
+    #     url = '/graphs/results/1/'
+    #     data = self.result3
+    #     response = self.client.put(url, data, format='json')
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     result = Result.objects.get(id=1)
+    #     self.assertEqual(result.FacilityName, 'Collie')
+    #     self.assertEqual(result.facilityOutput.get().energy_6, decimal.Decimal('0.9936'))
+    #     self.assertEqual(result.TPR.get().energy_6, decimal.Decimal('0.6800'))
+    #     self.assertEqual(result.Nds_3dcrt.get().code_101106, decimal.Decimal('0.01470'))
+    #     self.assertEqual(result.Nds_3dcrt_misdelivery.get().code_101106, 0)
+    #     self.assertEqual(result.Nds_imrt.get().code_c6_p11_6, decimal.Decimal('0.00190'))
+    #     self.assertEqual(result.Nds_imrt_misdelivery.get().code_c6_p11_6, 0)
+    #
+    # def test_destroy_result(self):
+    #     url = '/graphs/results/1/'
+    #     response = self.client.delete(url, format='json')
+    #     self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+    #     self.assertEqual(Result.objects.count(), 8)
 
     def test_create_resultlist(self):
         url = '/graphs/resultsList/'
