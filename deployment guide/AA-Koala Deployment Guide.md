@@ -41,29 +41,31 @@
 
 1. Pull code from our github repo
 
-```shell 
-git clone https://github.com/geoffreychen831/AABKoala.git
-```
+   ```shell 
+   git clone https://github.com/geoffreychen831/AABKoala.git
+   ```
 
 (Alternatively, you can upload the server code onto the server by winSCP)
 
 2. Deploy
 
-```shell
-cd Server
-sudo docker-compose up -d
-```
+   ```shell
+   cd Server
+   sudo docker-compose up -d
+   ```
 
 **Done**, by far you have finished the deployment of your project, both backend and MySQL database are up running. You can check them by executing command `sudo docker ps` to see if there are two processes (backend and database) running.
 
 **What did the docker-compose do?**
 
 * Launch the MySQL database
-* set MySQL database password type to legacy passsword
+* Set MySQL database password type to legacy passsword
+* Map database directory to `/data`(i.e. All the database data are stored in `/data` directory in the Linux file system)
 * (if it is first time launching) Create schema `NDS`
 * Launch Backend
 * Connect backend to MySQL database
-* (if first time launching) Create tables specified in `model.py`class. (if not first time launching) check if `model.py`class has been modified, if changed, modify the tables, if not, do nothing.
+* Map graph directory to `/graph`(i.e. All the generated plots are stored in `/graph` directory in the Linux file system)
+* (if first time launching) Create tables specified in `model.py` class. (if not first time launching) check if `model.py`class has been modified, if changed, modify the tables, if not, do nothing.
 * Creates a backend super user (username: client, password: AA-koala123456, you can convert this user info into base64 format and put it in local program `config.py` to allow local program access to the backend)
 
 ## (Optional) Change code
@@ -94,11 +96,11 @@ sudo docker-compose up -d
 
 * Open MySQL workbench. On this page, create a new connection by click on the `+`button next to `MySQL Connections`
 
-   ![mysql connection](./mysql connection.png)
+   ![mysql connection](mysql_connection.png)
 
 * Fill out with your `host`, `port`, `username` , `password`.  You can costimize the `Connection Name` to any name you want. It is just a display name, it does not affect the connection. You can click `Test Connection` to see if the configuration is correct. If it successfully connects, click `ok` to make changes take effect. If connection fails, check if you have filled in the correct info or check if MySQL is running on the server.
 
-   ![new conn](./new conn.png)
+   ![new conn](new_conn.png)
 
 * After clicking `ok`, a new conections will popup at the Mysql Workbench Launch page, click on it to log in.
 
@@ -110,11 +112,11 @@ sudo docker-compose up -d
 
 * For example. click `Add Account`at bottom left and fill the new user info in the red box.
 
-   ![add user](./add user.png)
+   ![add user](add_user.png)
 
 * In Administration roles tab, you can manage the privillege of the selected user, including most of the allowed key sql operation 
 
-  ![user privilidges](./user privilidges.png)
+  ![user privilidges](user_privilidges.png)
 
 * click `Apply` at bottom right to make changes take effect.
 
@@ -124,11 +126,11 @@ sudo docker-compose up -d
 
   ![auth_user](./auth_user.png)
 
-* Currently there is only have one user, whose username is `root` and it is a superuser. The password here is a SHA digest result of the original password, threrefore it looks different from the password you use.
+* Currently there is only have one user, whose username is `root` and it is a superuser. The password displayed here is a SHA digest result of the actual password, threrefore it looks different from the password you use.
 
 ##  Sample Server
 
-* There is a sample server ruuning on `43.101.11.1`,  the backend and MySQL database are already up on this server, you can play with it with the given local program. (Local program is already configured with default superuser access to this service)
+* There is a sample server running on `43.101.11.1`,  the backend and MySQL database are already up on this server, you can play with it with the given local program. (Local program is already configured with default superuser access to this service)
 
 ## More Information
 
