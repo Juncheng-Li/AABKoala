@@ -78,24 +78,13 @@ WSGI_APPLICATION = 'AAB.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'NDS',
-#         'HOST': 'db',
-#         'PORT': 3306,
-#         'USER': 'root',  # use own database account name
-#         'PASSWORD': 'AA-koala123456',  # use own database account password
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'AABKoalaTest2',
-        'HOST': '35.189.21.28',
+        'NAME': 'NDS',
+        'HOST': 'db',
         'PORT': 3306,
-        'USER': 'juncheng',  # use own database account name
+        'USER': 'root',  # use own database account name
         'PASSWORD': 'AA-koala123456',  # use own database account password
     }
 }
