@@ -66,15 +66,27 @@ sudo docker-compose up -d
 * (if first time launching) Create tables specified in `model.py`class. (if not first time launching) check if `model.py`class has been modified, if changed, modify the tables, if not, do nothing.
 * Creates a backend super user (username: client, password: AA-koala123456, you can convert this user info into base64 format and put it in local program `config.py` to allow local program access to the backend)
 
+## (Optional) Change code
 
+* If you wish to change code,  the first thing you need to do is to upload the modified python files onto the server and replace the same python file on server. 
 
-## (Optional) Manage backend users
+* And then execute the folloing command to stop all running docker containers
 
-* table `auth_user`is responsible for the users. If you do `select * from auth_user`, you can get the following
+  ```shell
+  sudo docker stop $(sudo docker ps)
+  ```
 
-  ![auth_user](./auth_user.png)
+* Build a new docker image based on the modified code
 
-* Currently there is only have one user, whose username is `root` and it is a superuser. The password here is a SHA digest result of the original password, threrefore it looks different from the password you use.
+  ```shell
+  sudo docker-compose build --no-cache
+  ```
+
+* Launch the new image
+
+  ```shell
+  sudo docker-compose up
+  ```
 
 ## (Optional) Manage MySQL database users
 
@@ -106,31 +118,15 @@ sudo docker-compose up -d
 
 * click `Apply` at bottom right to make changes take effect.
 
-## (Optional) Change code
+## (Not recommended to change) Manage backend users
 
-* If you wish to change code,  the first thing you need to do is to upload the modified python files onto the server and replace the same python file on server. 
+* table `auth_user`is responsible for the users. If you do `select * from auth_user`, you can get the following
 
-* And then execute the folloing command to stop all running docker containers
+  ![auth_user](./auth_user.png)
 
-  ```shell
-  sudo docker stop $(sudo docker ps)
-  ```
+* Currently there is only have one user, whose username is `root` and it is a superuser. The password here is a SHA digest result of the original password, threrefore it looks different from the password you use.
 
-* Build a new docker image based on the modified code
-
-  ```shell
-  sudo docker-compose build --no-cache
-  ```
-
-* Launch the new image with the modified code 
-
-  ```shell
-  sudo docker-compose up
-  ```
-
-  
-
-## (Optional) Sample Server
+##  Sample Server
 
 * There is a sample server ruuning on `43.101.11.1`,  the backend and MySQL database are already up on this server, you can play with it with the given local program. (Local program is already configured with default superuser access to this service)
 
