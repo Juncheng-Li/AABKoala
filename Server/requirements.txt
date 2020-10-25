@@ -1,6 +1,6 @@
-Django
-djangorestframework
-mysqlclient
-matplotlib
-pandas
-drf-yasg
+Django==3.1.1
+djangorestframework==3.11.1
+mysqlclient==1.4.0
+matplotlib==3.3.1
+pandas==1.1.1
+drf-yasg==1.17.1
