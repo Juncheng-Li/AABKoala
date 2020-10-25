@@ -18,30 +18,39 @@ class resultRequest:
         self.conn = http.client.HTTPConnection(self.host, self.port)
 
     def parseExcel(self):
-        filename = "upload/uploadingData.xlsx"
+        # read excel
+        filename = "upload/AllData_copy.xlsx"
         df = pd.read_excel(filename)
         df["AuditDate"] = pd.to_datetime(df["AuditDate"], errors='coerce')
         df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
-        resultList = []
-        ids = []
-        roundIndex = ['Reading_101106', 'Reading_110106', 'Reading_205106', 'Reading_208106', 'Reading_205206',
-                      'Reading_208206', 'Reading_205306', 'Reading_208306', 'Reading_303106', 'Reading_305106',
-                      'Reading_403106', 'Reading_405106', 'Reading_103110', 'Reading_110110', 'Reading_303110',
-                      'Reading_305110', 'Reading_403110', 'Reading_405110', 'Reading_103115', 'Reading_110115',
-                      'Reading_303115', 'Reading_305115', 'Reading_403115', 'Reading_405115', 'Reading_103118',
-                      'Reading_110118', 'Reading_303118', 'Reading_305118', 'Reading_403118', 'Reading_405118',
-                      'Reading_101105', 'Reading_110105', 'Reading_303105', 'Reading_305105', 'Reading_103109',
-                      'Reading_110109', 'Reading_303109', 'Reading_305109', 'c6_p11_6', 'c6_p12_6', 'c6_p13_6',
-                      'c6_p14_6', 'c6_p15_6', 'c6_p16_6', 'c6_p17_6', 'c7_p11_6', 'c7_p12_6', 'c7_p13_6', 'c7_p14_6',
-                      'c7_p15_6', 'c7_p16_6', 'c7_p17_6', 'c8_p11_6', 'c8_p12_6', 'c8_p13_6', 'c8_p14_6', 'c8_p15_6',
-                      'c8_p17_6', 'c8_p18_6', 'c6_p11_10', 'c6_p12_10', 'c6_p13_10', 'c6_p14_10', 'c6_p15_10',
-                      'c6_p16_10', 'c6_p17_10', 'c7_p11_10', 'c7_p12_10', 'c7_p13_10', 'c7_p14_10', 'c7_p15_10',
-                      'c7_p16_10', 'c7_p17_10', 'c8_p11_10', 'c8_p12_10', 'c8_p13_10', 'c8_p14_10', 'c8_p15_10',
-                      'c8_p17_10', 'c8_p18_10', 'fac_6', 'fac_10', 'fac_15', 'fac_18', 'fac_6FFF', 'fac_10FFF', 'TPR_6',
+
+        # round following columns to 4 digits
+        roundIndex = ['code_101106', 'code_110106', 'code_205106', 'code_208106', 'code_205206',
+                      'code_208206', 'code_205306', 'code_208306', 'code_303106', 'code_305106',
+                      'code_403106', 'code_405106', 'code_103110', 'code_110110', 'code_303110',
+                      'code_305110', 'code_403110', 'code_405110', 'code_103115', 'code_110115',
+                      'code_303115', 'code_305115', 'code_403115', 'code_405115', 'code_103118',
+                      'code_110118', 'code_303118', 'code_305118', 'code_403118', 'code_405118',
+                      'code_101105', 'code_110105', 'code_303105', 'code_305105', 'code_103109',
+                      'code_110109', 'code_303109', 'code_305109', 'code_c6_p11_6', 'code_c6_p12_6', 'code_c6_p13_6',
+                      'code_c6_p14_6', 'code_c6_p15_6', 'code_c6_p16_6', 'code_c6_p17_6', 'code_c7_p11_6',
+                      'code_c7_p12_6', 'code_c7_p13_6', 'code_c7_p14_6',
+                      'code_c7_p15_6', 'code_c7_p16_6', 'code_c7_p17_6', 'code_c8_p11_6', 'code_c8_p12_6',
+                      'code_c8_p13_6', 'code_c8_p14_6', 'code_c8_p15_6',
+                      'code_c8_p17_6', 'code_c8_p18_6', 'code_c6_p11_10', 'code_c6_p12_10', 'code_c6_p13_10',
+                      'code_c6_p14_10', 'code_c6_p15_10',
+                      'code_c6_p16_10', 'code_c6_p17_10', 'code_c7_p11_10', 'code_c7_p12_10', 'code_c7_p13_10',
+                      'code_c7_p14_10', 'code_c7_p15_10',
+                      'code_c7_p16_10', 'code_c7_p17_10', 'code_c8_p11_10', 'code_c8_p12_10', 'code_c8_p13_10',
+                      'code_c8_p14_10', 'code_c8_p15_10',
+                      'code_c8_p17_10', 'code_c8_p18_10', 'fac_6', 'fac_10', 'fac_15', 'fac_18', 'fac_6FFF',
+                      'fac_10FFF', 'TPR_6',
                       'TPR_10', 'TPR_15', 'TPR_18', 'TPR_6FFF', 'TPR_10FFF', ]
         decimals = pd.Series([4 for _ in range(92)], index=roundIndex)
         df = df.round(decimals)
 
+        ids = []
+        resultList = []
         for i in range(len(df)):
             id = df.loc[i, 'id']
             if not math.isnan(id):
@@ -49,19 +58,19 @@ class resultRequest:
             unested = df.loc[i, "AuditID":"Phantom"].to_json()
             facilityOutput = df.loc[i, "fac_6":"fac_10FFF"].to_json().replace("fac", "energy")
             tpr = df.loc[i, "TPR_6":"TPR_10FFF"].to_json().replace("TPR", "energy")
-            readings = df.loc[i, "Reading_101106":"Reading_305109"].to_json()
-            misdelivery = df.loc[i, "Misdelivery_101106":"Misdelivery_305109"].to_json()
-            imrt = df.loc[i, "c6_p11_6":"c8_p18_10"].to_json()
+            readings = df.loc[i, "code_101106":"code_305109"].to_json()
+            misdelivery = df.loc[i, "Misdelivery_101106":"Misdelivery_305109"].to_json().replace("Misdelivery_", "code_")
+            imrt = df.loc[i, "code_c6_p11_6":"code_c8_p18_10"].to_json()
             imrt_misdelivery = df.loc[i, "imrt_misdelivery_c6_p11_6":"imrt_misdelivery_c8_p18_10"].to_json().replace(
-                "imrt_misdelivery_", "")
+                "imrt_misdelivery_", "code_")
 
             result = json.loads(unested)
             result.update({"facilityOutput": [json.loads(facilityOutput)]})
             result.update({"TPR": [json.loads(tpr)]})
-            result.update({"Reading": [json.loads(readings)]})
-            result.update({"Misdelivery": [json.loads(misdelivery)]})
-            result.update({"IMRT": [json.loads(imrt)]})
-            result.update({"IMRT_misdelivery": [json.loads(imrt_misdelivery)]})
+            result.update({"Nds_3dcrt": [json.loads(readings)]})
+            result.update({"Nds_3dcrt_misdelivery": [json.loads(misdelivery)]})
+            result.update({"Nds_imrt": [json.loads(imrt)]})
+            result.update({"Nds_imrt_misdelivery": [json.loads(imrt_misdelivery)]})
             resultList.append(json.dumps(result))
             # print("resultList in Excel")
             # print(resultList)
@@ -135,14 +144,14 @@ class resultRequest:
 
         reading_df = json_normalize(contentInJson, record_path='Reading')
         reading_df = reading_df[
-            ['Reading_101106', 'Reading_110106', 'Reading_205106', 'Reading_208106', 'Reading_205206',
-             'Reading_208206', 'Reading_205306', 'Reading_208306', 'Reading_303106', 'Reading_305106',
-             'Reading_403106', 'Reading_405106', 'Reading_103110', 'Reading_110110', 'Reading_303110',
-             'Reading_305110', 'Reading_403110', 'Reading_405110', 'Reading_103115', 'Reading_110115',
-             'Reading_303115', 'Reading_305115', 'Reading_403115', 'Reading_405115', 'Reading_103118',
-             'Reading_110118', 'Reading_303118', 'Reading_305118', 'Reading_403118', 'Reading_405118',
-             'Reading_101105', 'Reading_110105', 'Reading_303105', 'Reading_305105', 'Reading_103109',
-             'Reading_110109', 'Reading_303109', 'Reading_305109']]
+            ['code_101106', 'code_110106', 'code_205106', 'code_208106', 'code_205206',
+             'code_208206', 'code_205306', 'code_208306', 'code_303106', 'code_305106',
+             'code_403106', 'code_405106', 'code_103110', 'code_110110', 'code_303110',
+             'code_305110', 'code_403110', 'code_405110', 'code_103115', 'code_110115',
+             'code_303115', 'code_305115', 'code_403115', 'code_405115', 'code_103118',
+             'code_110118', 'code_303118', 'code_305118', 'code_403118', 'code_405118',
+             'code_101105', 'code_110105', 'code_303105', 'code_305105', 'code_103109',
+             'code_110109', 'code_303109', 'code_305109']]
         misdelivery_df = json_normalize(contentInJson, record_path='Misdelivery')
 
         imrt_df = json_normalize(contentInJson, record_path='IMRT')
@@ -273,12 +282,10 @@ class resultRequest:
             print("The deleteResultWithID Request has not succeeded ")
             return None
 
+
 obj = resultRequest()
 # obj.insertNewResult()
 # obj.listResults()
 # obj.updateResultsWithIDs('84')
 # obj.updateResults()
 # obj.retrieveResultWithID('61')
-
-
-

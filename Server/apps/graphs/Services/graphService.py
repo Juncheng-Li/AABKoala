@@ -130,7 +130,7 @@ def averageCalculation(data_list):
         avgdata_format = {
             "average1": [], "average2": [], "average3": [], "average4": [], "average5": [], "average6": []
         }
-        formatsize = len(data["c6_p11_6"])
+        formatsize = len(data["code_c6_p11_6"])
 
         for i in range(formatsize):
             # average1 = np.mean(c6_p11_6, c6_p12_6, c6_p13_6, c6_p15_6, c6_p16_6,c6_p17_6)
@@ -209,7 +209,7 @@ def standardDeviationCalculation(data_list):
             if None in std1_arr:
                 std1 = None
             else:
-                std1 = round(np.std(std1_arr, ddof=1), 3)
+                std1 = np.std(std1_arr, ddof=1)
 
             # std2 = std（c7_p11_6， c7_p12_6， c7_p13_6，  c7_p15_6， c7_p16_6， c7_p17_6）
             std2_arr = [data["code_c7_p11_6"][i], data["code_c7_p12_6"][i], data["code_c7_p13_6"][i], data["code_c7_p15_6"][i],
@@ -217,7 +217,7 @@ def standardDeviationCalculation(data_list):
             if None in std2_arr:
                 std2 = None
             else:
-                std2 = round(np.std(std2_arr, ddof=1), 3)
+                std2 = np.std(std2_arr, ddof=1)
 
             # std3 = std（c8_p11_6，c8_p12_6， c8_p13_6，  c8_p15_6， c8_p17_6， c8_p18_6）
             std3_arr = [data["code_c8_p11_6"][i], data["code_c8_p12_6"][i], data["code_c8_p13_6"][i], data["code_c8_p15_6"][i],
@@ -225,7 +225,7 @@ def standardDeviationCalculation(data_list):
             if None in std3_arr:
                 std3 = None
             else:
-                std3 = round(np.std(std3_arr, ddof=1), 3)
+                std3 = np.std(std3_arr, ddof=1)
 
             # std4 = std（c6_p11_10， c6_p12_10， c6_p13_10， c6_p15_10， c6_p16_10， c6_p17_10）
             std4_arr = [data["code_c6_p11_10"][i], data["code_c6_p12_10"][i], data["code_c6_p13_10"][i], data["code_c6_p15_10"][i],
@@ -233,7 +233,7 @@ def standardDeviationCalculation(data_list):
             if None in std4_arr:
                 std4 = None
             else:
-                std4 = round(np.std(std4_arr, ddof=1), 3)
+                std4 = np.std(std4_arr, ddof=1)
 
             # std5 = std（c7_p11_10， c7_p12_10， c7_p13_10， c7_p15_10， c7_p16_10， c7_p17_10
             std5_arr = [data["code_c7_p11_10"][i], data["code_c7_p12_10"][i], data["code_c7_p13_10"][i], data["code_c7_p15_10"][i],
@@ -241,7 +241,7 @@ def standardDeviationCalculation(data_list):
             if None in std5_arr:
                 std5 = None
             else:
-                std5 = round(np.std(std5_arr, ddof=1), 3)
+                std5 = np.std(std5_arr, ddof=1)
 
             # std6 = std（c8_p11_10，c8_p12_10， c8_p13_10，  c8_p15_10， c8_p17_10， c8_p18_10）
             std6_arr = [data["code_c8_p11_10"][i], data["code_c8_p12_10"][i], data["code_c8_p13_10"][i], data["code_c8_p15_10"][i],
@@ -249,7 +249,7 @@ def standardDeviationCalculation(data_list):
             if None in std6_arr:
                 std6 = None
             else:
-                std6 = round(np.std(std6_arr, ddof=1), 3)
+                std6 = np.std(std6_arr, ddof=1)
 
             avgdata_format["std1"].append(std1)
             avgdata_format["std2"].append(std2)

@@ -1,10 +1,11 @@
-import matplotlib.pyplot as plt
-import matplotlib
-import numpy as np
-import pandas as pd
-from matplotlib.cbook import get_sample_data
 import os
+import random
 import time
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.cbook import get_sample_data
 
 
 def NDS_3DCRT(series_data, series_name, mode):
@@ -16,15 +17,7 @@ def NDS_3DCRT(series_data, series_name, mode):
     image3Path = path + '/images/case3.png'
     image4Path = path + '/images/case4.png'
     RNS_path = path + '/images/RNS.png'
-    Series_names = []
 
-    if mode == "all":
-        Series_names.append("All Data")
-        for name in series_name:
-            Series_names.append(name)
-    else:
-        for name in series_name:
-            Series_names.append(name)
     # adjust canvas size
     plt.figure(figsize=(7.4, 4.8))
 
@@ -42,15 +35,15 @@ def NDS_3DCRT(series_data, series_name, mode):
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
-            for i in range(0, length):
+            for k in range(0, length):
                 x.append(code_to_x_3dcrt(code))
         # scatter plot
-        if s_name == "all":
+        if s_name == "All":
             # plot "All data" data points in black
-            plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
+            plot_series.append(plt.scatter(x, y, s=3.7, c="#454545", zorder=5))
         else:
             # plot other facility data points in random colors
-            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=3.7, c=get_color(i), zorder=5))
 
     # set axis
     xlabel_pos = np.unique(x)
@@ -61,7 +54,7 @@ def NDS_3DCRT(series_data, series_name, mode):
                             "6", "10", "15", '18', '6FFF', '10FFF',
                             '6', '10', "15", "18",
                             "6", "10", "15", "18"), rotation=90, fontsize=7)
-    plt.xlim(-1, 65)
+    plt.xlim(0, 67.9)
     plt.yticks(fontsize=7)
     plt.ylim(-0.1, 0.1)
     plt.title("3DCRT Results", fontsize=7, fontweight="bold")
@@ -75,15 +68,15 @@ def NDS_3DCRT(series_data, series_name, mode):
     plt.subplots_adjust(left=0.08, right=0.83, bottom=0.4, top=0.9)
 
     # set legend
-    plt.legend(plot_series, Series_names, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
+    plt.legend(plot_series, series_name, loc='best', bbox_to_anchor=(1.22, 1), prop={'size': 6})
 
     # add split lines
-    plt.axvline(x=12, c="black", linewidth=0.4)
-    plt.axvline(x=32, c="black", linewidth=0.4)
-    plt.axvline(x=47, c="black", linewidth=0.4)
-    plt.axvline(x=5.5, c="black", linewidth=0.3, linestyle="dashed")
-    plt.axvline(x=39.5, c="black", linewidth=0.3, linestyle="dashed")
-    plt.axvline(x=56, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=15.4, c="black", linewidth=0.4)
+    plt.axvline(x=35.7, c="black", linewidth=0.4)
+    plt.axvline(x=51.95, c="black", linewidth=0.4)
+    plt.axvline(x=8.35, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=43.05, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=59.7, c="black", linewidth=0.3, linestyle="dashed")
     plt.axhline(y=0, c="black", linewidth=0.4)
 
     # add case images
@@ -130,19 +123,22 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # plot
     plot_series = []
+    count = 0
     for i in range(0, len(series_data)):
         series = series_data[i]
-        s_name = series_data[i]
+        s_name = series_name[i]
         x = []
         y = []
         for code in series:
             # flatten measurements in data into list y
             measurements = series[code]
             for measurement in measurements:
+                if measurement != None:
+                    count += 1
                 y.append(measurement)
             # flatten code in data into list x
             length = len(measurements)
-            for i in range(0, length):
+            for k in range(0, length):
                 if mode == "all":
                     x.append(code_to_x_imrt(code))
                 elif mode == "average":
@@ -150,13 +146,21 @@ def NDS_IMRT(series_data, series_name, mode):
                 elif mode == "std":
                     x.append(std_to_x(code))
         # scatter plot
-        if s_name == "all":
+        print(y)
+        print(len(y))
+        if s_name == "All":
             plot_series.append(plt.scatter(x, y, s=4, c="#454545", zorder=5))
         else:
-            plot_series.append(plt.scatter(x, y, s=4, zorder=5))
+            plot_series.append(plt.scatter(x, y, s=4, c=get_color(i), zorder=5))
+
+    # x positions
+    xlabel_pos = [8, 25, 42, 59, 76, 93]
+    # drw std with a different function
+    print(count)
+    if mode == "std":
+        return plot_std(plot_series, series_name, xlabel_pos, path)
 
     # set axis
-    xlabel_pos = [8, 25, 42, 59, 76, 93]
     plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=6)
     plt.xlim(0, 102)
     plt.yticks(fontsize=6)
@@ -165,7 +169,7 @@ def NDS_IMRT(series_data, series_name, mode):
     # set white margins
     plt.subplots_adjust(bottom=0.13)
 
-    # add green background
+    # add green/grey background
     ax = plt.gca()
     ax.axhspan(-0.03, 0.03, facecolor="#C5E1A5", alpha=1, zorder=2)
     ax.axhspan(-0.05, 0.05, facecolor="#F1F8E9", alpha=1, zorder=1)
@@ -199,104 +203,105 @@ def NDS_IMRT(series_data, series_name, mode):
 
     # add legend
     ax.legend(plot_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8,
-               frameon=False)
+              frameon=False)
 
     # save plot
     ticks = time.time()
     ticks = str(round(ticks * 1000))
     plt.savefig(path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png", dpi=300)
-    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png", "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
+    response = {"fileName": "IMRT_" + mode + "_" + ticks + ".png",
+                "url": path + "/plGraphs/IMRT_" + mode + "_" + ticks + ".png"}
     return response
 
 
 def code_to_x_3dcrt(input_code):
     switcher = {
-        "101106": 0,
-        "110106": 1,
-        "205106": 2,
-        "208106": 3,
-        "205206": 4,
-        "208206": 5,
-        "205306": 6,
-        "208306": 7,
-        "303106": 8,
-        "305106": 9,
-        "403106": 10,
-        "405106": 11,
-        "103110": 13,
-        "110110": 15.5,
-        "303110": 20.5,
-        "305110": 23,
-        "403110": 27,
-        "405110": 30.5,
-        "103115": 33.5,
-        "110115": 34.5,
-        "303115": 35.5,
-        "305115": 36.5,
-        "403115": 37.5,
-        "405115": 38.5,
-        "103118": 40.5,
-        "110118": 41.5,
-        "303118": 42.5,
-        "305118": 43.5,
-        "403118": 44.5,
-        "405118": 45.5,
-        "101105": 51,
-        "110105": 52,
-        "303105": 53,
-        "305105": 54,
-        "103109": 58,
-        "110109": 59,
-        "303109": 60,
-        "305109": 61
+        "code_101106": 2.3,
+        "code_110106": 3.4,
+        "code_205106": 4.5,
+        "code_208106": 5.6,
+        "code_205206": 6.7,
+        "code_208206": 7.8,
+        "code_205306": 8.9,
+        "code_208306": 10.,
+        "code_303106": 11.1,
+        "code_305106": 12.2,
+        "code_403106": 13.3,
+        "code_405106": 14.4,
+        "code_103110": 16.4,
+        "code_110110": 18.9,
+        "code_303110": 23.9,
+        "code_305110": 26.4,
+        "code_403110": 31.7,
+        "code_405110": 34.2,
+        "code_103115": 36.9,
+        "code_110115": 37.9,
+        "code_303115": 38.9,
+        "code_305115": 39.9,
+        "code_403115": 40.9,
+        "code_405115": 41.9,
+        "code_103118": 44.2,
+        "code_110118": 45.2,
+        "code_303118": 46.2,
+        "code_305118": 47.2,
+        "code_403118": 48.2,
+        "code_405118": 49.2,
+        "code_101105": 54.7,
+        "code_110105": 55.7,
+        "code_303105": 56.7,
+        "code_305105": 57.7,
+        "code_103109": 61.7,
+        "code_110109": 62.7,
+        "code_303109": 63.7,
+        "code_305109": 64.7,
     }
     return switcher.get(input_code)
 
 
 def code_to_x_imrt(input_code):
     switcher = {
-        "c6_p11_6": 1,
-        "c6_p12_6": 2,
-        "c6_p13_6": 3,
-        "c6_p14_6": None,
-        "c6_p15_6": 5,
-        "c6_p16_6": 6,
-        "c6_p17_6": 7,
-        "c7_p11_6": 18,
-        "c7_p12_6": 19,
-        "c7_p13_6": 20,
-        "c7_p14_6": None,
-        "c7_p15_6": 22,
-        "c7_p16_6": 23,
-        "c7_p17_6": 24,
-        "c8_p11_6": 35,
-        "c8_p12_6": 36,
-        "c8_p13_6": 37,
-        "c8_p14_6": None,
-        "c8_p15_6": 39,
-        "c8_p17_6": 40,
-        "c8_p18_6": 41,
-        "c6_p11_10": 52,
-        "c6_p12_10": 53,
-        "c6_p13_10": 54,
-        "c6_p14_10": None,
-        "c6_p15_10": 56,
-        "c6_p16_10": 57,
-        "c6_p17_10": 58,
-        "c7_p11_10": 69,
-        "c7_p12_10": 70,
-        "c7_p13_10": 71,
-        "c7_p14_10": None,
-        "c7_p15_10": 73,
-        "c7_p16_10": 74,
-        "c7_p17_10": 75,
-        "c8_p11_10": 86,
-        "c8_p12_10": 87,
-        "c8_p13_10": 88,
-        "c8_p14_10": None,
-        "c8_p15_10": 90,
-        "c8_p17_10": 91,
-        "c8_p18_10": 92,
+        "code_c6_p11_6": 1,
+        "code_c6_p12_6": 2,
+        "code_c6_p13_6": 3,
+        "code_c6_p14_6": None,
+        "code_c6_p15_6": 5,
+        "code_c6_p16_6": 6,
+        "code_c6_p17_6": 7,
+        "code_c7_p11_6": 18,
+        "code_c7_p12_6": 19,
+        "code_c7_p13_6": 20,
+        "code_c7_p14_6": None,
+        "code_c7_p15_6": 22,
+        "code_c7_p16_6": 23,
+        "code_c7_p17_6": 24,
+        "code_c8_p11_6": 35,
+        "code_c8_p12_6": 36,
+        "code_c8_p13_6": 37,
+        "code_c8_p14_6": None,
+        "code_c8_p15_6": 39,
+        "code_c8_p17_6": 40,
+        "code_c8_p18_6": 41,
+        "code_c6_p11_10": 52,
+        "code_c6_p12_10": 53,
+        "code_c6_p13_10": 54,
+        "code_c6_p14_10": None,
+        "code_c6_p15_10": 56,
+        "code_c6_p16_10": 57,
+        "code_c6_p17_10": 58,
+        "code_c7_p11_10": 69,
+        "code_c7_p12_10": 70,
+        "code_c7_p13_10": 71,
+        "code_c7_p14_10": None,
+        "code_c7_p15_10": 73,
+        "code_c7_p16_10": 74,
+        "code_c7_p17_10": 75,
+        "code_c8_p11_10": 86,
+        "code_c8_p12_10": 87,
+        "code_c8_p13_10": 88,
+        "code_c8_p14_10": None,
+        "code_c8_p15_10": 90,
+        "code_c8_p17_10": 91,
+        "code_c8_p18_10": 92,
     }
     return switcher.get(input_code)
 
@@ -315,11 +320,63 @@ def avg_to_x(input_code):
 
 def std_to_x(input_code):
     switcher = {
-        "average1": 4,
-        "average2": 21,
-        "average3": 38,
-        "average4": 55,
-        "average5": 72,
-        "average6": 89,
+        "std1": 4,
+        "std2": 21,
+        "std3": 38,
+        "std4": 55,
+        "std5": 72,
+        "std6": 89,
     }
     return switcher.get(input_code)
+
+
+def get_color(i):
+    color_list = ["#454545", "#FF2A00", "#FFD500", "#00CCAA", "#CC8800", "#9933FF", "#0066CC"]
+    if i > len(color_list):
+        rgb = (random.random(), random.random(), random.random())
+        return rgb
+    return color_list[i]
+
+
+def plot_std(plot_series, series_name, xlabel_pos, path):
+    # set axis
+    plt.xticks(xlabel_pos, ('case 6', 'case 7', 'case 8', 'case 6', 'case 7', 'case 8'), fontsize=6)
+    plt.xlim(0, 102)
+    plt.yticks(fontsize=6)
+    plt.ylim(0, 0.04)
+
+    # set white margins
+    plt.subplots_adjust(bottom=0.13)
+
+    ax = plt.gca()
+    # configure plot boundaries
+    ax.spines["top"].set_edgecolor("white")
+    ax.spines["right"].set_edgecolor("white")
+    ax.tick_params(bottom=False)
+
+    # set title and sub title
+    ax.set_title('IMRT Results', y=1.1, horizontalalignment='center', pad=-4, size=10, fontweight='bold')
+    plt.suptitle("Standard Deviation of in-volume points", y=0.93, x=0.51, fontsize=8)
+
+    # add line
+    plt.axvline(x=17, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=34, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=51, c="black", linewidth=0.4)
+    plt.axvline(x=68, c="black", linewidth=0.3, linestyle="dashed")
+    plt.axvline(x=85, c="black", linewidth=0.3, linestyle="dashed")
+
+    # add energy text
+    plt.text(23, -0.119, "6X", fontsize=6, zorder=6)
+    plt.text(74, -0.119, "10X", fontsize=6, zorder=6)
+
+    # add legend
+    ax.legend(plot_series, series_name, loc='center', bbox_to_anchor=(0.5, -0.135), ncol=len(series_name), fontsize=8,
+              frameon=False)
+
+    # save plot
+    ticks = time.time()
+    ticks = str(round(ticks * 1000))
+    plt.savefig(path + "/plGraphs/IMRT_std_" + ticks + ".png", dpi=300)
+    response = {"fileName": "IMRT_std_" + ticks + ".png",
+                "url": path + "/plGraphs/IMRT_std_" + ticks + ".png"}
+    return response
