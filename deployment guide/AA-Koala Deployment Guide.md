@@ -1,17 +1,17 @@
 # AA-Koala Deployment Guide
 
-## Recommented System Requirement
+## Recommended System Requirement
 
 * **CPU**: 3.2GHz x 2 cores
 * **RAM**: 16GB
 * **Hard drive**: 40GB
-* **Operating** **system**: Linux(with docker and git installed)
+* **Operating** **system**: Linux(e.g. ubuntu or centOS with docker and git installed)
 
 ## Before you start: Make sure Docker and Git are installed on the Server
 
 ### Install Docker and Docker-Compose
 
-* Install Docker (Here take centOS as an example. For other operating system, instructions can be found here https://docs.docker.com/engine/install/centos/)
+* Install Docker (Here takes centOS as an example. For other operating system, instructions can be found here https://docs.docker.com/engine/install/centos/)
 
   ```shell
   # install and start docker
@@ -36,18 +36,23 @@
   # Test if proper installed
   docker-compose --version
   ```
+  
+* Install git
+  ```shell
+  sudo yum install -y git
+  ```
 
 ## Deploy our service
 
-1. Pull code from our github repo
+**1. Pull code from our github repo**
 
    ```shell 
    git clone https://github.com/geoffreychen831/AABKoala.git
    ```
 
-(Alternatively, you can upload the server code onto the server by winSCP)
+(Alternatively, you can upload the server code onto the server)
 
-2. Deploy
+**2. Deploy**
 
    ```shell
    cd Server
