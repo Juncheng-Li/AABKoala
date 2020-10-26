@@ -15,7 +15,7 @@ Additionally, an local program is developed as a substitution of front-end to al
   * drf-yasg 1.17.1
 
 ## Documents
-* Database
+* [Database](https://github.com/geoffreychen831/AABKoala/blob/doc/database/database%20guide/AA-Koala_Database_Guide.md)
 * Backend
 * Local Program
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
