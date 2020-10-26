@@ -21,7 +21,7 @@ Additionally, an local program is developed as a substitution of front-end to al
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
 
 ## Deploy our service
-Before you start, make sure `git`, `docker` and `docker-compose` are installed on the server.
+Before you start, make sure `git`, `docker` and `docker-compose` are installed on the server.(If you need help with this, instructions can be found in our [deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md))
 
 **1. Pull code from our github repo**
 
