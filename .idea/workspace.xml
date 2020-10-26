@@ -2,69 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a1dca98-e20f-4590-8b23-58c18f94e536" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/Demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/classes/validator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1600153340110.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1600701248952.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1600936560790.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1600936830896.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/graphRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/resultRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/unitTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/upload/AllData.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/upload/AllData_copy.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/upload/debug.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/upload/uploadingData.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LocalProgram/validateUploadingDataExcel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/AAB/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/AAB/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/AAB/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/AAB/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/AAB/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/Services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/Services/graphService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/migrations/0002_auto_20201022_0602.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/migrations/0003_nds_3dcrt_misdelivery_code_101106.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/tests/test_urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/tests/test_views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/apps/graphs/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/docker-entrypoint.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/RNS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/all_cases.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/background1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/case1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/case2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/case3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/images/case4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/plGraphs/3DCRT_1600153340110.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/plot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/utils/sample.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/wait-for-it.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database guide/AA-Koala_Database_Guide.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database guide/er_diagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database guide/step_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database guide/step_4-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database guide/step_4-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database guide/step_5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AABKoala.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1602607469309.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1602637037985.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/3DCRT_1603101576099.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/IMRT_all_1602606319412.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/IMRT_all_1602606809103.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/IMRT_average_1602606877504.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/IMRT_average_1602639475031.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/IMRT_average_1603101363531.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalProgram/download/IMRT_std_1602605812364.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/3DCRT_1602607469309.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/3DCRT_1602637037985.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/3DCRT_1603101576099.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/IMRT_all_1602606319412.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/IMRT_all_1602606809103.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/IMRT_average_1602606877504.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/IMRT_average_1602639475031.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/IMRT_average_1603101363531.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/utils/plGraphs/IMRT_std_1602605812364.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,40 +56,11 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Server/apps/graphs/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="143" column="53" lean-forward="true" selection-start-line="143" selection-start-column="53" selection-end-line="143" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/apps/graphs/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/MySQLdb/connections.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2890">
-              <caret line="184" selection-start-line="184" selection-end-line="184" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/manage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        <entry file="file://$PROJECT_DIR$/database guide/AA-Koala_Database_Guide.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -154,8 +92,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="98" />
     <option name="y" value="23" />
     <option name="width" value="1395" />
     <option name="height" value="877" />
@@ -176,45 +114,7 @@
             <path>
               <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
               <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="LocalProgram" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="LocalProgram" type="462c0819:PsiDirectoryNode" />
-              <item name="download" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="LocalProgram" type="462c0819:PsiDirectoryNode" />
-              <item name="upload" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="graphs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AABKoala" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AABKoala" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="graphs" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
+              <item name="database guide" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -226,13 +126,14 @@
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/LocalProgram" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database guide" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/database guide" />
       <recent name="$PROJECT_DIR$/LocalProgram" />
     </key>
   </component>
@@ -316,12 +217,12 @@
       <workItem from="1602001945353" duration="159000" />
       <workItem from="1602002125126" duration="14969000" />
       <workItem from="1603124184740" duration="3424000" />
-      <workItem from="1603712998744" duration="1077000" />
+      <workItem from="1603712998744" duration="2026000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65034000" />
+    <option name="totallyTimeSpent" value="65983000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -333,7 +234,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="23" width="1395" height="877" extended-state="6" />
+    <frame x="98" y="23" width="1395" height="877" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25316456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -548,13 +449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/MySQLdb/connections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2890">
-          <caret line="184" selection-start-line="184" selection-end-line="184" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -573,6 +467,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="143" column="53" lean-forward="true" selection-start-line="143" selection-start-column="53" selection-end-line="143" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/MySQLdb/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database guide/AA-Koala_Database_Guide.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
