@@ -1,6 +1,6 @@
-## Server
+# Server
 
-### 1. Project structure in Server
+## 1. Project structure in Server
 
 ```java
 .
@@ -35,7 +35,7 @@ The above structure shows the main files and folders used in the server.
 
 
 
-#### **1.1 Project setting:**
+### **1.1 Project setting:**
 
 **`AAB/settings.py`:** 
 
@@ -49,7 +49,7 @@ The url configuration of this project.
 
 
 
-#### **1.2 Apps:**
+### **1.2 Apps:**
 
 an app "graphs" is used to deal with the result and graph management.
 
@@ -124,7 +124,7 @@ This folder contains the tests used in development.
 
 
 
-#### **1.3 Utils**:
+### **1.3 Utils**:
 
 **`utils/plot.py`:**
 
@@ -146,7 +146,7 @@ Contain the static images which are used for ploting.
 
 
 
-### 2. API documentation
+## 2. API documentation
 
 Run the server in local and use below url to open API documentation which is built with `drf_yasg`
 
@@ -154,7 +154,7 @@ http://127.0.0.1:8000/swagger/
 
 Below shows the examples of  api request. Authorization is basic authorization with username = "root" and password = "root"
 
-#### 2.1 results
+### 2.1 results
 
 **GET /graphs/results/**
 
@@ -378,7 +378,7 @@ Authorization: Basic cm9vdDpyb290
 
 
 
-#### 2.2 resultsList
+### 2.2 resultsList
 
 **POST /graphs/resultsList/**
 
@@ -556,7 +556,7 @@ Content-Type: application/json
 
 
 
-#### 2.3 graphManage
+### 2.3 graphManage
 
 **GET  /graphManage/**
 
@@ -618,7 +618,7 @@ Content-Type: application/json
 }
 ```
 
-<img src="image-20201027002052326.png" alt="image-20201027002052326" style="zoom:50%;" />
+<img src="./image-20201027002052326.png" alt="image-20201027002052326" style="zoom:50%;" />
 
 
 
@@ -641,14 +641,14 @@ Content-Type: application/json
 
 
 
-### 3. Future development
+## 3. Future development
 
 - Replace the basic authentication with a safe authentication in product environment.
 - Extend the api according the other graph types.
 
 
 
-### 4. Relative links
+## 4. Relative links
 
 Django documentation   https://docs.djangoproject.com/en/3.1/
 
