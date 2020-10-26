@@ -20,6 +20,13 @@ Additionally, an local program is developed as a substitution of front-end to al
 * Local Program
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
 
+## Recommented System Requirement
+
+* **CPU**: 3.2GHz x 2 cores
+* **RAM**: 16GB
+* **Hard drive**: 40GB
+* **Operating** **system**: Linux(e.g. ubuntu or centOS)
+
 ## Deploy our service
 Before you start, make sure `git`, `docker` and `docker-compose` are installed on the server.(If you need help with this, instructions can be found in our [deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md))
 
