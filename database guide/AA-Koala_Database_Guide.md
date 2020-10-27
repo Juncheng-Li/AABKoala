@@ -14,7 +14,8 @@ The [ER model](https://www.guru99.com/er-diagram-tutorial-dbms.html) shows the b
   * TPR: Stored as `tpr` table
   * Facility Stated Daily Output (cGy/MU): Stored as `facility_output` table
   
-Now we have both Case data and Prior data in place, we can utilise this information to plot graphs and store graph-related data into the `graph` table.\ 
+Now we have both Case data and Prior data in place, we can utilise this information to plot graphs and store graph-related data into the `graph` table.
+
 **Note**: There is a `graph_result` table in between `result` and `graph`. A result record can be used to plot multiple graphs and a graph can be plotted by multiple result records. This table is created to indicate the so-called [Many-to-many relationship](https://en.wikipedia.org/wiki/Many-to-many_(data_model)) between `result` table and `graph` table. 
 * `auth_user` table: Store database user information
 
