@@ -3,6 +3,45 @@ Bacause of the increament of the audit data, a normal Excel table is not capable
 
 Additionally, an local program is developed as a substitution of front-end to allow user to run the automated process.
 
+## List of files
+```
+├── LocalProgram
+│   ├── Demo.py
+│   ├── config.py
+│   ├── download
+│   ├── graphRequest.py
+│   ├── resultRequest.py
+│   ├── unitTest.py
+│   ├── upload
+│      	├── AllData.xlsx
+│      	└── uploadingData.xlsx
+└── Server
+    ├── AAB
+    │   ├── asgi.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    ├── apps
+    │   └── graphs
+    │       ├── Services
+    │       │   └── graphService.py
+    │       ├── admin.py
+    │       ├── apps.py
+    │       ├── migrations
+    │       ├── models.py
+    │       ├── serializers.py
+    │       ├── tests
+    │       │   ├── test_urls.py
+    │       │   └── test_views.py
+    │       ├── urls.py
+    │       └── views.py
+    ├── utils
+        ├── images
+        ├── plGraphs  
+        ├── plot.py
+        └── sample.py
+```
+
 ## Technology
 * Database: Mysql 8.0
 * Backend: Django Rest Framework 3.11.1
