@@ -20,6 +20,9 @@ Additionally, an local program is developed as a substitution of front-end to al
 * Local Program
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
 
+## Changelog
+* [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
+
 ## Recommented System Requirement
 
 * **CPU**: 3.2GHz x 2 cores
