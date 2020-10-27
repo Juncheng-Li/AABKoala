@@ -2,14 +2,15 @@ import http.client
 import urllib.request
 import os
 import json
+from LocalProgram.config import *
 
 
 class graphRequest:
 
     def __init__(self):
-        self.authorization = "Basic cm9vdDpyb290"
-        self.host = "127.0.0.1"
-        self.port = 8000
+        self.authorization = authorization
+        self.host = host
+        self.port = port
         self.conn = http.client.HTTPConnection(self.host, self.port)
 
     def list_graphs(self):
