@@ -19,7 +19,7 @@ class resultRequest:
 
     def parseExcel(self):
         # read excel
-        filename = "upload/AllData_copy.xlsx"
+        filename = "upload/uploadingData.xlsx"
         df = pd.read_excel(filename)
         df["AuditDate"] = pd.to_datetime(df["AuditDate"], errors='coerce')
         df["AuditDate"] = df["AuditDate"].dt.strftime("%Y-%m-%d")
