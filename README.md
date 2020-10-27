@@ -1,4 +1,4 @@
-# AABKoala
+# Automated Audit Benchmarking System - By Team Koala
 Bacause of the increament of the audit data, a normal Excel table is not capable of handling the and increasingly complex audit process and data analysis conducted by the ARPANSA. As a result, a database is urgently required. This project normalises the Excel data into a Mysql database schema and implemented a backend to automate the "IMRT" and "3DRT" analysis process.
 
 Additionally, an local program is developed as a substitution of front-end to allow user to run the automated process.
@@ -78,7 +78,7 @@ Before you start, make sure `git`, `docker` and `docker-compose` are installed o
    git clone https://github.com/geoffreychen831/AABKoala.git
    ```
 
-(Alternatively, you can upload the server code onto the server)
+(Alternatively, you can upload the code in server directory onto the server)
 
 **2. Deploy**
 
