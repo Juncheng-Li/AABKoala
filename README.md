@@ -56,7 +56,7 @@ In addition, an local program is developed as a substitution of front-end to all
 ## Documents
 * [Database](https://github.com/geoffreychen831/AABKoala/blob/doc/database/database%20guide/AA-Koala_Database_Guide.md)
 * [Backend](https://github.com/geoffreychen831/AABKoala/blob/doc/backend/backend%20guide/Server.md)
-* Local Program
+* [Local Program](https://github.com/geoffreychen831/AABKoala/blob/doc/local/local%20program%20guide/local%20program%20guide.md)
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
 
 ## Changelog
