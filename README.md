@@ -1,5 +1,6 @@
 # Automated Audit Benchmarking System - By Team Koala
-Bacause of the increament of the audit data, a regular Excel file is not capable of handling the increasingly complex data structure and audit process conducted by the ARPANSA. As a result, a database is urgently required. This project normalised the Excel data into a Mysql database schema and implemented a backend that automates the "IMRT" and "3DRT" analysis process. In addition, an local program is developed as a substitution of front-end to allow user to run the automated process with various options.
+Bacause of the increament of the audit data, a regular Excel file is not capable of handling the increasingly complex data structure and audit process conducted by the ARPANSA. As a result, a database is urgently required. This project normalised the Excel data into a Mysql database schema and implemented a backend that automates the "IMRT" and "3DRT" analysis process. 
+In addition, an local program is developed as a substitution of front-end to allow user to run the automated process with various options.
 
 ## List of files
 ```
