@@ -7,9 +7,15 @@ MySQL is a widely used open-sourced relational database management system. We ch
 ### Entity-Relationship (ER) diagram
 ![er_diagram](./er_diagram.png)
 
-The [ER model](https://www.guru99.com/er-diagram-tutorial-dbms.html) shows the big picture of how different data relates to each other. The dotted lines express the cardinality between entities. The lines link the table whoever have some kind of relationship with the others. The core component of the diagram is the `result` table, which corresponds to the Results tab from the original spreadsheet. Everything needed to build a complete result record are stored in `result` presented by rows of attributes. As audit data can be processed with different types of treatment such as 3DCRT and IMRT, we split this treatment information into separate tables for explicitness on plotting the graphs based on different treatment plans applied. 3DCRT-related tables include `nds_3dcrt` and `nds_3dcrt_misdelivery`, where IMRT-related tables include `nds_imrt` and `nds_imrt_misdelivery`.
+The [ER model](https://www.guru99.com/er-diagram-tutorial-dbms.html) shows the big picture of how different data relates to each other. The dotted lines express the cardinality between entities (tables). The lines link the table whoever have some kind of relationship with the others. The core component of the diagram is the `result` table, which corresponds to the Results tab from the original spreadsheet. Everything needed to build a complete result record are stored in `result` presented by rows of attributes. As audit data can be processed with different types of treatment such as 3DCRT and IMRT, we split this treatment information into separate tables for explicitness on plotting the graphs based on different treatment plans applied. 3DCRT-related tables include `nds_3dcrt` and `nds_3dcrt_misdelivery`, where IMRT-related tables include `nds_imrt` and `nds_imrt_misdelivery`.
 
-Case data is stored in the `result` table. Prior data such as TPR and Facility Stated Daily Output (cGy/MU) are split into separate tables (`tpr` and `facility_output`) so that we can observe their energy statistics in a better view. Now we have both Case data and Prior data in place, it is time to utilise this information to plot graphs and store graph-related data into the `graph` table. Note that there is a `graph_result` table in between `result` and `graph`. A result record can be used to plot multiple graphs and a graph can be plotted by multiple result records. This table is created to indicate the so-called [Many-to-many relationship](https://en.wikipedia.org/wiki/Many-to-many_(data_model)) between `result` table and `graph` table. The `auth_user` table is for the purpose of storing database user information.
+* Case data: Stored as `result` table
+* Prior data: 
+  * TPR: Stored as `tpr` table
+  * Facility Stated Daily Output (cGy/MU): stored as `facility_output` table 
+Now we have both Case data and Prior data in place, we can utilise this information to plot graphs and store graph-related data into the `graph` table.\ 
+**Note**: There is a `graph_result` table in between `result` and `graph`. A result record can be used to plot multiple graphs and a graph can be plotted by multiple result records. This table is created to indicate the so-called [Many-to-many relationship](https://en.wikipedia.org/wiki/Many-to-many_(data_model)) between `result` table and `graph` table. 
+* `auth_user` table: Store database user information
 
 Let's have a look at the tables.
 
