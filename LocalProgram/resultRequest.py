@@ -164,23 +164,6 @@ class resultRequest:
         print(data.decode("utf-8"))
         return res
 
-    def updateResultsWithIDs(self, resultIds):
-        resultsList = self.parseExcel()
-        if len(resultIds) != len(resultsList):
-            print("The number of results ids does not match with the number of results in excel")
-            return
-        for i in range(len(resultIds)):
-            payload = resultsList[i]
-            headers = {
-                'Authorization': self.authorization,
-                'Content-Type': 'application/json'
-            }
-            self.conn.request("PUT", "/graphs/results/" + resultIds[i] + "/", payload, headers)
-            res = self.conn.getresponse()
-            data = res.read()
-            print("updateResultsWithIDs")
-            print(data.decode("utf-8"))
-
     def updateResults(self):
         resultsList, ids = self.parseExcel()
         for i in range(len(ids)):
