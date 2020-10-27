@@ -9,17 +9,19 @@ Two python files do the trick:
 * **`LocalProgram/graphRequest.py`** for graph-related requests
 
 ## Before sending a request
-1. Open `AABKoala` project in your IDE and go to `LocalProgram` directory 
-2. To start the server, run this command in terminal (Mac)\
+1. To start the server, run this command in terminal (Mac)\
    Note: Make sure you are located in `AABKoala/Server` directory
 ```bash
 python3 manage.py runserver
 ```
-3. The server is up now, we can start sending the requests
-## 
+2. The server is up now, have `AABKoala` project ready in your IDE and go to `LocalProgram` directory 
+3. We can start sending the requests
+
 ## Result Requests
 ### **`LocalProgram/resultRequest.py`**
+
 Functions:
+
 #### ∙ Insert new result(s) into MySQL database
 ```python
 def insertNewResult(self)
@@ -41,6 +43,7 @@ def insertNewResult(self)
 4. Insertion completed, check the inserted result(s) printed out in your console
 5. Refresh the database to see the new `result` table
 
+
 #### ∙ List all the results stored in MySQL database
 ```python
 def listResults(self)
@@ -56,6 +59,8 @@ def listResults(self)
    ```
 3. Listing completed, check the listed results printed out in your console
 4. You will get a copy`LocalProgram/download/list.xlsx`of complete result in the database
+
+
 #### ∙ Update result(s) stored in MySQL database
 ```python
 def updateResults(self)
@@ -74,6 +79,8 @@ def updateResults(self)
    ```
 4. Update completed, check the updated results printed out in your console
 5. Refresh the database to see the updated result(s)
+
+
 #### ∙ Retrieve a specific result from MySQL database
 This function requires a parameter **`resultID`** \
 **`resultID`**: `id` field in `result` database table
@@ -91,6 +98,8 @@ def retrieveResultWithID(self, resultID)
    ```
 3. Retrieve completed, check the retrieved result printed out in your console
 4. You will get a excel file `LocalProgram/download/retrievexxx.xlsx` storing the retrieved result
+
+
 #### ∙ Delete a result from MySQL database
 This function requires a parameter **`resultID`** \
 **`resultID`**: `id` field in `result` database table
@@ -107,9 +116,13 @@ def deleteResultWithID(self, resultID)
    python3 resultRequest.py
    ```
 3. Deletion completed, refresh the database to see the changes
+
+
 ## Graph Requests
 ### **`LocalProgram/graphRequest.py`**
+
 Functions:
+
 #### ∙ List all the graphs stored in MySQL database
 ```python
 def list_graphs(self)
@@ -124,6 +137,8 @@ def list_graphs(self)
    python3 graphRequest.py
    ```
 3. Listing completed, check the graph information printed out in your console
+
+
 #### ∙ Retrieve a graph from MySQL database
 This function requires a parameter **`fileName`** \
 **`fileName`**: `fileName` field in `graph` table
@@ -140,6 +155,8 @@ def retrieve_graph(self, fileName)
    python3 graphRequest.py
    ```
 3. Retrieve completed, the graph is stored into `LocalProgram/download` folder in png format
+
+
 #### ∙ Plot a 3DCRT graph
 This function requires two parameters: **`mode`** and **`facilities`** \
 **`mode`**: `"all"`(all results)\
@@ -159,6 +176,8 @@ def plot_graph_NDS_3DCRT(self, mode, facilities)
 3. Plotting completed, check the graph information in your console
 4. The graph is stored into `LocalProgram/download` folder in png format 
 5. Refresh the database to see the updated `graph` table
+
+
 #### ∙ Plot an IMRT graph
 This function requires two parameters: **`mode`** and **`facilities`** \
 **`mode`**: `"all"`(all results), `"average"`(average), `"std"`(standard deviation)\
@@ -178,6 +197,8 @@ def plot_graph_NDS_IMRT(self, mode, facilities)
 3. Plotting completed, check the graph information in your console
 4. The graph is stored into `LocalProgram/download` folder in png format
 5. Refresh the database to see the updated `graph` table
+
+
 #### ∙ Delete graph(s) from MySQL database
 This function requires a parameter **`graphID`** \
 **`graphID`**: A list of `id`s (one or more) from `graph`database table
