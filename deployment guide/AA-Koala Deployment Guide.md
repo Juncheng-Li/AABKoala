@@ -9,9 +9,7 @@
 
 ## Before you start: Make sure Docker and Git are installed on the Server
 
-### Install Docker and Docker-Compose
-
-* Install Docker (Here takes centOS as an example. For other operating system, instructions can be found here https://docs.docker.com/engine/install/centos/)
+* **Install Docker** (Here takes centOS as an example. For other operating system, instructions can be found here https://docs.docker.com/engine/install/centos/)
 
   ```shell
   # install and start docker
@@ -26,7 +24,7 @@
   sudo docker run hello-world
   ```
 
-* Install docker compose
+* **Install docker compose**
 
   ```shell
   sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -37,7 +35,8 @@
   docker-compose --version
   ```
   
-* Install git
+* **Install git**
+  
   ```shell
   sudo yum install -y git
   ```
