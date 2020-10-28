@@ -8,7 +8,7 @@ In addition, an local program is developed as a substitution of front-end to all
 * **CPU**: 3.2GHz x 2 cores
 * **RAM**: 16GB
 * **Hard drive**: 40GB
-* **Operating** **system**: Linux(e.g. ubuntu or centOS)
+* **Operating** **system**: Linux(centOS)
 
 ## Technology
 * Database: Mysql 8.0
