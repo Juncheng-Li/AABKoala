@@ -42,15 +42,15 @@ Before you start, make sure `git`, `docker` and `docker-compose` are installed o
 ### Use local program
 Once deployment completes, you can use local program to run our predefined audit process.
 Here takes inserting result as an example.
-1. Open `uploadData.xlxs` and fill in the data you want to insert into database
+1. Open `uploadData.xlsx` and fill in the data you want to insert into database
 
-2. Open the `demo.py` and call insertResult.
+2. Open the `Demo.py` and call `insertResult()`
 ```python
 from LocalProgram.resultRequest import *
 resultRequest.insertNewResult()
 ```
 3. If it returns a json in the console, meaning it has succesfully inserted the result
-4. You can check the inserted result by calling listResults()
+4. You can check the inserted result by calling `listResults()`
 ```python
 from LocalProgram.resultRequest import *
 resultRequest.listResults()
@@ -64,8 +64,10 @@ For full instruction, please refer to our [Local Program Document](https://githu
 * [Backend](https://github.com/geoffreychen831/AABKoala/blob/doc/backend/backend%20guide/Server.md)
 * [Local Program](https://github.com/geoffreychen831/AABKoala/blob/doc/local/local%20program%20guide/local%20program%20guide.md)
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
-* [Test Cases](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/FunctionalTestCase.pdf)
 * [User Stories](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/Userstories.pdf)
+
+## Test
+* [Test Cases](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/FunctionalTestCase.pdf)
 
 ## Changelog
 * [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
