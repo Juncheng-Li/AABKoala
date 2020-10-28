@@ -111,11 +111,11 @@ For full instruction, please refer to our [Local Program Document](https://githu
         └── sample.py
 ```
 
-## Personas
-![personas](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/personas.png)
-
 ## Motivational Model
 * Functional Goal
 ![Functional Goal](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/Functional_Model.png)
 * Non-functional Goal
 ![Non-functional_Model](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/Non-functional_Model.png)
+
+## Personas
+![personas](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/personas.png)
