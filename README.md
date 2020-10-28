@@ -3,6 +3,23 @@ Bacause of the increament of the audit data, a regular Excel file is not capable
 
 In addition, an local program is developed as a substitution of front-end to allow user to run the automated process with various options.
 
+## Recommented System Requirement
+
+* **CPU**: 3.2GHz x 2 cores
+* **RAM**: 16GB
+* **Hard drive**: 40GB
+* **Operating** **system**: Linux(e.g. ubuntu or centOS)
+
+## Technology
+* Database: Mysql 8.0
+* Backend: Django Rest Framework 3.11.1
+* Deployment: Docker 19.03.13
+* Python dependencies:
+  * Django 3.1.1
+  * mysqlclient 1.4.0
+  * matplotlib 3.3.1
+  * pandas 1.1.1
+  * drf-yasg 1.17.1
 
 ## Getting Started
 ### Deploy our service
@@ -42,18 +59,6 @@ resultRequest.listResults()
 
 For full instruction, please refer to our [Local Program Document](https://github.com/geoffreychen831/AABKoala/blob/doc/local/local%20program%20guide/local%20program%20guide.md)
 
-
-## Technology
-* Database: Mysql 8.0
-* Backend: Django Rest Framework 3.11.1
-* Deployment: Docker 19.03.13
-* Python dependencies:
-  * Django 3.1.1
-  * mysqlclient 1.4.0
-  * matplotlib 3.3.1
-  * pandas 1.1.1
-  * drf-yasg 1.17.1
-
 ## Documents
 * [Database](https://github.com/geoffreychen831/AABKoala/blob/doc/database/database%20guide/AA-Koala_Database_Guide.md)
 * [Backend](https://github.com/geoffreychen831/AABKoala/blob/doc/backend/backend%20guide/Server.md)
@@ -64,13 +69,6 @@ For full instruction, please refer to our [Local Program Document](https://githu
 
 ## Changelog
 * [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
-
-## Recommented System Requirement
-
-* **CPU**: 3.2GHz x 2 cores
-* **RAM**: 16GB
-* **Hard drive**: 40GB
-* **Operating** **system**: Linux(e.g. ubuntu or centOS)
 
 ## List of files
 ```
