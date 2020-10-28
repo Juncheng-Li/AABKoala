@@ -67,7 +67,7 @@ For full instruction, please refer to our [Local Program Document](https://githu
 * [User Stories](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/Userstories.pdf)
 
 ## Test
-* [Test Cases](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/FunctionalTestCase.pdf)
+* [Test Cases](https://github.com/geoffreychen831/AABKoala/blob/master/Test/FunctionalTestCase.pdf)
 
 ## Changelog
 * [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
