@@ -60,7 +60,7 @@ For full instruction, please refer to our [Local Program Document](https://githu
 * [Local Program](https://github.com/geoffreychen831/AABKoala/blob/doc/local/local%20program%20guide/local%20program%20guide.md)
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
 * [Test Cases](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/FunctionalTestCase.pdf)
-* [Userstories](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/Userstories.pdf)
+* [User Stories](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/Userstories.pdf)
 
 ## Changelog
 * [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
@@ -112,9 +112,10 @@ For full instruction, please refer to our [Local Program Document](https://githu
 ```
 
 ## Personas
-
+![personas](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/personas.png)
 
 ## Motivational Model
 * Functional Goal
-
+![Functional Goal](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/Functional_Model.png)
 * Non-functional Goal
+![Non-functional_Model](https://github.com/geoffreychen831/AABKoala/blob/doc/images/images/Non-functional_Model.png)
