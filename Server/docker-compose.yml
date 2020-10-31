@@ -5,7 +5,7 @@ services:
     image: mysql:8
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3304:3306"
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: NDS
       MYSQL_ROOT_PASSWORD: AA-koala123456
@@ -17,5 +17,7 @@ services:
     command: sh -c "/docker-entrypoint.sh"
     ports:
       - "8000:8000"
+    volumes:
+    - /graph:/code/utils/plGraphs
     depends_on:
       - db
