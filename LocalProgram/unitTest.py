@@ -9,8 +9,13 @@ class UnitTest(unittest.TestCase):
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     def test_insertNewResultRequest(self):
         try:
-            obj = resultRequest()
-            response = obj.get_insertNewResult_HTTPRequest()
+            request = resultRequest().insertNewResult()
+            if request.status == 201:
+                response = request.status
+            else:
+                print("The insertNewResult request has not succeeded ")
+                response = None
+
             self.assertEqual(response, 201)
             print("The insertNewResult HTTP 201 Created success status response code")
         except AssertionError:
@@ -18,8 +23,13 @@ class UnitTest(unittest.TestCase):
 
     def test_listResultsRequest(self):
         try:
-            obj = resultRequest()
-            response = obj.get_listResults_HTTPRequest()
+            request = resultRequest().listResults()
+            if request.status == 200:
+                response = request.status
+            else:
+                print("The listResults request has not succeeded ")
+                response = None
+
             self.assertEqual(response, 200)
             print("The listResults HTTP 200 OK success status response code")
         except AssertionError:
@@ -27,8 +37,13 @@ class UnitTest(unittest.TestCase):
 
     def test_updateResultsRequest(self):
         try:
-            obj = resultRequest()
-            response = obj.get_updateResults_HTTPRequest()
+            request = resultRequest().updateResults()
+            if request.status == 200:
+                response = request.status
+            else:
+                print("The updateResults request has not succeeded ")
+                response = None
+
             self.assertEqual(response, 200)
             print("The updateResults HTTP 200 OK success status response code")
         except AssertionError:
@@ -36,8 +51,16 @@ class UnitTest(unittest.TestCase):
 
     def test_retrieveResultWithID_Request(self):
         try:
-            obj = resultRequest()
-            response = obj.get_retrieveResultWithID_HTTPRequest('2')
+            request = resultRequest().retrieveResultWithID('2')
+            print("request")
+            print(request.status)
+            if request.status == 200:
+                print("The retrieveResultWithID HTTP 200 OK success status response code")
+                response = request.status
+            else:
+                print("The retrieveResultWithID request has not succeeded ")
+                response = None
+
             self.assertEqual(response, 200)
             print("The retrieveResultWithID HTTP 200 OK success status response code")
         except AssertionError:
@@ -45,8 +68,17 @@ class UnitTest(unittest.TestCase):
 
     def test_deleteResultWithID_Request(self):
         try:
-            obj = resultRequest()
-            response = obj.get_deleteResultWithID_HTTPRequest('2')
+            request = resultRequest().deleteResultWithID('2')
+            print("request")
+            print(request.status)
+            if request.status == 204:
+                response = request.status
+            if request.status == 404:
+                response = request.status
+            else:
+                print("The deleteResultWithID Request has not succeeded ")
+                response = None
+
             if response == 204:
                 self.assertEqual(response, 204)
                 print("The deleteResultWithID HTTP 204 No Content success status response code")
