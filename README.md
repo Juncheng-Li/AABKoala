@@ -68,8 +68,8 @@ For full instruction, please refer to our [Local Program Document](https://githu
 * [Test Cases Doc](https://github.com/geoffreychen831/AABKoala/blob/master/Test/FunctionalTestCase.pdf)
 
 ## Test
-* [Local program test cases](https://github.com/geoffreychen831/AABKoala/tree/master/LocalProgram/tests)
-* [Backend_test_cases](https://github.com/geoffreychen831/AABKoala/tree/master/Server/apps/graphs/tests)
+* [Local Program Test Cases](https://github.com/geoffreychen831/AABKoala/tree/master/LocalProgram/tests)
+* [Backend Test Cases](https://github.com/geoffreychen831/AABKoala/tree/master/Server/apps/graphs/tests)
 
 ## Changelog
 * [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
