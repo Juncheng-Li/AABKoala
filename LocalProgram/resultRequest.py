@@ -129,6 +129,7 @@ class resultRequest:
         # print("listResults: res.status, res.reason")
         # print(res.status, res.reason)
         data = res.read()
+        print(data.decode("utf-8"))
         content = bytes.decode(data, 'utf-8')
         contentInJson = json.loads(content)
         df = json_normalize(contentInJson)
@@ -142,7 +143,7 @@ class resultRequest:
         tpr_df = json_normalize(contentInJson, record_path='TPR', record_prefix='tpr')
         tpr_df.columns = tpr_df.columns.str.replace('energy', "")
 
-        reading_df = json_normalize(contentInJson, record_path='Reading')
+        reading_df = json_normalize(contentInJson, record_path='Nds_3dcrt')
         reading_df = reading_df[
             ['code_101106', 'code_110106', 'code_205106', 'code_208106', 'code_205206',
              'code_208206', 'code_205306', 'code_208306', 'code_303106', 'code_305106',
@@ -152,10 +153,10 @@ class resultRequest:
              'code_110118', 'code_303118', 'code_305118', 'code_403118', 'code_405118',
              'code_101105', 'code_110105', 'code_303105', 'code_305105', 'code_103109',
              'code_110109', 'code_303109', 'code_305109']]
-        misdelivery_df = json_normalize(contentInJson, record_path='Misdelivery')
+        misdelivery_df = json_normalize(contentInJson, record_path='Nds_3dcrt_misdelivery')
 
-        imrt_df = json_normalize(contentInJson, record_path='IMRT')
-        imrt_misdelivery_df = json_normalize(contentInJson, record_path='IMRT_misdelivery',
+        imrt_df = json_normalize(contentInJson, record_path='Nds_imrt')
+        imrt_misdelivery_df = json_normalize(contentInJson, record_path='Nds_imrt_misdelivery',
                                              record_prefix='imrt_misdelivery_')
 
         table = pd.concat([df, fac_df, tpr_df, reading_df, misdelivery_df, imrt_df, imrt_misdelivery_df], axis=1)
@@ -163,23 +164,6 @@ class resultRequest:
         print("listResults")
         print(data.decode("utf-8"))
         return res
-
-    def updateResultsWithIDs(self, resultIds):
-        resultsList = self.parseExcel()
-        if len(resultIds) != len(resultsList):
-            print("The number of results ids does not match with the number of results in excel")
-            return
-        for i in range(len(resultIds)):
-            payload = resultsList[i]
-            headers = {
-                'Authorization': self.authorization,
-                'Content-Type': 'application/json'
-            }
-            self.conn.request("PUT", "/graphs/results/" + resultIds[i] + "/", payload, headers)
-            res = self.conn.getresponse()
-            data = res.read()
-            print("updateResultsWithIDs")
-            print(data.decode("utf-8"))
 
     def updateResults(self):
         resultsList, ids = self.parseExcel()

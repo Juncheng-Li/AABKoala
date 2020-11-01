@@ -2,10 +2,14 @@ from LocalProgram.resultRequest import *
 from LocalProgram.graphRequest import *
 
 
-resultRequest().insertNewResult()
+# resultRequest().insertNewResult()
 
-# graphRequest().plot_graph_NDS_3DCRT()
+# graphRequest().plot_graph_NDS_3DCRT("all", '{"Duncker": [194]}')
+
+# graphRequest().plot_graph_NDS_IMRT("average", '{"Duncker": [194]}')
+
+# graphRequest().plot_graph_NDS_IMRT("std", '{"Duncker": [194]}')
+
+# graphRequest().plot_graph_NDS_IMRT("all", '{"Duncker": [194]}')
 
 # resultRequest().updateResults()
-
-# graphRequest().plot_graph_NDS_IMRT("average", '{"Dunker" : [194, 195], "Collie": [154]}')
