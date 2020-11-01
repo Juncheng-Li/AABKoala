@@ -11,5 +11,5 @@
 # port = 8000
 
 authorization = "Basic Y2xpZW50OkFBLWtvYWxhMTIzNDU2"
-host = "34.92.42.208"
+host = "34.92.80.63"
 port = 8000
