@@ -76,16 +76,14 @@ For full instruction, please refer to our [Local Program Document](https://githu
 
 ## List of files
 ```
+├── Doc
 ├── LocalProgram
-│   ├── Demo.py
-│   ├── config.py
-│   ├── download
-│   ├── graphRequest.py
-│   ├── resultRequest.py
-│   ├── unitTest.py
-│   ├── upload
-│      	├── AllData.xlsx
-│      	└── uploadingData.xlsx
+│   ├── Demo.py
+│   ├── config.py
+│   ├── graphRequest.py
+│   ├── resultRequest.py
+│   ├── tests
+│   └── upload
 └── Server
     ├── AAB
     │   ├── asgi.py
