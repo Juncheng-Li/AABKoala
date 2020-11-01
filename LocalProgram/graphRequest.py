@@ -69,6 +69,3 @@ class graphRequest:
         print(data.decode("utf-8"))
         return res
 
-
-response = graphRequest().delete_graph("15")
-print(response.status)

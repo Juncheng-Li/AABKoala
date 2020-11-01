@@ -65,9 +65,11 @@ For full instruction, please refer to our [Local Program Document](https://githu
 * [Local Program](https://github.com/geoffreychen831/AABKoala/blob/doc/local/local%20program%20guide/local%20program%20guide.md)
 * [Deployment guide](https://github.com/geoffreychen831/AABKoala/blob/doc/deploy/deployment%20guide/AA-Koala%20Deployment%20Guide.md)
 * [User Stories](https://github.com/geoffreychen831/AABKoala/blob/master/Doc/Userstories.pdf)
+* [Test Cases Doc](https://github.com/geoffreychen831/AABKoala/blob/master/Test/FunctionalTestCase.pdf)
 
 ## Test
-* [Test Cases](https://github.com/geoffreychen831/AABKoala/blob/master/Test/FunctionalTestCase.pdf)
+* [Local program test cases](https://github.com/geoffreychen831/AABKoala/tree/master/LocalProgram/tests)
+* [Backend_test_cases](https://github.com/geoffreychen831/AABKoala/tree/master/Server/apps/graphs/tests)
 
 ## Changelog
 * [Changelog](https://github.com/geoffreychen831/AABKoala/blob/doc/changelog/CHANGLOG.md)
