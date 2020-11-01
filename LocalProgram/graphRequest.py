@@ -69,48 +69,6 @@ class graphRequest:
         print(data.decode("utf-8"))
         return res
 
-    # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    # Get graphRequest HTTP method                                                                 #
-    # # # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-    def get_list_graphs_HTTPRequest(self):
-        request = self.list_graphs()
-        if request.status == 200:
-            return request.status
-        else:
-            print("The list_graphs request has not succeeded ")
-            return None
-
-    def get_plot_graph_NDS_3DCRT_HTTPRequest(self, mode, facilities):
-        request = self.plot_graph_NDS_3DCRT(mode, facilities)
-        if request.status == 200:
-            # print("get_plot_graph_NDS_3DCRT_HTTPRequest request")
-            # print(request.status)
-            return request.status
-        else:
-            # print("The list_graphs request has not succeeded ")
-            return None
-
-    def get_plot_graph_NDS_IMRT_HTTPRequest(self, mode, facilities):
-        request = self.plot_graph_NDS_IMRT(mode, facilities)
-        if request.status == 200:
-            print("get_plot_graph_NDS_3DCRT_HTTPRequest request")
-            print(request.status)
-            return request.status
-        else:
-            # print("The list_graphs request has not succeeded ")
-            return None
-
-    def get_delete_graph_HTTPRequest(self, resultID):
-        request = self.delete_graph(resultID)
-        if request.status == 200:
-            return request.status
-        else:
-            return None
-
-# graphRequest().list_graphs()
-# graphRequest().delete_graph("15")
-# graphRequest().retrieve_graph("3DCRT_1600914975424.png")
-
-# graphRequest().plot_graph_NDS_3DCRT("all", '{"Drever": [308], "Avocet": [106, 302]}')
-# graphRequest().plot_graph_NDS_IMRT("std", '{"Drever": [308], "Avocet": [106, 302]}')
+response = graphRequest().delete_graph("15")
+print(response.status)

@@ -6,7 +6,7 @@ import math
 import numpy as np
 import decimal
 import re
-from LocalProgram.classes.validator import Validator
+from LocalProgram.tests.validator import Validator
 
 
 class getTestingValue:
