@@ -3,7 +3,7 @@ Bacause of the increament of the audit data, a regular Excel file is not capable
 
 In addition, an local program is developed as a substitution of front-end to allow user to run the automated process with various options.
 
-## Recommented System Requirement
+## Recommended System Requirement
 
 * **CPU**: 3.2GHz x 2 cores
 * **RAM**: 16GB
